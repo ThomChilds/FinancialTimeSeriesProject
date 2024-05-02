@@ -1,0 +1,184 @@
+---
+title: "ASwEiF"
+author: "Małgorzata Leszczyńska"
+date: "2022-12-04"
+output: html_document
+---
+```{r, include = FALSE}
+library(tidyverse)
+library(stats)
+library(ggplot2)
+library(dplyr)
+library(tseries)
+library(writexl)
+library(tsibble)
+library(tsibbledata)
+library(feasts)
+library(fable)
+library(psych)
+```
+
+### Importing the data
+
+```{r}
+data <- read.csv("MSFT - 5 Years.csv", sep = ",", header = TRUE)
+
+data_ts <- data %>% mutate(Date = ymd(Date)) %>% as_tsibble(index = Date)
+```
+
+### Creating simpple return and log return
+
+```{r}
+data_ts <- data_ts %>% mutate(simple_rtn = difference(Close)/lag(Close), log_rtn = difference((log(Close))))
+```
+
+### Plots
+
+```{r}
+microsoft_prices_plot <- data_ts %>% autoplot(Close) + ylab("Closing price [USD]") + xlab("Date") + theme_bw() + ggtitle("Microsoft price from 2019 to 2024")
+
+ggsave(microsoft_prices_plot, filename = "microsoft_prices.png", device = "png", height = 6, width = 8, units = "in")
+
+microsoft_prices_rtns_plot <- data_ts %>% autoplot(simple_rtn) + ylab("Simple returns [USD]") + xlab("Date") + theme_bw() + ggtitle("Microsoft simple returns from 2019 to 2024")
+
+ggsave(microsoft_prices_rtns_plot, filename = "microsoft_simple_returns.png", device = "png", height = 6, width = 8, units = "in")
+
+microsoft_prices_log_plot <- data_ts %>% autoplot(log_rtn) + ylab("Log return [USD]") + xlab("Date") + theme_bw() + ggtitle("Microsoft log returns from 2019 to 2024")
+
+ggsave(microsoft_prices_log_plot, filename = "microsoft_log_returns.png", device = "png", height = 6, width = 8, units = "in")
+```
+
+### Collerograms for the close price
+
+```{r}
+collerograms <- data_ts %>% mutate(trading_day = row_number()) %>% update_tsibble(index = trading_day, regular = TRUE)
+
+png(file="microsoft_acf_plot_prices_1249.png", height = 6, width = 8, res=1080, units = "in") 
+microsoft_acf_plot_1249 <- acf(collerograms$Close, lag.max = 1249, main = "ACF for Microsoft, close prices, lag = 1249", xlab = "Lag (#trading days)")
+dev.off()
+
+png(file="microsoft_acf_plot_prices_60.png", height = 6, width = 8, res=1080, units = "in") 
+microsoft_acf_plot_60 <- acf(collerograms$Close, lag.max = 60, main = "ACF for Microsoft, close prices, lag = 60", xlab = "Lag (#trading days)")
+dev.off()
+
+png(file="microsoft_pacf_plot_prices_1249.png", height = 6, width = 8, res=1080, units = "in")
+microsoft_pacf_plot_1249 <- pacf(collerograms$Close, lag.max = 1249, main = "PACF for Microsoft, close prices, lag = 1249", xlab = "Lag (#trading days)")
+dev.off()
+
+png(file="microsoft_pacf_plot_prices_60.png", height = 6, width = 8, res=1080, units = "in")
+microsoft_pacf_plot_60 <- pacf(collerograms$Close, lag.max = 60, main = "PACF for Microsoft, close prices, lag = 60", xlab = "Lag (#trading days)")
+dev.off()
+```
+### Collerograms for the log returns price
+
+```{r}
+collerograms <- data_ts %>% mutate(trading_day = row_number()) %>% update_tsibble(index = trading_day, regular = TRUE)
+collerograms <- na.omit(collerograms)
+
+png(file="microsoft_acf_plot_log_return_1249.png", height = 6, width = 8, res=1080, units = "in") 
+microsoft_acf_plot_log_return_1249 <- acf(collerograms$log_rtn, lag.max = 1249, main = "ACF for Microsoft, log returns, lag = 1249", xlab = "Lag (#trading days)")
+dev.off()
+
+png(file="microsoft_acf_plot_log_return_60.png", height = 6, width = 8, res=1080, units = "in") 
+microsoft_acf_plot_log_retrun_60 <- acf(collerograms$log_rtn, lag.max = 60, main = "ACF for Microsoft, log returns, lag = 60", xlab = "Lag (#trading days)")
+dev.off()
+
+png(file="microsoft_pacf_plot_log_return_1249.png", height = 6, width = 8, res=1080, units = "in")
+microsoft_pacf_plot_log_return_1249 <- pacf(collerograms$log_rtn, lag.max = 1249, main = "PACF for Microsoft, log returns, lag = 1249", xlab = "Lag (#trading days)")
+dev.off()
+
+png(file="microsoft_pacf_plot_log_return_60.png", height = 6, width = 8, res=1080, units = "in")
+microsoft_pacf_plot_log_return_60 <- pacf(collerograms$log_rtn, lag.max = 60, main = "PACF for Microsoft, log returns, lag = 60", xlab = "Lag (#trading days)")
+dev.off()
+```
+
+
+### Summary
+
+```{r, echo=FALSE}
+data_df <- data.frame(data_ts)
+
+describe(data_df$Close)
+describe(data_df$log_rtn)
+```
+
+## Decomposing of the Time Series
+
+### LEOSS 
+
+Locally weighted scatterplot smoothing - decomposing of the time series to seasonal, trend and residual values.
+
+```{r, echo = FALSE}
+data_ts_ts <- ts(data_ts$Close, frequency = 5)
+data_LEOSS <- stl(data_ts_ts, s.window = 5)
+
+data_time_series = data_LEOSS$time.series
+
+data_ts_seasonal = data_time_series[,1]
+data_ts_trend = data_time_series[,2]
+data_ts_remainder = data_time_series[,3]
+```
+
+**Plots of decomposing parts from LEOSS algorithm**
+
+```{r, echo=FALSE}
+par(mfrow =c(3,1))
+
+plot(data_ts_trend)
+plot(data_ts_seasonal)
+plot(data_ts_remainder)
+```
+
+**Plot of residuals**
+
+```{r, echo=FALSE}
+plot(data_ts_remainder)
+```
+
+### ARMA
+
+The loop returns proper values for ARMA.
+
+```{r, warning=FALSE}
+p=0
+q=0
+pj=0
+qj=0
+y=data_ts_remainder
+aic = 100000000000000000000
+for(pj in 0:5)
+{
+  for(qj in 0:5)
+  {
+    result = arima(y, c(pj, 0, qj))
+    s = result$aic
+    if(s<aic)
+    {
+      aic = s
+      p = pj
+      q = qj
+    }
+  }
+}
+
+data.frame(p,q)
+```
+
+**Choosing of the model**
+
+```{r}
+armA = arima(data_ts_remainder, order = c(5,0,5))
+armA_residuals = armA$residuals
+```
+
+## Stationary test ADF
+
+**H0**: time series is not stationary
+
+**H1**: time series is stationary
+
+```{r, warning=FALSE}
+adf.test(data_ts_remainder)
+```
+
+P-value od the test is below the confidence level alpha=0.05, so we can accept H1. The time series is **stationary**.
