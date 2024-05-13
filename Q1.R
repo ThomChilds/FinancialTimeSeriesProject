@@ -4,6 +4,7 @@ library("fpp3") #load packages
 library("tidyverse")
 library("urca")
 library("forecast")
+library("rugarch")
 
 
 # a) ####
@@ -107,7 +108,6 @@ print(adf_result_visa)
 adf_result_msft <- adf_test(msft_5$Close, "Close")
 print(adf_result_msft)
 
-
 # d) ####
 # Perform a simplified Box-Jenkins analysis to find an ARMA model (AR, MA or mixed) that best describes the log returns. Justify your choice.
 
@@ -136,6 +136,42 @@ visa_arma_model <- simplified_box_jenkins(v_5_log_rtn$log_rtn)
 msft_arma_model <- simplified_box_jenkins(msft_5_log_rtn$log_rtn)
 
 # e) ####
+# Obtain the residuals of the ARMA model estimated in item (d). Test for the presence of ARCH effects. Analyze the time series properties of the squared residuals and use that information to propose ARMA-GARCH models for the log returns. Justify in detail your options
+
+# Function to test for ARCH effects and propose ARMA-GARCH models
+arch_test_and_propose_models <- function(residuals) {
+  # Test for ARCH effects using the Ljung-Box test on squared residuals
+  ljung_box_test <- Box.test(residuals^2, lag = 10, type = "Ljung-Box")
+  print(ljung_box_test)
+  
+  # Plot the squared residuals
+  squared_residuals <- residuals^2
+  ggplot() +
+    geom_line(aes(x = index(residuals), y = squared_residuals)) +
+    labs(title = "Squared Residuals",
+         x = "Date",
+         y = "Squared Residuals") +
+    theme_minimal()
+  
+  # Propose ARMA-GARCH models based on squared residuals analysis
+  arma_garch_model <- ugarchspec(mean.model = list(armaOrder = c(1, 1)),
+                                 variance.model = list(model = "sGARCH", garchOrder = c(1, 1)),
+                                 distribution.model = "norm")
+  print(arma_garch_model)
+}
+
+# Obtain residuals of ARMA model for Visa stock
+visa_residuals <- residuals(visa_arma_model)
+
+# Test for ARCH effects and propose ARMA-GARCH models for Visa stock
+visa_arma_garch_model <- arch_test_and_propose_models(visa_residuals)
+
+# Obtain residuals of ARMA model for Microsoft stock
+msft_residuals <- residuals(msft_arma_model)
+
+# Test for ARCH effects and propose ARMA-GARCH models for Microsoft stock
+msft_arma_garch_model <- arch_test_and_propose_models(msft_residuals)
+
 # f) ####
 # g) ####
 # h) ####
