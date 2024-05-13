@@ -2,6 +2,9 @@
 rm(list = ls()) #clear env
 library("fpp3") #load packages
 library("tidyverse")
+library("urca")
+library("forecast")
+
 
 # a) ####
 #Task:
@@ -83,7 +86,55 @@ ggplot(msft_5_log_rtn) +
 
 
 # c) ####
+# Apply the Augmented Dickey-Fuller (ADF) test to the log prices. Describe
+# in detail the conclusions of the test.
+
+# The Augmented Dickey-Fuller (ADF) test is a statistical test commonly used
+# to determine whether a unit root is present in a time series dataset. 
+# A unit root would indicate that a time series is non-stationary.
+
+# Function to conduct ADF test and print results
+adf_test <- function(data, variable_name) {
+  adf_result <- ur.df(data, type = "drift", lags = 0, selectlags = "Fixed")
+  summary(adf_result)
+}
+
+# Apply ADF test to log prices of Visa stock
+adf_result_visa <- adf_test(v_5$Close, "Close")
+print(adf_result_visa)
+
+# Apply ADF test to log prices of Microsoft stock
+adf_result_msft <- adf_test(msft_5$Close, "Close")
+print(adf_result_msft)
+
+
 # d) ####
+# Perform a simplified Box-Jenkins analysis to find an ARMA model (AR, MA or mixed) that best describes the log returns. Justify your choice.
+
+# The simplified Box-Jenkins analysis is a technique used to identify and estimate ARMA models for time series data.
+# This analysis involves identifying the best-fitting ARMA model, based on criteria such as the Akaike Information Criterion (AIC), and diagnostic checks of the residuals.
+
+# Function to perform simplified Box-Jenkins analysis and find ARMA model
+simplified_box_jenkins <- function(log_returns) {
+  # Identify the best ARMA model using AIC criterion
+  arma_model <- auto.arima(log_returns)
+  
+  # Print summary of the identified ARMA model
+  print(summary(arma_model))
+  
+  # Plot the ACF and PACF of log returns
+  acf_pacf_plot <- ggtsdisplay(log_returns)
+  print(acf_pacf_plot)
+  
+  return(arma_model)
+}
+
+# Perform simplified Box-Jenkins analysis for Visa stock log returns
+visa_arma_model <- simplified_box_jenkins(v_5_log_rtn$log_rtn)
+
+# Perform simplified Box-Jenkins analysis for Microsoft stock log returns
+msft_arma_model <- simplified_box_jenkins(msft_5_log_rtn$log_rtn)
+
 # e) ####
 # f) ####
 # g) ####
