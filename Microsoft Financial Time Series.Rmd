@@ -1,7 +1,7 @@
 ---
-title: "ASwEiF"
+title: "FTS"
 author: "Małgorzata Leszczyńska"
-date: "2022-12-04"
+date: "2024-05-05"
 output: html_document
 ---
 ```{r, include = FALSE}
@@ -16,23 +16,33 @@ library(tsibbledata)
 library(feasts)
 library(fable)
 library(psych)
+library(urca)
+library(forecast)
+library(rugarch)
 ```
+
+# Q1 B
+
+Obtain the log returns and plot the time series graph of prices and log returns. Obtain the correlogram and descriptive statistics for prices and log returns. Comment on the distributional and dynamical properties of the data (mean, volatility, skewness, kurtosis, stationarity, outliers,. . .). Which stylized facts about financial returns you observe in the data?
 
 ### Importing the data
 
 ```{r}
 data <- read.csv("MSFT - 5 Years.csv", sep = ",", header = TRUE)
+data_visa <- read.csv("V - 5 Years.csv", sep = ",", header = TRUE)
 
 data_ts <- data %>% mutate(Date = ymd(Date)) %>% as_tsibble(index = Date)
+data_ts_visa <- data_visa %>% mutate(Date = ymd(Date)) %>% as_tsibble(index = Date)
 ```
 
 ### Creating simpple return and log return
 
 ```{r}
 data_ts <- data_ts %>% mutate(simple_rtn = difference(Close)/lag(Close), log_rtn = difference((log(Close))))
+data_ts_visa <- data_ts_visa %>% mutate(simple_rtn = difference(Close)/lag(Close), log_rtn = difference((log(Close))))
 ```
 
-### Plots
+### Plots Microsoft
 
 ```{r}
 microsoft_prices_plot <- data_ts %>% autoplot(Close) + ylab("Closing price [USD]") + xlab("Date") + theme_bw() + ggtitle("Microsoft price from 2019 to 2024")
@@ -48,7 +58,23 @@ microsoft_prices_log_plot <- data_ts %>% autoplot(log_rtn) + ylab("Log return [U
 ggsave(microsoft_prices_log_plot, filename = "microsoft_log_returns.png", device = "png", height = 6, width = 8, units = "in")
 ```
 
-### Collerograms for the close price
+### Plots Visa
+
+```{r}
+visa_prices_plot <- data_ts_visa %>% autoplot(Close) + ylab("Closing price [USD]") + xlab("Date") + theme_bw() + ggtitle("Visa price from 2019 to 2024")
+
+ggsave(visa_prices_plot, filename = "visa_prices.png", device = "png", height = 6, width = 8, units = "in")
+
+visa_prices_rtns_plot <- data_ts_visa %>% autoplot(simple_rtn) + ylab("Simple returns [USD]") + xlab("Date") + theme_bw() + ggtitle("Visa simple returns from 2019 to 2024")
+
+ggsave(visa_prices_rtns_plot, filename = "visa_simple_returns.png", device = "png", height = 6, width = 8, units = "in")
+
+visa_prices_log_plot <- data_ts_visa %>% autoplot(log_rtn) + ylab("Log return [USD]") + xlab("Date") + theme_bw() + ggtitle("Visa log returns from 2019 to 2024")
+
+ggsave(visa_prices_log_plot, filename = "visa_log_returns.png", device = "png", height = 6, width = 8, units = "in")
+```
+
+### Collerograms for the close price Microsoft
 
 ```{r}
 collerograms <- data_ts %>% mutate(trading_day = row_number()) %>% update_tsibble(index = trading_day, regular = TRUE)
@@ -69,7 +95,30 @@ png(file="microsoft_pacf_plot_prices_60.png", height = 6, width = 8, res=1080, u
 microsoft_pacf_plot_60 <- pacf(collerograms$Close, lag.max = 60, main = "PACF for Microsoft, close prices, lag = 60", xlab = "Lag (#trading days)")
 dev.off()
 ```
-### Collerograms for the log returns price
+
+### Collerograms for the close price Visa
+
+```{r}
+collerograms_visa <- data_ts_visa %>% mutate(trading_day = row_number()) %>% update_tsibble(index = trading_day, regular = TRUE)
+
+png(file="visa_acf_plot_prices_1249.png", height = 6, width = 8, res=1080, units = "in") 
+visa_acf_plot_1249 <- acf(collerograms_visa$Close, lag.max = 1249, main = "ACF for Visa, close prices, lag = 1249", xlab = "Lag (#trading days)")
+dev.off()
+
+png(file="visa_acf_plot_prices_60.png", height = 6, width = 8, res=1080, units = "in") 
+visa_acf_plot_60 <- acf(collerograms_visa$Close, lag.max = 60, main = "ACF for Visa, close prices, lag = 60", xlab = "Lag (#trading days)")
+dev.off()
+
+png(file="visa_pacf_plot_prices_1249.png", height = 6, width = 8, res=1080, units = "in")
+visa_pacf_plot_1249 <- pacf(collerograms_visa$Close, lag.max = 1249, main = "PACF for Visa, close prices, lag = 1249", xlab = "Lag (#trading days)")
+dev.off()
+
+png(file="visa_pacf_plot_prices_60.png", height = 6, width = 8, res=1080, units = "in")
+visa_pacf_plot_60 <- pacf(collerograms_visa$Close, lag.max = 60, main = "PACF for Visa, close prices, lag = 60", xlab = "Lag (#trading days)")
+dev.off()
+```
+
+### Collerograms for the log returns price Microsoft
 
 ```{r}
 collerograms <- data_ts %>% mutate(trading_day = row_number()) %>% update_tsibble(index = trading_day, regular = TRUE)
@@ -92,8 +141,31 @@ microsoft_pacf_plot_log_return_60 <- pacf(collerograms$log_rtn, lag.max = 60, ma
 dev.off()
 ```
 
+### Collerograms for the log returns price Visa
 
-### Summary
+```{r}
+collerograms_visa <- data_ts_visa %>% mutate(trading_day = row_number()) %>% update_tsibble(index = trading_day, regular = TRUE)
+collerograms_visa <- na.omit(collerograms_visa)
+
+png(file="visa_acf_plot_log_return_1249.png", height = 6, width = 8, res=1080, units = "in") 
+visa_acf_plot_log_return_1249 <- acf(collerograms_visa$log_rtn, lag.max = 1249, main = "ACF for Visa, log returns, lag = 1249", xlab = "Lag (#trading days)")
+dev.off()
+
+png(file="visa_acf_plot_log_return_60.png", height = 6, width = 8, res=1080, units = "in") 
+visa_acf_plot_log_retrun_60 <- acf(collerograms_visa$log_rtn, lag.max = 60, main = "ACF for Visa, log returns, lag = 60", xlab = "Lag (#trading days)")
+dev.off()
+
+png(file="visa_pacf_plot_log_return_1249.png", height = 6, width = 8, res=1080, units = "in")
+visa_pacf_plot_log_return_1249 <- pacf(collerograms_visa$log_rtn, lag.max = 1249, main = "PACF for Visa, log returns, lag = 1249", xlab = "Lag (#trading days)")
+dev.off()
+
+png(file="visa_pacf_plot_log_return_60.png", height = 6, width = 8, res=1080, units = "in")
+visa_pacf_plot_log_return_60 <- pacf(collerograms_visa$log_rtn, lag.max = 60, main = "PACF for Visa, log returns, lag = 60", xlab = "Lag (#trading days)")
+dev.off()
+```
+
+
+### Summary Microsoft
 
 ```{r, echo=FALSE}
 data_df <- data.frame(data_ts)
@@ -102,83 +174,128 @@ describe(data_df$Close)
 describe(data_df$log_rtn)
 ```
 
-## Decomposing of the Time Series
-
-### LEOSS 
-
-Locally weighted scatterplot smoothing - decomposing of the time series to seasonal, trend and residual values.
-
-```{r, echo = FALSE}
-data_ts_ts <- ts(data_ts$Close, frequency = 5)
-data_LEOSS <- stl(data_ts_ts, s.window = 5)
-
-data_time_series = data_LEOSS$time.series
-
-data_ts_seasonal = data_time_series[,1]
-data_ts_trend = data_time_series[,2]
-data_ts_remainder = data_time_series[,3]
-```
-
-**Plots of decomposing parts from LEOSS algorithm**
+### Summary Visa
 
 ```{r, echo=FALSE}
-par(mfrow =c(3,1))
+data_df_visa <- data.frame(data_ts_visa)
 
-plot(data_ts_trend)
-plot(data_ts_seasonal)
-plot(data_ts_remainder)
+describe(data_df_visa$Close)
+describe(data_df_visa$log_rtn)
 ```
 
-**Plot of residuals**
+# Q1 c
 
-```{r, echo=FALSE}
-plot(data_ts_remainder)
-```
+Apply the Augmented Dickey-Fuller (ADF) test to the log prices. Describe in detail the conclusions of the test.
 
-### ARMA
-
-The loop returns proper values for ARMA.
-
-```{r, warning=FALSE}
-p=0
-q=0
-pj=0
-qj=0
-y=data_ts_remainder
-aic = 100000000000000000000
-for(pj in 0:5)
-{
-  for(qj in 0:5)
-  {
-    result = arima(y, c(pj, 0, qj))
-    s = result$aic
-    if(s<aic)
-    {
-      aic = s
-      p = pj
-      q = qj
-    }
-  }
-}
-
-data.frame(p,q)
-```
-
-**Choosing of the model**
-
-```{r}
-armA = arima(data_ts_remainder, order = c(5,0,5))
-armA_residuals = armA$residuals
-```
-
-## Stationary test ADF
+### Stationary test ADF Microsoft
 
 **H0**: time series is not stationary
 
 **H1**: time series is stationary
 
 ```{r, warning=FALSE}
-adf.test(data_ts_remainder)
+data_ts <- na.omit(data_ts)
+
+adf.test(data_ts$log_rtn)
 ```
 
 P-value od the test is below the confidence level alpha=0.05, so we can accept H1. The time series is **stationary**.
+
+### Stationary test ADF Visa
+
+**H0**: time series is not stationary
+
+**H1**: time series is stationary
+
+```{r, warning=FALSE}
+data_ts_visa <- na.omit(data_ts_visa)
+
+adf.test(data_ts_visa$log_rtn)
+```
+
+P-value od the test is below the confidence level alpha=0.05, so we can accept H1. The time series is **stationary**.
+
+# Q1 d
+
+Perform a simplified Box-Jenkins analysis to find an ARMA model (AR, MA or mixed) that best describes the log returns. Justify your choice.
+
+```{r}
+simplified_box_jenkins <- function(log_returns) {
+  arma_model <- auto.arima(log_returns)
+  print(summary(arma_model))
+  
+  acf_pacf_plot <- ggtsdisplay(log_returns)
+  print(acf_pacf_plot)
+  
+  return(arma_model)
+}
+
+```
+
+### Box Jenkins Microsoft
+
+```{r}
+msft_arma_model <- simplified_box_jenkins(data_ts$log_rtn)
+```
+
+### Box Jenkins Visa
+
+```{r}
+visa_arma_model <- simplified_box_jenkins(data_ts_visa$log_rtn)
+```
+
+# Q1 e
+
+Obtain the residuals of the ARMA model estimated in item (e). Test for the presence of ARCH effects. Analyze the time series properties of the squared residuals and use that information to propose ARMA-GARCH models for the log returns. Justify in detail your options.
+
+**H0**: no residual autocorrelation through tested lags
+
+**H1**: there is the residual autocorrelation through tested lags
+
+```{r}
+arch_test_and_propose_models <- function(residuals) {
+  ljung_box_test <- Box.test(residuals^2, lag = 22, type = "Ljung-Box")
+  print(ljung_box_test)
+  
+  arma_garch_model <- ugarchspec(mean.model = list(armaOrder = c(0, 1)), variance.model = list(model = "sGARCH", garchOrder = c(0, 1)), distribution.model = "norm")
+  print(arma_garch_model)
+}
+```
+
+### Ljung box test and ARMA GARCH model Microsoft
+
+```{r}
+msft_residuals <-residuals(msft_arma_model)
+msft_arma_garch_model <- arch_test_and_propose_models(msft_residuals)
+```
+
+### Squared residuals Microsoft
+
+```{r}
+squared_residuals <- msft_residuals^2
+  ggplot() +
+    geom_line(aes(x = msft_residuals, y = squared_residuals)) +
+    labs(title = "Squared Residuals",
+         x = "Date",
+         y = "Squared Residuals") +
+    theme_minimal()
+```
+
+### Ljung box test and ARMA GARCH model Visa
+
+```{r}
+visa_residuals <- residuals(visa_arma_model)
+visa_arma_garch_model <- arch_test_and_propose_models(visa_residuals)
+```
+
+### Squared residuals Visa
+
+```{r}
+squared_residuals <- visa_residuals^2
+  ggplot() +
+    geom_line(aes(x = visa_residuals, y = squared_residuals)) +
+    labs(title = "Squared Residuals",
+         x = "Date",
+         y = "Squared Residuals") +
+    theme_minimal()
+```
