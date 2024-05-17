@@ -1,0 +1,228 @@
+
+
+```{r setup}
+# load packaged
+rm(list = ls()) #clear env
+library("fpp3") #load packages
+library("tidyverse")
+library("urca")
+library("forecast")
+library("rugarch")
+
+# load data and get log returns 
+v_5 = read.csv("data/V - 5 Years.csv") %>%  select(Date, Close) %>% 
+  mutate(Date = date(Date)) %>% as_tsibble(index = Date) %>% 
+  mutate(log_rtn = difference(log(Close))) %>% 
+  filter(!is.na(log_rtn))
+
+msft_5 = read.csv("data/MSFT - 5 Years.csv") %>%  select(Date, Close) %>% 
+  mutate(Date = date(Date))%>% as_tsibble(index = Date) %>% 
+  mutate(log_rtn = difference(log(Close))) %>% 
+  filter(!is.na(log_rtn))
+```
+
+
+# Q 2 
+The objective of this exercise is to obtain VaR on the basis of different as-
+sumptions regarding the ARMA-GARCH process for the log returns. Use both
+financial time series to answer the following question.
+
+## a) 
+Suppose that a given firm holds a long financial position of 10 Million Euros in stocks of the financial asset under analysis. Obtain the VaR for the next trading day and the next 5 trading days using:
+
+```{r Q2 a setup}
+value_stock = 10e6
+cis = c(.90,.95,.99)
+alphas = 1- cis
+```
+
+### (i) 
+#### the unconditional moments of an assumed normal distribution (historical  mean and standard deviation)
+
+
+The only model that can be formed using just unconditional moments is the constant model $R_t = \epsilon_t, \epsilon_t \overset{\text{w.n.}}{\sim} N(\mu, \sigma^2)$
+$\hat \mu = \bar R_t, \hat{\sigma^2} = Var(R_t)$, for $t \in [1,T]$. 
+Even for a random walk model both the standard deviation of an observation from the preceding one and a last observation would be needed. Both are not given.
+
+To calculate the VaR of each stock, the historical mean and standard deviation (std) will be estimated and the respective z value of a standard distribution will be scaled by the std and shifted by the mean. 
+Since the likelihood of the z value can be read off from the normal distribution, the z value corresponding to the likelihood of interest can be chosen.
+
+The scaled and shifted z value corresponds to a maximal log return under the given probability. The typically small log returns of stocks are proportional to percent changes in the stock value. Tue to this, maximal the monetary value of currency that is at risk can be calculated by multiplying the result of the previous calculation with the value of bought stock.
+
+
+```{r i msft 1 day}
+## get historical, unconditional mean and std
+msft_m = msft_5$log_rtn %>% mean()
+msft_std = msft_5$log_rtn %>% var() %>% sqrt()
+
+## next day
+p_msft_1 =  msft_m + msft_std* qnorm(alphas)
+msft_a_i_max_1_day_neg_change = value_stock * p_msft_1 #assume proportionality to percents
+msft_a_i_max_1_day_neg_change
+```
+
+Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the MSFT stock, the loss incuring over one day will be smaller than -154418.3, -201792.7 and -290659.2 with 90%, 95% and 99% probability. 
+The due to simplicity of the model, the 5-day VaR is the same as the 1-day VaR.
+
+``` {r i v 1 day}
+## get mean and std
+v_m = v_5$log_rtn %>% mean()
+v_std = v_5$log_rtn %>% var() %>% sqrt()
+
+## next day
+p_v_1_05 = v_m + v_std*qnorm(alphas)
+v_a_i_max_1_day_neg_change = value_stock * p_v_1_05 
+v_a_i_max_1_day_neg_change
+```
+
+Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the V stock, the loss incuring over one day will be smaller than -220709.9, -284484.4 and -404114.7 with 90%, 95% and 99% probability. 
+The due to simplicity of the model, the 5-day VaR is the same as the 1-day VaR.
+
+According to this model, V has a way larger VaR than MSFT.
+
+
+### (ii)
+#### a GARCH(1,1) with only a constant in the conditional mean function and normal errors. Hint: for an ARMA(0,0) model, it is possible to show that ψi = 0 for every i.
+
+The following GARCH model will be fitted 
+$\begin{cases} R_t = \mu_t + \epsilon_t, \epsilon_t = \sigma_t  * z_t, z_t \overset{i.i.d.}{\sim} N(0,1) \\ \sigma^2_t = \alpha_0 + \alpha_1 \epsilon^2_{t-1} + \beta_1 \sigma^2_{t-1} \\ \mu_t = \mu_0 \end{cases}$
+
+A more sophisticated model will be used to estimate the VaR in this subtask. 
+The model will be specified and fitted to the historical data. The fitted model can then be used to make predictions about the stock returns in the future. The predicted mean and std of the returns can be used to scale and shift a z value like in the previous subtask.
+The use of this scaled and shifted z value in the further calculation of the VaR is identical to the previous, current and the later subtasks.
+
+```{r ii model}
+#specify model 
+a_ii_spec = rugarch::ugarchspec(variance.model=list(model="sGARCH", 
+                                                 garchOrder=c(1,1)),
+                             mean.model=list(armaOrder=c(0,0),include.mean=TRUE),
+                             distribution.model="norm")
+```
+
+```{r function for resutls}
+getVaR_table = function(spec1, data1, lags = c(1,5), value_stock1 = value_stock, alphas1 = alphas, verbose = F){
+  # Function that predcits and forecasts using a rugarch::modelspec object and and tsibble data on log returns. it then gets the VaR for 2 specified lags in the future using a specified stock value and probability bounds
+  #Parameters
+  ## spec1: rugarch::modelspec object
+  ## data1: log return data a tsibble object
+  ## 2 lags: default c(1,5)
+  ## value_stock1: default golbal var 'value_stock'
+  ## alphas1: default golbal var 'alphas'
+  ## verbose: should itermediary results be printed?
+  
+  #test that there are only 2 lags
+  stopifnot(length(lags) == 2)
+  
+  #fit model
+  fit1 = rugarch::ugarchfit(data = data1, spec = spec1)
+  #predict
+  pred1 = rugarch::ugarchforecast(fit1,n.ahead = lags[2])
+  
+  #get pred mean and var
+  mu1 = fitted(pred1)
+  sig1 = sigma(pred1)
+  
+  if (verbose){
+    print(paste("Mean: ", mu1))
+    print(paste("SD: ", sig1))
+
+  }
+  
+  #get VaR
+     #put lags and alphas into df
+  max_neg_change <- data.frame(expand.grid(lags = lags, alphas1 = alphas1)) %>%
+     #apply formual to everything
+    mutate(result = value_stock1 * (mu1[lags] + sig1[lags] * qnorm(alphas1))) %>% 
+    #change names
+    mutate(lags = paste0(as.character(lags), "-Day VaR"),
+           alphas1 = paste0(as.character(100*(1-alphas1)), "%")) %>% 
+    #change format
+    pivot_wider(names_from = alphas1, values_from = result) %>%
+    column_to_rownames(var = "lags")
+  
+  return(max_neg_change)
+}
+```
+
+```{r ii msft}
+#get VaR
+msft_a_ii_table = getVaR_table(a_ii_spec, msft_5$log_rtn)
+msft_a_ii_table
+```
+Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the MSFT stock, the loss incurring over one day will be smaller than -154418.3,	-201792.7	and -290659.2 with 90%, 95% and 99% probability.
+The loss after 5 days will be smaller than -161413.7,	-210771.3	and -303357.7 with 90%, 95% and 99% probability.
+
+```{r ii v}
+#get VaR
+v_a_ii_table = getVaR_table(a_ii_spec, v_5$log_rtn)
+v_a_ii_table
+```
+Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the V stock, the loss incuring over one day will be smaller than -114043.9,	-148128.3 and	-212065.1 with 90%, 95% and 99% probability.
+The loss after 5 days will be smaller than -122764.6,	-159321.3	and -227895.4	 with 90%, 95% and 99% probability.
+
+According to this model, the VaR is smaller when investing into V than when investing into MSFT. Why?
+
+Also, I does the smaller relative difference between the 1 day and 5 day VaR in MSFT speak for higher stability in the (higher) volatility?
+
+### (iii)
+#### an AR(1)-GARCH(1,1) model with normal errors. Hint: for a stationary AR(1) model, it is possible to show that ψi = ϕ1i for every i.
+
+```{r iii model}
+#specify model
+a_iii_spec <-  rugarch::ugarchspec(variance.model=list(model="sGARCH", 
+                                                 garchOrder=c(1,1)),
+                             mean.model=list(armaOrder=c(1,0),include.mean=TRUE),
+                             distribution.model="norm")
+```
+
+```{r iii msft}
+#get VaR
+msft_a_iii_table = getVaR_table(a_iii_spec, msft_5$log_rtn)
+msft_a_iii_table
+```
+Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the MSFT stock, the loss incurring over one day will be smaller than -159257.5,	-207448.0 and	-297845.5	 with 90%, 95% and 99% probability.
+The loss after 5 days will be smaller than -163731.4,	-213758.5	and -307601.0	with 90%, 95% and 99% probability.
+
+```{r iii v}
+#get VaR
+v_a_iii_table = getVaR_table(a_iii_spec, v_5$log_rtn)
+v_a_iii_table
+```
+Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the V stock, the loss incuring over one day will be smaller than -114877.1,	-148974.7 and	-212936.0	 with 90%, 95% and 99% probability.
+The loss after 5 days will be smaller than -122596.9,	-159133.9 and	-227671.1	with 90%, 95% and 99% probability.
+
+The estimated VaR don't really differ between the previous model which modeled the mean as constant, and the current one, which models the mean of the time series using an AR(1). 
+The reason for this indifference could be, that the conditional mean of stock returns cannot really be predicted from preceding returns. It is already a good aproximation to model this conditional mean as constant.
+
+### (iv) 
+#### an AR(1)-GARCH(1,1) model with Student-t innovations 
+
+```{r iv model}
+#specify model
+a_iv_spec <-  rugarch::ugarchspec(variance.model=list(model="sGARCH", 
+                                                 garchOrder=c(1,1)),
+                             mean.model=list(armaOrder=c(1,0),include.mean=TRUE),
+                             distribution.model="std")
+```
+
+```{r iv msft}
+#get VaR
+msft_a_iv_table = getVaR_table(a_iv_spec, msft_5$log_rtn)
+msft_a_iv_table
+```
+Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the MSFT stock, the loss incurring over one day will be smaller than -158814.0,	-207664.4	and -299299.5	 with 90%, 95% and 99% probability.
+The loss after 5 days will be smaller than -165224.1,	-216306.9	and -312129.7		with 90%, 95% and 99% probability.
+
+```{r iv v}
+#get VaR
+v_a_iv_table = getVaR_table(a_iv_spec, v_5$log_rtn)
+v_a_iv_table
+```
+Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the V stock, the loss incuring over one day will be smaller than -113368.9,	-148172.3 and	-213457.5		 with 90%, 95% and 99% probability.
+The loss after 5 days will be smaller than -122388.9	-159936.6	-230369.7		with 90%, 95% and 99% probability.
+
+There were only small variations in the predicted VaR for both stocks between the models using normal innovations and the current one, which is using a t-student distribution. The expected shift of likelohood towards the tails could be observed. The 90% VaR decreased slightly, while the 99%VaR increased. This reflects an increased likelihood of increased events like negative price shocks and is more extreme for the 5-Day VaR in comparison to the 1-Day VaR. 
+
+### (v) 
+#### Another ARMA-GARCH specification choosen by the group. Here you should choose either a constant or an AR(1) conditional mean function. For the GARCH specification you may choose a GARCH(m,n) for any m and n with either normal or student-t innovations. You may also explore extensions of the standard GARCH model (GARCH-in-mean,T-GARCH, EGARCH,...). Justify your option
+
