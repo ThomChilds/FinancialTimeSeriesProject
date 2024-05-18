@@ -392,8 +392,25 @@ The VaR obtained by the current models using t-stundent innovations are much lar
 ### (v) 
 #### Another ARMA-GARCH specification choosen by the group. Here you should choose either a constant or an AR(1) conditional mean function. For the GARCH specification you may choose a GARCH(m,n) for any m and n with either normal or student-t innovations. You may also explore extensions of the standard GARCH model (GARCH-in-mean,T-GARCH, EGARCH,...). Justify your option
 
+```{r v model}
+#specify model
+a_v_spec <-  rugarch::ugarchspec(variance.model=list(model="tGARCH", 
+                                                 garchOrder=c(1,2)),
+                        mean.model=list(armaOrder=c(1,0)),
+                             distribution.model="std")
+                              
+#TODO secify different model
+```
 
-## b) 
+```{r iv msft}
+#get VaR
+msft_a_v_table = getVaR_table(a_v_spec, msft_5$log_rtn)
+```
+
+```{r v v}
+#get VaR
+v_a_v_table = getVaR_table(a_v_v_spec, v_5$log_rtn)
+```
 
 
 # Functional Code
