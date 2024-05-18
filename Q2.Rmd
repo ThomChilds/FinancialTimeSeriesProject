@@ -52,7 +52,7 @@ cis = c(.90,.95,.99)
 alphas = 1- cis
 
 #### function for resutls ####
-getVaR_table = function(spec1, data1, lags = c(1:5), value_stock1 = value_stock, alphas1 = alphas, verbose = T){
+getVaR_table = function(spec1, data1, lags = c(1:5), value_stock1 = value_stock, alphas1 = alphas, verbose = T,  formulas = T){
   # Function that predcits and forecasts using a rugarch::modelspec object and and tsibble data on log returns. it then gets the VaR for 2 specified lags in the future using a specified stock value and probability bounds
   #Parameters
   ## spec1: rugarch::modelspec object
@@ -61,6 +61,7 @@ getVaR_table = function(spec1, data1, lags = c(1:5), value_stock1 = value_stock,
   ## value_stock1: default golbal var 'value_stock'
   ## alphas1: default golbal var 'alphas'
   ## verbose: should itermediary results be printed?
+  ## formulas: should latex formulas be written (to a seperate file)
   
   #fit model
   fit1 = rugarch::ugarchfit(data = data1, spec = spec1)
@@ -168,6 +169,9 @@ getVaR_table = function(spec1, data1, lags = c(1:5), value_stock1 = value_stock,
     }  
 
     
+  }
+  
+  if (formulas){
     #print latex formulas
     string_list = "\n####New Task###\n"
     
@@ -189,10 +193,16 @@ getVaR_table = function(spec1, data1, lags = c(1:5), value_stock1 = value_stock,
       }
     }
     cat(string_list, file = formulas_file, append = TRUE, sep = "\n")
-    
   }
   
-  return(max_neg_change_euro)
+  #concat df to return
+  names(max_neg_change_log_rtn) = paste(names(max_neg_change_log_rtn), "(log rtn)")
+  names(max_neg_change_euro) = paste(names(max_neg_change_euro), "(Euro)")
+  desc = data.frame(mu_t = mu1, sigma_t = sig1)
+  names(desc) = c("mu_t","sigma_t")
+  return(cbind(desc,
+               max_neg_change_log_rtn,
+               max_neg_change_euro))
 }
 ```
 
