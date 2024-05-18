@@ -1,5 +1,3 @@
-
-
 ---
 title: "Q2 Markdown"
 output: 
@@ -31,6 +29,12 @@ msft_5 = read.csv("data/MSFT - 5 Years.csv") %>%  select(Date, Close) %>%
   mutate(Date = date(Date))%>% as_tsibble(index = Date) %>% 
   mutate(log_rtn = difference(log(Close))) %>% 
   filter(!is.na(log_rtn))
+
+formulas_file = "Q2_a_latex_formulas.md"
+
+if (file.exists(formulas_file)) {
+  file.remove(formulas_file)
+}
 ```
 
 
@@ -46,14 +50,157 @@ Suppose that a given firm holds a long financial position of 10 Million Euros in
 value_stock = 10e6
 cis = c(.90,.95,.99)
 alphas = 1- cis
+
+#### function for resutls ####
+getVaR_table = function(spec1, data1, lags = c(1:5), value_stock1 = value_stock, alphas1 = alphas, verbose = T){
+  # Function that predcits and forecasts using a rugarch::modelspec object and and tsibble data on log returns. it then gets the VaR for 2 specified lags in the future using a specified stock value and probability bounds
+  #Parameters
+  ## spec1: rugarch::modelspec object
+  ## data1: log return data a tsibble object
+  ## 2 lags: default c(1,5)
+  ## value_stock1: default golbal var 'value_stock'
+  ## alphas1: default golbal var 'alphas'
+  ## verbose: should itermediary results be printed?
+  
+  #fit model
+  fit1 = rugarch::ugarchfit(data = data1, spec = spec1)
+  #predict
+  pred1 = rugarch::ugarchforecast(fit1,n.ahead = lags[length(lags)])
+  
+  #get pred mean and var
+  mu1 = fitted(pred1)
+  sig1 = sigma(pred1)
+  
+  distr1 = spec1@model$modeldesc$distribution
+  
+  if (distr1 == "norm"){
+    quant_fun = qnorm
+  } else if (distr1 == "std"){
+    print("using student t quantilies")
+    df_t = fit1@fit$matcoef["shape"," Estimate"]
+    distr1 = paste0("std(", round(df_t), ")")
+    quant_fun = function(ps){
+      return(qt(p = ps, df = df_t))
+    }
+  } else {
+    Warning("don't know this distribution, using nromal quantiles")
+    quant_fun = qnorm
+  }
+  
+  
+  #get VaR
+     #put lags and alphas into df
+  max_neg_change_log_rtn <- data.frame(expand.grid(lags = lags, alphas1 = alphas1)) %>%
+     #apply formual to everything
+    mutate(result = (mu1[lags] + sig1[lags] * quant_fun(alphas1))) %>% 
+    #change names
+    mutate(lags = paste0(lags, "-Day"),
+           alphas1 = paste0("VaR",(100*(alphas1)), "%")) %>% 
+    #change format
+    pivot_wider(names_from = alphas1, values_from = result) %>%
+    column_to_rownames(var = "lags")
+  
+  max_neg_change_euro = value_stock1*max_neg_change_log_rtn
+
+  if (verbose){
+    # print(paste("Mean:", paste(mu1,  collapse = ",")))
+    # print(paste("SD:",   paste(sig1, collapse = ",")))
+
+    #print calculation resuslts as table
+    ## quantiles
+    print(paste("quantiles:", paste(round(quant_fun(alphas),2),collapse = ",")))
+    
+    # # % VaR
+    # print(paste("         ",
+    #             paste(names(max_neg_change_log_rtn),
+    #                   collapse = " ")))
+    # for (i in 1:nrow(max_neg_change_log_rtn)) {
+    #   print(paste(rownames(max_neg_change_log_rtn)[i],
+    #               paste(
+    #                 paste0(
+    #                   str_pad(round(max_neg_change_log_rtn,4)[i, ],
+    #                       nchar("-0.0001"), "right"),
+    #                   "% "),
+    #                 collapse ="")
+    #               
+    #               ))
+    # }  
+    # 
+    # # Euro VaR
+    # 
+    # print(paste("          ",
+    #             paste(names(max_neg_change_euro),
+    #                   collapse = "         ")))
+    # for (i in 1:nrow(max_neg_change_euro)) {
+    #   print(paste(rownames(max_neg_change_euro)[i],
+    #               paste(
+    #                 paste0(
+    #                   str_pad(round(max_neg_change_euro,2)[i, ],
+    #                           width = nchar("-400000.00"), "right"),
+    #                 "Euros "), collapse ="")
+    #               ))
+    # } 
+    
+    ## both VaR
+    print(paste("      mu     sig    ",
+                paste(names(max_neg_change_log_rtn),
+                      collapse = "   "),
+                "    ",
+                paste(names(max_neg_change_euro), collapse = "          ")))
+    
+    for (i in 1:nrow(max_neg_change_log_rtn)) {
+      print(paste(
+                  rownames(max_neg_change_log_rtn)[i],
+                  str_pad(format(round(mu1[i],4), scientific = FALSE), 6, "right"),
+                  str_pad(format(round(sig1[i], 4), scientific = FALSE), 6, "right"),
+                  paste(
+                    paste0(
+                      str_pad(round(max_neg_change_log_rtn,4)[i, ],
+                          nchar("-0.0001"), "right"),
+                      "% "),
+                    collapse =""),
+                  paste(
+                    paste0(
+                      str_pad(round(max_neg_change_euro,2)[i, ],
+                              width = nchar("-400000.00"), "right"),
+                    "Euros "), collapse ="")
+                ))
+    }  
+
+    
+    #print latex formulas
+    string_list = "\n####New Task###\n"
+    
+    for (lag in lags){
+      for (alpha in alphas1){
+  
+      var_log_ret = mu1[lag] + sig1[lag]*quant_fun(alpha)
+      q = round(quant_fun(alpha),2)
+      m = format(round(mu1[lag],4), scientific = FALSE)
+      s = format(round(sig1[lag],4), scientific = FALSE)
+      string_list = c(string_list, "\n",
+      paste0("$\\text{Quantile}_\\text{",distr1,"}(",alpha,") = ",q,"$"),
+      paste0("$\\hat{\\mu_{T+",lag,"|T}} = ",m,", \\hat{\\sigma_{T+",lag,"|T}} = ",s, "$"),
+      paste0("$VaR(\\log \\text{returns}) = ",m," + ",s,"\\times",q,
+             " = ", round(var_log_ret, 4) ,"$"),
+      paste0("$VaR_{",alpha*100,"\\%} = \\text{ Value in Euros } \\times VaR(\\log returns) = ",
+             format(value_stock1, big.mark = " ", scientific = FALSE)," \\texteuro \\times",
+             round(var_log_ret, 4)," = ",round(value_stock1*var_log_ret, 2)," \\texteuro$"))
+      }
+    }
+    cat(string_list, file = formulas_file, append = TRUE, sep = "\n")
+    
+  }
+  
+  return(max_neg_change_euro)
+}
 ```
+
 
 ### (i) 
 #### the unconditional moments of an assumed normal distribution (historical  mean and standard deviation)
-
-
-The only model that can be formed using just unconditional moments is the constant model $R_t = \epsilon_t, \epsilon_t \overset{\text{w.n.}}{\sim} N(\mu, \sigma^2)$
-$\hat \mu = \bar R_t, \hat{\sigma^2} = Var(R_t)$, for $t \in [1,T]$. 
+The only model that can be formed using just unconditional moments is the constant model $$R_t = \epsilon_t, \epsilon_t \overset{\text{w.n.}}{\sim} N(\mu, \sigma^2),$$
+with $\hat \mu = \bar R_t, \hat{\sigma^2} = Var(R_t)$, for $t \in [1,T]$. 
 Even for a random walk model both the standard deviation of an observation from the preceding one and a last observation would be needed. Both are not given.
 
 To calculate the VaR of each stock, the historical mean and standard deviation (sd) will be estimated and the respective z value of a standard distribution will be scaled by the sd and shifted by the mean. 
@@ -71,9 +218,30 @@ msft_sd = msft_5$log_rtn %>% var() %>% sqrt()
 p_msft_1 =  msft_m + msft_sd* qnorm(alphas)
 msft_a_i_max_1_day_neg_change = value_stock * p_msft_1 #assume proportionality to percents
 
-print(paste("quantiles:", paste(round(qnorm(alphas),2),collapse = ",")))
+print(paste("nomal quantiles:", paste(round(qnorm(alphas),2),collapse = ",")))
 print(paste("VaR(log rtn):", paste(round(p_msft_1,4),collapse = ",")))
 print(paste("VaR(Euro):", paste(round(msft_a_i_max_1_day_neg_change, 2),collapse = ",")))
+
+#print latex formulas
+string_list = "\n####New Task###\n"
+    
+lag = 1
+for (alpha in alphas){
+  var_log_ret = msft_m[lag] + msft_sd[lag]*qnorm(alpha)
+  q = round(qnorm(alpha),2)
+  m = format(round(msft_m[lag],4), scientific = FALSE)
+  s = format(round(msft_sd[lag],4), scientific = FALSE)
+  string_list = c(string_list, "\n",
+  paste0("$\\text{Quantile}_\\text{norm}(",alpha,") = ",q,"$"),
+  paste0("$\\hat{\\mu_{T+",lag,"|T}} = ",m,", \\hat{\\sigma_{T+",lag,"|T}} = ",s, "$"),
+  paste0("$VaR(\\log \\text{returns}) = ",m," + ",s,"\\times",q,
+         " = ", round(var_log_ret, 4) ,"$"),
+  paste0("$VaR_{",alpha*100,"\\%} = \\text{ Value in Euros } \\times VaR(\\log returns) = ",
+         format(value_stock, big.mark = " ", scientific = FALSE)," \\texteuro \\times",
+         round(var_log_ret, 4)," = ",round(value_stock*var_log_ret, 2)," \\texteuro$"))
+}
+
+cat(string_list, file = formulas_file, append = TRUE, sep = "\n")
 ```
 
 Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the MSFT stock, the loss incuring over one day will be smaller than -154418.3, -201792.7 and -290659.2 with 90%, 95% and 99% probability. 
@@ -89,6 +257,28 @@ p_v_1 = v_m + v_sd*qnorm(alphas)
 v_a_i_max_1_day_neg_change = value_stock * p_v_1 
 print(paste("VaR(log rtn):", paste(round(p_v_1,4),collapse = ",")))
 print(paste("VaR(Euro):", paste(round(v_a_i_max_1_day_neg_change, 2),collapse = ",")))
+
+
+#print latex formulas
+string_list = "\n####New Task###\n"
+    
+lag = 1
+for (alpha in alphas){
+  var_log_ret = v_m[lag] + v_sd[lag]*qnorm(alpha)
+  q = round(qnorm(alpha),2)
+  m = format(round(v_m[lag],4), scientific = FALSE)
+  s = format(round(v_sd[lag],4), scientific = FALSE)
+  string_list = c(string_list, "\n",
+  paste0("$\\text{Quantile}_\\text{norm}(",alpha,") = ",q,"$"),
+  paste0("$\\hat{\\mu_{T+",lag,"|T}} = ",m,", \\hat{\\sigma_{T+",lag,"|T}} = ",s, "$"),
+  paste0("$VaR(\\log \\text{returns}) = ",m," + ",s,"\\times",q,
+         " = ", round(var_log_ret, 4) ,"$"),
+  paste0("$VaR_{",alpha*100,"\\%} = \\text{ Value in Euros } \\times VaR(\\log returns) = ",
+         format(value_stock, big.mark = " ", scientific = FALSE)," \\texteuro \\times",
+         round(var_log_ret, 4)," = ",round(value_stock*var_log_ret, 2)," \\texteuro$"))
+}
+
+cat(string_list, file = formulas_file, append = TRUE, sep = "\n")
 ```
 
 Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the V stock, the loss incuring over one day will be smaller than -220709.9, -284484.4 and -404114.7 with 90%, 95% and 99% probability. 
@@ -114,105 +304,6 @@ a_ii_spec = rugarch::ugarchspec(variance.model=list(model="sGARCH",
                              mean.model=list(armaOrder=c(0,0),include.mean=TRUE),
                              distribution.model="norm")
 ```
-
-```{r function for resutls}
-getVaR_table = function(spec1, data1, lags = c(1,5), value_stock1 = value_stock, alphas1 = alphas, verbose = T){
-  # Function that predcits and forecasts using a rugarch::modelspec object and and tsibble data on log returns. it then gets the VaR for 2 specified lags in the future using a specified stock value and probability bounds
-  #Parameters
-  ## spec1: rugarch::modelspec object
-  ## data1: log return data a tsibble object
-  ## 2 lags: default c(1,5)
-  ## value_stock1: default golbal var 'value_stock'
-  ## alphas1: default golbal var 'alphas'
-  ## verbose: should itermediary results be printed?
-  
-  #test that there are only 2 lags
-  stopifnot(length(lags) == 2)
-  
-  #fit model
-  fit1 = rugarch::ugarchfit(data = data1, spec = spec1)
-  #predict
-  pred1 = rugarch::ugarchforecast(fit1,n.ahead = lags[2])
-  
-  #get pred mean and var
-  mu1 = fitted(pred1)
-  sig1 = sigma(pred1)
-  
-  distr1 = spec1@model$modeldesc$distribution
-  
-  if (distr1 == "norm"){
-    quant_fun = qnorm
-  } else if (distr1 == "std"){
-    print("using student t quantilies")
-    quant_fun = function(ps){
-      return(qt(p = ps, df = fit1@fit$matcoef["shape"," Estimate"]))
-    }
-  } else {
-    Warning("don't know this distribution, using nromal quantiles")
-    quant_fun = qnorm
-  }
-  
-  
-  #get VaR
-     #put lags and alphas into df
-  max_neg_change_log_rtn <- data.frame(expand.grid(lags = lags, alphas1 = alphas1)) %>%
-     #apply formual to everything
-    mutate(result = (mu1[lags] + sig1[lags] * quant_fun(alphas1))) %>% 
-    #change names
-    mutate(lags = paste0(as.character(lags), "-Day VaR"),
-           alphas1 = paste0(as.character(100*(1-alphas1)), "%")) %>% 
-    #change format
-    pivot_wider(names_from = alphas1, values_from = result) %>%
-    column_to_rownames(var = "lags")
-  
-  if (verbose){
-    # print(paste("Mean:", paste(mu1,  collapse = ",")))
-    # print(paste("SD:",   paste(sig1, collapse = ",")))
-
-
-    print(paste("quantiles:", paste(round(quant_fun(alphas),2),collapse = ",")))
-  
-    print(paste("                      ",
-                paste(names(max_neg_change_log_rtn),
-                      collapse = "     ")))
-    for (i in 1:nrow(max_neg_change_log_rtn)) {
-      print(paste(rownames(max_neg_change_log_rtn)[i],"(log rtn)",
-                  paste(round(max_neg_change_log_rtn,4)[i, ], collapse = " ")))
-    }  
-    
-    string_list = c()
-    
-    for (j in lags){
-      for (i in seq_along(alphas1)){
-  
-      var_log_ret = mu1[j] + sig1[j]*quant_fun(alphas1[i])
-      q = round(quant_fun(alphas1[i]))
-      m = round(mu1[j],4)
-      s = round(sig1[j],4)
-      string_list = c(string_list, "\n",
-      paste0("$\\text{Quantile}_\\text{",distr1,"}(",alphas1[i],") = ",q,"$"),
-      paste0("$\\hat{\\mu_{T+",j,"|T}} = ",m,", \\hat{\\sigma_{T+",j,"|T}} = ",s, "$"),
-      paste0("$VaR(\\log \text{returns}) = ",m," + ",s,"\\times",q,
-             " = ", round(var_log_ret, 4) ,"$"),
-      paste0("$VaR_{5\\%} = \\text{ Value in Euros } \\times VaR(\\log returns) = 10.000.000 \\texteuro \\times",
-             round(var_log_ret, 4)," = ",round(value_stock1*var_log_ret, 2)," \\texteuro$"))
-      }
-    }
-    cat(string_list, sep = "\n")
-      
-    max_neg_change_euro = value_stock1*max_neg_change_log_rtn
-    
-    print(paste("                      ", paste(names(max_neg_change_euro), collapse = "     ")))
-    for (i in 1:nrow(max_neg_change_euro)) {
-      print(paste(rownames(max_neg_change_euro)[i],"(Euros)",
-                  paste(round(max_neg_change_euro,2)[i, ], collapse = " ")))
-    } 
-  }
-  
-  return(max_neg_change_euro)
-}
-```
-
 
 ```{r ii msft}
 #get VaR
@@ -293,4 +384,10 @@ The VaR obtained by the current models using t-stundent innovations are much lar
 
 
 ## b) 
+
+
+# Functional Code
+```{r knit formulas file}
+rmarkdown::render(input = formulas_file, output_format = "html_document")
+```
 
