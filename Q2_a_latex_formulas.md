@@ -3,42 +3,48 @@
 
 
 
-$\text{Quantile}_\text{norm}(0.1) = -1$
+$\text{Quantile}_\text{norm}(0.1) = -1.28$
+
 $\hat{\mu_{T+1|T}} = 0.0009, \hat{\sigma_{T+1|T}} = 0.0192$
-$VaR(\log \text{returns}) = 0.0009 + 0.0192\times-1 = -0.0236$
+
+$VaR(\log \text{returns}) = 0.0009 + 0.0192\times-1.28 = -0.0236$
 $VaR_{10\%} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \texteuro \times-0.0236 = -236303.82 \texteuro$
 
 
-$\text{Quantile}_\text{norm}(0.05) = -2$
+$\text{Quantile}_\text{norm}(0.05) = -1.64$
+
 $\hat{\mu_{T+1|T}} = 0.0009, \hat{\sigma_{T+1|T}} = 0.0192$
-$VaR(\log \text{returns}) = 0.0009 + 0.0192\times-2 = -0.0306$
+
+$VaR(\log \text{returns}) = 0.0009 + 0.0192\times-1.64 = -0.0306$
 $VaR_{5\%} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \texteuro \times-0.0306 = -305890.67 \texteuro$
 
 
-$\text{Quantile}_\text{norm}(0.01) = -2$
+$\text{Quantile}_\text{norm}(0.01) = -2.33$
+
 $\hat{\mu_{T+1|T}} = 0.0009, \hat{\sigma_{T+1|T}} = 0.0192$
-$VaR(\log \text{returns}) = 0.0009 + 0.0192\times-2 = -0.0436$
+
+$VaR(\log \text{returns}) = 0.0009 + 0.0192\times-2.33 = -0.0436$
 $VaR_{1\%} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \texteuro \times-0.0436 = -436424.02 \texteuro$
 
 ####New Task###
 
 
 
-$\text{Quantile}_\text{norm}(0.1) = -1$
+$\text{Quantile}_\text{norm}(0.1) = -1.28$
 $\hat{\mu_{T+1|T}} = 0.0004, \hat{\sigma_{T+1|T}} = 0.0176$
-$VaR(\log \text{returns}) = 0.0004 + 0.0176\times-1 = -0.0221$
+$VaR(\log \text{returns}) = 0.0004 + 0.0176\times-1.28 = -0.0221$
 $VaR_{10\%} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \texteuro \times-0.0221 = -220709.87 \texteuro$
 
 
-$\text{Quantile}_\text{norm}(0.05) = -2$
+$\text{Quantile}_\text{norm}(0.05) = -1.64$
 $\hat{\mu_{T+1|T}} = 0.0004, \hat{\sigma_{T+1|T}} = 0.0176$
-$VaR(\log \text{returns}) = 0.0004 + 0.0176\times-2 = -0.0284$
+$VaR(\log \text{returns}) = 0.0004 + 0.0176\times-1.64 = -0.0284$
 $VaR_{5\%} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \texteuro \times-0.0284 = -284484.36 \texteuro$
 
 
-$\text{Quantile}_\text{norm}(0.01) = -2$
+$\text{Quantile}_\text{norm}(0.01) = -2.33$
 $\hat{\mu_{T+1|T}} = 0.0004, \hat{\sigma_{T+1|T}} = 0.0176$
-$VaR(\log \text{returns}) = 0.0004 + 0.0176\times-2 = -0.0404$
+$VaR(\log \text{returns}) = 0.0004 + 0.0176\times-2.33 = -0.0404$
 $VaR_{1\%} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \texteuro \times-0.0404 = -404114.71 \texteuro$
 
 ####New Task###

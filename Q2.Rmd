@@ -242,8 +242,8 @@ for (alpha in alphas){
   m = format(round(msft_m[lag],4), scientific = FALSE)
   s = format(round(msft_sd[lag],4), scientific = FALSE)
   string_list = c(string_list, "\n",
-  paste0("$\\text{Quantile}_\\text{norm}(",alpha,") = ",q,"$"),
-  paste0("$\\hat{\\mu_{T+",lag,"|T}} = ",m,", \\hat{\\sigma_{T+",lag,"|T}} = ",s, "$"),
+  paste0("$\\text{Quantile}_\\text{norm}(",alpha,") = ",q,"$\n"),
+  paste0("$\\hat{\\mu_{T+",lag,"|T}} = ",m,", \\hat{\\sigma_{T+",lag,"|T}} = ",s, "$\n"),
   paste0("$VaR(\\log \\text{returns}) = ",m," + ",s,"\\times",q,
          " = ", round(var_log_ret, 4) ,"$"),
   paste0("$VaR_{",alpha*100,"\\%} = \\text{ Value in Euros } \\times VaR(\\log returns) = ",
