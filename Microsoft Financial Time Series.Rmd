@@ -495,3 +495,44 @@ ggplot() +
 
 ```
 
+# Q1 i
+
+```{r}
+# Specify the start and end dates for the estimation and forecast periods
+start_estimation <- ymd("2019-04-25")  # Start date of the estimation period
+end_estimation <- ymd("2024-04-18")    # End date of the estimation period
+start_forecast <- ymd("2024-04-19")    # Start date of the forecast period
+end_forecast <- ymd("2024-05-05")      # End date of the forecast period
+
+# Choose the sample for the estimation period (Microsoft)
+estimation_sample_msft <- window(data_ts$log_rtn, start = start_estimation, end = end_estimation)
+
+# Choose the sample for the forecast period (Microsoft)
+forecast_sample_msft <- window(data_ts$log_rtn, start = start_forecast, end = end_forecast)
+
+# Forecast log returns using the selected method (Microsoft)
+# Insert your forecasting code here for Microsoft
+
+# For example, using auto.arima for forecasting
+library(forecast)
+forecast_model_msft <- auto.arima(estimation_sample_msft)
+forecast_results_msft <- forecast(forecast_model_msft, h = length(forecast_sample_msft))
+print(forecast_results_msft)
+
+# Choose the sample for the estimation period (Visa)
+estimation_sample_visa <- window(data_ts_visa$log_rtn, start = start_estimation, end = end_estimation)
+
+# Choose the sample for the forecast period (Visa)
+forecast_sample_visa <- window(data_ts_visa$log_rtn, start = start_forecast, end = end_forecast)
+
+# Forecast log returns using the selected method (Visa)
+# Insert your forecasting code here for Visa
+
+# For example, using auto.arima for forecasting
+forecast_model_visa <- auto.arima(estimation_sample_visa)
+forecast_results_visa <- forecast(forecast_model_visa, h = length(forecast_sample_visa))
+print(forecast_results_visa)
+
+```
+
+
