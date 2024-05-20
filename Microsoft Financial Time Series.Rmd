@@ -414,3 +414,84 @@ squared_residuals <- visa_residuals^2
          y = "Squared Residuals") +
     theme_minimal()
 ```
+
+# Q1 h
+
+Redo the previous 3 items on the basis of the t-distribution for the error term.
+Do you find a better goodness-of-fit than in item (e)?
+
+```{r}
+arch_test_and_propose_models_tstudent <- function(residuals) {
+  ljung_box_test <- Box.test(residuals^2, lag = 10, type = "Ljung-Box")
+  print(ljung_box_test)
+  
+  #acf(residuals^2, main = "ACF of Squared Residuals")
+  #pacf(residuals^2, main = "PACF of Squared Residuals")
+  
+  # Choosing the best GARCH model based on AIC
+  best_aic <- 6000000
+  best_order <- NULL
+  best_model <- NULL
+  
+  for (p in 0:5) {
+    for (q in 0:5) {
+      if (p == 0 && q == 0) next
+      
+      spec <- ugarchspec(
+        mean.model = list(armaOrder = c(0, 1)),
+        variance.model = list(model = "sGARCH", garchOrder = c(p, q)),
+        distribution.model = "std"
+      )
+      
+      fit <- ugarchfit(spec = spec, data = residuals,, optim.method = "nlminb")
+ 
+      aic <- infocriteria(fit)[1]
+      if (aic < best_aic) {
+        best_aic <- aic
+        best_order <- c(p, q)
+        best_model <- fit
+      }
+    }
+  }
+  
+  cat("Best GARCH Model Order (p,q):", best_order, "\n")
+  cat("Best AIC:", best_aic, "\n")
+  print(best_model)
+  
+  return(best_model)
+}
+```
+
+### Ljung box test and ARMA GARCH model Microsoft:
+```{r}
+msft_residuals <- residuals(msft_arma_model)
+msft_arma_garch_model <- arch_test_and_propose_models_tstudent(msft_residuals)
+```
+### Squared residuals Microsoft:
+```{r}
+ggplot() +
+  geom_line(aes(x = msft_residuals, y = squared_residuals)) +
+  labs(title = "Squared Residuals",
+       x = "Date",
+       y = "Squared Residuals") +
+  theme_minimal()
+
+```
+### Ljung box test and ARMA GARCH model Visa:
+```{r}
+Box.test(visa_residuals^2, lag = 10, type = "Ljung-Box")
+
+visa_arma_garch_model <- arch_test_and_propose_models_tstudent(visa_residuals)
+
+```
+### Squared residuals Visa:
+```{r}
+ggplot() +
+  geom_line(aes(x = visa_residuals, y = squared_residuals)) +
+  labs(title = "Squared Residuals",
+       x = "Date",
+       y = "Squared Residuals") +
+  theme_minimal()
+
+```
+
