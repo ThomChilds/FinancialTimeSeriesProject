@@ -183,8 +183,8 @@ getVaR_table = function(spec1, data1, lags = c(1:5), value_stock1 = value_stock,
       m = format(round(mu1[lag],4), scientific = FALSE)
       s = format(round(sig1[lag],4), scientific = FALSE)
       string_list = c(string_list, "\n",
-      paste0("$\\text{Quantile}_\\text{",distr1,"}(",alpha,") = ",q,"$"),
-      paste0("$\\hat{\\mu_{T+",lag,"|T}} = ",m,", \\hat{\\sigma_{T+",lag,"|T}} = ",s, "$"),
+      paste0("$\\text{Quantile}_\\text{",distr1,"}(",alpha,") = ",q,"$\n"),
+      paste0("$\\hat{\\mu_{T+",lag,"|T}} = ",m,", \\hat{\\sigma_{T+",lag,"|T}} = ",s, "$\n"),
       paste0("$VaR(\\log \\text{returns}) = ",m," + ",s,"\\times",q,
              " = ", round(var_log_ret, 4) ,"$"),
       paste0("$VaR_{",alpha*100,"\\%} = \\text{ Value in Euros } \\times VaR(\\log returns) = ",
@@ -279,8 +279,8 @@ for (alpha in alphas){
   m = format(round(v_m[lag],4), scientific = FALSE)
   s = format(round(v_sd[lag],4), scientific = FALSE)
   string_list = c(string_list, "\n",
-  paste0("$\\text{Quantile}_\\text{norm}(",alpha,") = ",q,"$"),
-  paste0("$\\hat{\\mu_{T+",lag,"|T}} = ",m,", \\hat{\\sigma_{T+",lag,"|T}} = ",s, "$"),
+  paste0("$\\text{Quantile}_\\text{norm}(",alpha,") = ",q,"$\n"),
+  paste0("$\\hat{\\mu_{T+",lag,"|T}} = ",m,", \\hat{\\sigma_{T+",lag,"|T}} = ",s, "$\n"),
   paste0("$VaR(\\log \\text{returns}) = ",m," + ",s,"\\times",q,
          " = ", round(var_log_ret, 4) ,"$"),
   paste0("$VaR_{",alpha*100,"\\%} = \\text{ Value in Euros } \\times VaR(\\log returns) = ",
@@ -394,22 +394,22 @@ The VaR obtained by the current models using t-stundent innovations are much lar
 
 ```{r v model}
 #specify model
-a_v_spec <-  rugarch::ugarchspec(variance.model=list(model="tGARCH", 
-                                                 garchOrder=c(1,2)),
-                        mean.model=list(armaOrder=c(1,0)),
-                             distribution.model="std")
-                              
+# a_v_spec <-  rugarch::ugarchspec(variance.model=list(model="tGARCH", 
+#                                                  garchOrder=c(1,2)),
+#                         mean.model=list(armaOrder=c(1,0)),
+#                              distribution.model="std")
+#                               
 #TODO secify different model
 ```
 
 ```{r iv msft}
 #get VaR
-msft_a_v_table = getVaR_table(a_v_spec, msft_5$log_rtn)
+# msft_a_v_table = getVaR_table(a_v_spec, msft_5$log_rtn)
 ```
 
 ```{r v v}
 #get VaR
-v_a_v_table = getVaR_table(a_v_v_spec, v_5$log_rtn)
+# v_a_v_table = getVaR_table(a_v_spec, v_5$log_rtn)
 ```
 
 
