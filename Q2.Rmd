@@ -191,8 +191,8 @@ getVaR_table = function(spec1, data1, lags = c(1:5), value_stock1 = value_stock,
       
       #VaR Euro
       paste0("$VaR_{",alpha*100,"\\%, T + ,",lag,",} = \\text{ Value in Euros } \\times VaR(\\log returns) = ",
-             format(value_stock1, big.mark = " ", scientific = FALSE)," \\texteuro \\times",
-             round(var_log_ret, 4)," = ",round(value_stock1*var_log_ret, 2)," \\texteuro$"))
+             format(value_stock1, big.mark = " ", scientific = FALSE)," \\text{\\euro} \\times",
+             round(var_log_ret, 4)," = ",round(value_stock1*var_log_ret, 2)," \\text{\\euro}$"))
       }
     }
     cat(string_list, file = formulas_file, append = TRUE, sep = "\n")
@@ -230,7 +230,8 @@ enum_str_list = function(string_list, sep = ", ", last = " and "){
 #### the unconditional moments of an assumed normal distribution (historical  mean and standard deviation)
 
 ```{r start latex doc}
-text_i = "\\subsection{A - VaR calculations}
+text_i = "\\subsubsection{Subtask(i)}
+
 The only model that can be formed using just unconditional moments is the constant model $$R_t = \\epsilon_t, \\epsilon_t \\overset{\\text{w.n.}}{\\sim} N(\\mu, \\sigma^2),$$
 with $\\hat \\mu = \\bar R_t, \\hat{\\sigma^2} = Var(R_t)$, for $t \\in [1,T]$. 
 Even for a random walk model both the standard deviation of an observation from the preceding one and a last observation would be needed. Both are not given.
@@ -244,13 +245,14 @@ The scaled and shifted z value corresponds to a maximal log return under the giv
 
 cat(c("\\section{Value at Risk (VaR) Analysis}
 \\label{sec:q2_value_at_risk_analysis}
+\\subsection{A - VaR calculations}
 ", text_i), file = formulas_file, sep = "\n") 
 ```
 
 `r text_i`
 ```{r i msft 1 day}
 #write to file
-cat("\n\\subsubsection{Subtask(i)}
+cat("\n
 \\paragraph{MSFT Stock}\n", file = formulas_file, append = TRUE)
 
 ## get historical, unconditional mean and sd
@@ -282,11 +284,18 @@ for (alpha in alphas){
   paste0("$VaR(\\log \\text{returns}) = ",m," + ",s,"\\times",q,
          " = ", round(var_log_ret, 4) ,"$"),
   paste0("$VaR_{",alpha*100,"\\%} = \\text{ Value in Euros } \\times VaR(\\log returns) = ",
-         format(value_stock, big.mark = " ", scientific = FALSE)," \\texteuro \\times",
-         round(var_log_ret, 4)," = ",round(value_stock*var_log_ret, 2)," \\texteuro$"))
+         format(value_stock, big.mark = " ", scientific = FALSE)," \\text{\\euro} \\times",
+         round(var_log_ret, 4)," = ",round(value_stock*var_log_ret, 2)," \\text{\\euro}$"))
 }
 
-text_i_msft = paste0("\n\nFollowing the modeling assumptions of this subtask, the available stock data and the given sum invested in the MSFT stock, the loss incuring over one day will be smaller than ",enum_str_list(msft_a_i_max_1_day_neg_change)," with " ,paste0(100*(1-alphas), "%"), "Confidence.
+text_i_msft = paste0("\n\nFollowing the modeling assumptions of this subtask, the available stock data and the given sum invested in the MSFT stock, the loss incuring over one day will be smaller than ",
+enum_str_list(
+  paste0(format(
+    round(msft_a_i_max_1_day_neg_change,2),
+         nsmall = 2, scientific = F
+         )
+  ), "\euro"),
+  " with " ,paste0(100*(1-alphas), "%"), "Confidence.
 
 
 The due to simplicity of the model, the 5-day VaR is the same as the 1-day VaR.
@@ -324,16 +333,22 @@ for (alpha in alphas){
   m = format(round(v_m[lag],4), scientific = FALSE)
   s = format(round(v_sd[lag],4), scientific = FALSE)
   string_list = c(string_list, "\n",
-  paste0("$\\text{Quantile}_\\text{norm}(",alpha,") = ",q,"$\n"),
-  paste0("$\\hat{\\mu_{T+",lag,"|T}} = ",m,", \\hat{\\sigma_{T+",lag,"|T}} = ",s, "$\n"),
+  paste0("$\\text{Quantile}_\\text{norm}(",alpha,") = ",q,"
+         \\hat{\\mu_{T+",lag,"|T}} = ",m,", \\hat{\\sigma_{T+",lag,"|T}} = ",s, "$\n"),
   paste0("$VaR(\\log \\text{returns}) = ",m," + ",s,"\\times",q,
-         " = ", round(var_log_ret, 4) ,"$"),
+         " = ", round(var_log_ret, 4) ,"$\n"),
   paste0("$VaR_{",alpha*100,"\\%} = \\text{ Value in Euros } \\times VaR(\\log returns) = ",
-         format(value_stock, big.mark = " ", scientific = FALSE)," \\texteuro \\times",
-         round(var_log_ret, 4)," = ",round(value_stock*var_log_ret, 2)," \\texteuro$"))
+         format(value_stock, scientific = FALSE)," \\text{\\euro} \\times",
+         round(var_log_ret, 4)," = ",round(value_stock*var_log_ret, 2)," \\text{\\euro}$"))
 }
 
-text_i_msft = paste0("\n\nFollowing the modeling assumptions of this subtask, the available stock data and the given sum invested in the V stock, the loss incuring over one day will be smaller than ",enum_str_list(msft_a_i_max_1_day_neg_change)," with " ,paste0(100*(1-alphas), "%"), "Confidence.
+text_i_msft = paste0("\n\nFollowing the modeling assumptions of this subtask, the available stock data and the given sum invested in the V stock, the loss incuring over one day will be smaller than ",
+enum_str_list(
+  paste0(format(
+    round(v_a_i_max_1_day_neg_change,2),
+         nsmall = 2, scientific = F
+         )
+  ), "\euro")," with " ,paste0(100*(1-alphas), "%"), "Confidence.
 
 
 The due to simplicity of the model, the 5-day VaR is the same as the 1-day VaR.
@@ -377,11 +392,11 @@ msft_a_ii_table = getVaR_table(a_ii_spec, msft_5$log_rtn)
 #write conclusion
 text_ii_msft = paste0("\n\nFollowing the modeling assumptions of this subtask, the available stock data and the given sum invested in the MSFT stock, the loss incuring over one day will be smaller than ",
 enum_str_list(
-  format(
+  paste0(format(
     msft_a_ii_table[1,((ncol(msft_a_ii_table)-2):(ncol(msft_a_ii_table)))],
          nsmall = 2, scientific = F
          )
-  )
+  ), "\euro")
 
 ,"Euros with " ,paste0(100*(1-alphas), "%"), "Confidence.
 The loss after 5 days will be smaller than", enum_str_list(
@@ -408,11 +423,11 @@ v_a_ii_table = getVaR_table(a_ii_spec, v_5$log_rtn)
 #write conclusion
 text_ii_v = paste0("\n\nFollowing the modeling assumptions of this subtask, the available stock data and the given sum invested in the V stock, the loss incuring over one day will be smaller than ",
 enum_str_list(
-  format(
+  paste0(format(
     v_a_ii_table[1,((ncol(v_a_ii_table)-2):(ncol(v_a_ii_table)))],
          nsmall = 2, scientific = F
          )
-  )
+  ), "\euro")
 
 ,"Euros with " ,paste0(100*(1-alphas), "%"), " Confidence.
 The loss after 5 days will be smaller than", enum_str_list(
@@ -463,11 +478,11 @@ msft_a_iii_table = getVaR_table(a_iii_spec, msft_5$log_rtn)
 #write to file
 text_iii_msft = paste0("\n\nFollowing the modeling assumptions of this subtask, the available stock data and the given sum invested in the MSFT stock, the loss incuring over one day will be smaller than ",
 enum_str_list(
-  format(
+  paste0(format(
     msft_a_iii_table[1,((ncol(msft_a_iii_table)-2):(ncol(msft_a_iii_table)))],
          nsmall = 2, scientific = F
          )
-  )
+  ), "\euro")
 
 ,"Euros with " ,paste0(100*(1-alphas), "%"), "Confidence.
 The loss after 5 days will be smaller than", enum_str_list(
@@ -494,11 +509,11 @@ v_a_iii_table = getVaR_table(a_iii_spec, v_5$log_rtn)
 #write to file
 text_iii_v = paste0("\n\nFollowing the modeling assumptions of this subtask, the available stock data and the given sum invested in the V stock, the loss incuring over one day will be smaller than ",
 enum_str_list(
-  format(
+  paste0(format(
     v_a_iii_table[1,((ncol(v_a_iii_table)-2):(ncol(v_a_iii_table)))],
          nsmall = 2, scientific = F
          )
-  )
+  ), "\euro")
 
 ,"Euros with " ,paste0(100*(1-alphas), "%"), "Confidence.
 The loss after 5 days will be smaller than", enum_str_list(
@@ -541,11 +556,11 @@ msft_a_iv_table = getVaR_table(a_iv_spec, msft_5$log_rtn)
 #write to file
 text_iv_msft = paste0("\n\nFollowing the modeling assumptions of this subtask, the available stock data and the given sum invested in the MSFT stock, the loss incuring over one day will be smaller than ",
 enum_str_list(
-  format(
+  paste0(format(
     msft_a_iv_table[1,((ncol(msft_a_iv_table)-2):(ncol(msft_a_iv_table)))],
          nsmall = 2, scientific = F
          )
-  )
+  ), "\euro")
 
 ,"Euros with " ,paste0(100*(1-alphas), "%"), "Confidence.
 The loss after 5 days will be smaller than", enum_str_list(
@@ -570,11 +585,11 @@ v_a_iv_table = getVaR_table(a_iv_spec, v_5$log_rtn)
 #write to file
 text_iv_v = paste0("\n\nFollowing the modeling assumptions of this subtask, the available stock data and the given sum invested in the V stock, the loss incuring over one day will be smaller than ",
 enum_str_list(
-  format(
+  paste0(format(
     v_a_iv_table[1,((ncol(v_a_iv_table)-2):(ncol(v_a_iv_table)))],
          nsmall = 2, scientific = F
          )
-  )
+  ), "\euro")
 
 ,"Euros with " ,paste0(100*(1-alphas), "%"), "Confidence.
 The loss after 5 days will be smaller than", enum_str_list(
