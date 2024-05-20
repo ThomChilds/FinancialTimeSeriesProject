@@ -19,6 +19,7 @@ library(psych)
 library(urca)
 library(forecast)
 library(rugarch)
+library(tseries)
 ```
 
 # Q1 B
@@ -174,6 +175,25 @@ describe(data_df$Close)
 describe(data_df$log_rtn)
 ```
 
+```{r}
+microsoft_frequency_close <- ggplot(data.frame(x = data_df$Close), aes(x = x)) +
+  geom_density(fill = "blue", alpha = 0.3) +
+  labs(title = "Microsoft Close",
+       x = "Close",
+       y = "Frequency") +
+  theme_minimal()
+```
+
+```{r}
+microsoft_frequency_log_return <- ggplot(data.frame(x = data_df$log_rtn), aes(x = x)) +
+  geom_density(fill = "blue", alpha = 0.3) +
+  labs(title = "Microsoft Log return",
+       x = "Log return",
+       y = "Frequency") +
+  theme_minimal()
+```
+
+
 ### Summary Visa
 
 ```{r, echo=FALSE}
@@ -181,6 +201,24 @@ data_df_visa <- data.frame(data_ts_visa)
 
 describe(data_df_visa$Close)
 describe(data_df_visa$log_rtn)
+```
+
+```{r}
+visa_frequency_close <- ggplot(data.frame(x = data_df_visa$Close), aes(x = x)) +
+  geom_density(fill = "blue", alpha = 0.3) +
+  labs(title = "Visa Close",
+       x = "Close",
+       y = "Frequency") +
+  theme_minimal()
+```
+
+```{r}
+visa_frequency_log_return <- ggplot(data.frame(x = data_df_visa$log_rtn), aes(x = x)) +
+  geom_density(fill = "blue", alpha = 0.3) +
+  labs(title = "Visa Log return",
+       x = "Log return",
+       y = "Frequency") +
+  theme_minimal()
 ```
 
 # Q1 c
@@ -238,10 +276,52 @@ simplified_box_jenkins <- function(log_returns) {
 msft_arma_model <- simplified_box_jenkins(data_ts$log_rtn)
 ```
 
+```{r}
+residuals <- residuals(msft_arma_model)
+
+ggplot(data.frame(time = 1:length(residuals), residuals = residuals), aes(x = time, y = residuals)) +
+  geom_line(color = "black") +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
+  labs(title = "Residuals of the Microsoft Log returns ARIMA model",
+       y = "Residuals") +
+  theme_minimal()
+
+Box.test(residuals, lag = 10, type = "Ljung-Box")
+```
+
+```{r}
+ggAcf(residuals, main = "Microsoft ACF of residuals ARIMA(0,0,1)")
+
+ggPacf(residuals, main = "Microsoft PACF of residuals ARIMA(0,0,1)")
+
+```
+
+
 ### Box Jenkins Visa
 
 ```{r}
 visa_arma_model <- simplified_box_jenkins(data_ts_visa$log_rtn)
+```
+
+
+```{r}
+residuals <- residuals(visa_arma_model)
+
+ggplot(data.frame(time = 1:length(residuals), residuals = residuals), aes(x = time, y = residuals)) +
+  geom_line(color = "black") +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
+  labs(title = "Residuals of the Visa Log returns ARIMA model",
+       y = "Residuals") +
+  theme_minimal()
+
+Box.test(residuals, lag = 10, type = "Ljung-Box")
+```
+
+```{r}
+ggAcf(residuals, main = "Visa ACF of residuals ARIMA(3,0,3)")
+
+ggPacf(residuals, main = "Visa PACF of residuals ARIMA(3,0,3)")
+
 ```
 
 # Q1 e
@@ -254,11 +334,43 @@ Obtain the residuals of the ARMA model estimated in item (e). Test for the prese
 
 ```{r}
 arch_test_and_propose_models <- function(residuals) {
-  ljung_box_test <- Box.test(residuals^2, lag = 22, type = "Ljung-Box")
+  ljung_box_test <- Box.test(residuals^2, lag = 10, type = "Ljung-Box")
   print(ljung_box_test)
   
-  arma_garch_model <- ugarchspec(mean.model = list(armaOrder = c(0, 1)), variance.model = list(model = "sGARCH", garchOrder = c(0, 1)), distribution.model = "norm")
-  print(arma_garch_model)
+  #acf(residuals^2, main = "ACF of Squared Residuals")
+  #pacf(residuals^2, main = "PACF of Squared Residuals")
+  
+  # Choosing the best GARCH model based on AIC
+  best_aic <- 6000000
+  best_order <- NULL
+  best_model <- NULL
+  
+  for (p in 0:5) {
+    for (q in 0:5) {
+      if (p == 0 && q == 0) next
+      
+      spec <- ugarchspec(
+        mean.model = list(armaOrder = c(0, 1)),
+        variance.model = list(model = "sGARCH", garchOrder = c(p, q)),
+        distribution.model = "norm"
+      )
+      
+      fit <- ugarchfit(spec = spec, data = residuals,, optim.method = "nlminb")
+ 
+      aic <- infocriteria(fit)[1]
+      if (aic < best_aic) {
+        best_aic <- aic
+        best_order <- c(p, q)
+        best_model <- fit
+      }
+    }
+  }
+  
+  cat("Best GARCH Model Order (p,q):", best_order, "\n")
+  cat("Best AIC:", best_aic, "\n")
+  print(best_model)
+  
+  return(best_model)
 }
 ```
 
@@ -273,18 +385,21 @@ msft_arma_garch_model <- arch_test_and_propose_models(msft_residuals)
 
 ```{r}
 squared_residuals <- msft_residuals^2
-  ggplot() +
-    geom_line(aes(x = msft_residuals, y = squared_residuals)) +
-    labs(title = "Squared Residuals",
-         x = "Date",
-         y = "Squared Residuals") +
-    theme_minimal()
+ggplot() +
+  geom_line(aes(x = msft_residuals, y = squared_residuals)) +
+  labs(title = "Squared Residuals",
+       x = "Date",
+       y = "Squared Residuals") +
+  theme_minimal()
 ```
 
 ### Ljung box test and ARMA GARCH model Visa
 
 ```{r}
 visa_residuals <- residuals(visa_arma_model)
+
+Box.test(visa_residuals^2, lag = 10, type = "Ljung-Box")
+
 visa_arma_garch_model <- arch_test_and_propose_models(visa_residuals)
 ```
 
