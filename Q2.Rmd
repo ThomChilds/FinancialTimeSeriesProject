@@ -215,10 +215,10 @@ enum_str_list = function(string_list, sep = ", ", last = " and "){
     return(
       paste0(
         c(
-          paste0(string_list[1:(length(string_list)-1)], collapse = ", "),
+          paste0(string_list[1:(length(string_list)-1)], collapse = sep),
           string_list[length(string_list)]
           ),
-        collapse = " and "
+        collapse = last
       )
     )
 }
@@ -294,7 +294,7 @@ enum_str_list(
     round(msft_a_i_max_1_day_neg_change,2),
          nsmall = 2, scientific = F
          )
-  ), "\euro"),
+  , "\\euro")),
   " with " ,paste0(100*(1-alphas), "%"), "Confidence.
 
 
@@ -348,7 +348,7 @@ enum_str_list(
     round(v_a_i_max_1_day_neg_change,2),
          nsmall = 2, scientific = F
          )
-  ), "\euro")," with " ,paste0(100*(1-alphas), "%"), "Confidence.
+  , "\\euro"))," with " ,paste0(100*(1-alphas), "%"), "Confidence.
 
 
 The due to simplicity of the model, the 5-day VaR is the same as the 1-day VaR.
@@ -396,7 +396,7 @@ enum_str_list(
     msft_a_ii_table[1,((ncol(msft_a_ii_table)-2):(ncol(msft_a_ii_table)))],
          nsmall = 2, scientific = F
          )
-  ), "\euro")
+  , "\\euro"))
 
 ,"Euros with " ,paste0(100*(1-alphas), "%"), "Confidence.
 The loss after 5 days will be smaller than", enum_str_list(
@@ -427,7 +427,7 @@ enum_str_list(
     v_a_ii_table[1,((ncol(v_a_ii_table)-2):(ncol(v_a_ii_table)))],
          nsmall = 2, scientific = F
          )
-  ), "\euro")
+  , "\\euro"))
 
 ,"Euros with " ,paste0(100*(1-alphas), "%"), " Confidence.
 The loss after 5 days will be smaller than", enum_str_list(
@@ -482,7 +482,7 @@ enum_str_list(
     msft_a_iii_table[1,((ncol(msft_a_iii_table)-2):(ncol(msft_a_iii_table)))],
          nsmall = 2, scientific = F
          )
-  ), "\euro")
+  , "\\euro"))
 
 ,"Euros with " ,paste0(100*(1-alphas), "%"), "Confidence.
 The loss after 5 days will be smaller than", enum_str_list(
@@ -513,7 +513,7 @@ enum_str_list(
     v_a_iii_table[1,((ncol(v_a_iii_table)-2):(ncol(v_a_iii_table)))],
          nsmall = 2, scientific = F
          )
-  ), "\euro")
+  , "\\euro"))
 
 ,"Euros with " ,paste0(100*(1-alphas), "%"), "Confidence.
 The loss after 5 days will be smaller than", enum_str_list(
@@ -560,7 +560,7 @@ enum_str_list(
     msft_a_iv_table[1,((ncol(msft_a_iv_table)-2):(ncol(msft_a_iv_table)))],
          nsmall = 2, scientific = F
          )
-  ), "\euro")
+  , "\\euro"))
 
 ,"Euros with " ,paste0(100*(1-alphas), "%"), "Confidence.
 The loss after 5 days will be smaller than", enum_str_list(
@@ -589,7 +589,7 @@ enum_str_list(
     v_a_iv_table[1,((ncol(v_a_iv_table)-2):(ncol(v_a_iv_table)))],
          nsmall = 2, scientific = F
          )
-  ), "\euro")
+  , "\\euro"))
 
 ,"Euros with " ,paste0(100*(1-alphas), "%"), "Confidence.
 The loss after 5 days will be smaller than", enum_str_list(
