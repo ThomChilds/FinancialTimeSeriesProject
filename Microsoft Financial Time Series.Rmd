@@ -29,8 +29,8 @@ Obtain the log returns and plot the time series graph of prices and log returns.
 ### Importing the data
 
 ```{r}
-data <- read.csv("MSFT - 5 Years.csv", sep = ",", header = TRUE)
-data_visa <- read.csv("V - 5 Years.csv", sep = ",", header = TRUE)
+data <- read.csv("data/MSFT - 5 Years.csv", sep = ",", header = TRUE)
+data_visa <- read.csv("data/V - 5 Years.csv", sep = ",", header = TRUE)
 
 data_ts <- data %>% mutate(Date = ymd(Date)) %>% as_tsibble(index = Date)
 data_ts_visa <- data_visa %>% mutate(Date = ymd(Date)) %>% as_tsibble(index = Date)
