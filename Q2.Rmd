@@ -71,7 +71,7 @@ append_calc_string_list = function(string_list_loc, var_log_ret, q, m, s, alpha1
 }
       
       
-getVaR_table = function(spec1, data1, lags = c(1:5), value_stock1 = value_stock, alphas1 = alphas, verbose = T,  formulas = T){
+getVaR_table = function(spec1, data1, lags = c(1,5), value_stock1 = value_stock, alphas1 = alphas, verbose = T,  formulas = T, formulas_file1 = formulas_file) {
   # Function that predcits and forecasts using a rugarch::modelspec object and and tsibble data on log returns. it then gets the VaR for 2 specified lags in the future using a specified stock value and probability bounds
   #Parameters
   ## spec1: rugarch::modelspec object
@@ -81,6 +81,7 @@ getVaR_table = function(spec1, data1, lags = c(1:5), value_stock1 = value_stock,
   ## alphas1: default golbal var 'alphas'
   ## verbose: should itermediary results be printed
   ## formulas: should latex formulas be written (to a seperate file)
+  ## formulas_file1: file to paste the formulas to 
   
   #fit model
   fit1 = rugarch::ugarchfit(data = data1, spec = spec1)
@@ -207,7 +208,7 @@ getVaR_table = function(spec1, data1, lags = c(1:5), value_stock1 = value_stock,
       
       }
     }
-    cat(string_list, file = formulas_file, append = TRUE, sep = "\n")
+    cat(string_list, file = formulas_file1, append = TRUE, sep = "\n")
   }
   
   #concat df to return
@@ -293,7 +294,7 @@ The scaled and shifted z value corresponds to a maximal log return under the giv
 
 cat(text_i, file = formulas_file) 
 
-text_i_5d = "The due to simplicity of the model, the 5-day VaR is the same as the 1-day VaR.\n"
+text_i_5d = "The due to simplicity of the model, the VaR further into the future is the same as the 1-day VaR.\n"
 ```
 
 
@@ -401,7 +402,8 @@ $$\\begin{cases} R_t = \\mu_t + \\epsilon_t, \\epsilon_t = \\sigma_t  * z_t, z_t
 
 The model fitted in this subtask is more sophisticated than a simple model using only unconditional constants. 
 The model will be specified and fitted to the historical data. The fitted model can then be used to make predictions about the stock returns in the future. The predicted mean and sd of the returns can be used to scale and shift a z value like in the previous subtask.
-The use of this scaled and shifted z value in the further calculation of the VaR is identical to the previous, current and the later subtasks."
+The use of this scaled and shifted z value in the further calculation of the VaR is identical to the previous, current and the later subtasks.
+Only the one- and five-days ahead VaR will be reported here, the two- to four-days ahead VaR can be seen in \\ref{sec:var2to4days}."
 
 #write to file 
 cat(c("\n\\subsubsection{(ii) AR(0)-GARCH(1,1)}\n",text_ii), file = formulas_file, append = TRUE)
@@ -634,5 +636,37 @@ cat(c(text_v_msft_1d,text_v_msft_5d), file = formulas_file, append = TRUE, sep =
 # Functional Code
 ```{r knit formulas file}
 rmarkdown::render(input = formulas_file, output_format = "html_document")
+
+#write formulas for day 2-4 (incl) into seperate file 
+appendix_file = "appendix.tex"
+
+cat("\\section{Appendix 1: VaR for T+2, T+3 and T+4}
+    \\label{sec:var2to4days}\n", file = appendix_file, append = T)
+
+cat("\\subsection{VaR for T+2, T+3 and T+4 for AR(0)-GARCH(1,1)}\n", file = appendix_file, append = T)
+cat("\\paragraph{Visa} Caclulations.\\newline \\indent \n\n", file = appendix_file, append = TRUE)
+getVaR_table(a_ii_spec, v_5$log_rtn, lags = (2:4), formulas_file1 = appendix_file)
+cat("\\paragraph{Microsoft} Caclulations.\\newline \\indent \n\n", file = appendix_file, append = TRUE)
+getVaR_table(a_ii_spec, msft_5$log_rtn, lags = (2:4), formulas_file1 = appendix_file)
+
+
+cat("\\subsection{VaR for T+2, T+3 and T+4 for AR(1)-GARCH(1,1)}\n", file = appendix_file, append = T)
+cat("\\paragraph{Visa} Caclulations.\\newline \\indent \n\n", file = appendix_file, append = TRUE)
+getVaR_table(a_iii_spec, v_5$log_rtn, lags = (2:4), formulas_file1 = appendix_file)
+cat("\\paragraph{Microsoft} Caclulations.\\newline \\indent \n\n", file = appendix_file, append = TRUE)
+getVaR_table(a_iii_spec, msft_5$log_rtn, lags = (2:4), formulas_file1 = appendix_file)
+
+
+cat("\\subsection{VaR for T+2, T+3 and T+4 for AR(1)-GARCH(1,1) with t-Stundent innovations}\n", file = appendix_file, append = T)
+cat("\\paragraph{Visa} Caclulations.\\newline \\indent \n\n", file = appendix_file, append = TRUE)
+getVaR_table(a_iv_spec, v_5$log_rtn, lags = (2:4), formulas_file1 = appendix_file)
+cat("\\paragraph{Microsoft} Caclulations.\\newline \\indent \n\n", file = appendix_file, append = TRUE)
+getVaR_table(a_iv_spec, msft_5$log_rtn, lags = (2:4), formulas_file1 = appendix_file)
+
+cat("\\subsection{VaR for T+2, T+3 and T+4 for other ARMA-GARCH specification}\n", file = appendix_file, append = T)
+cat("\\paragraph{Visa} Caclulations.\\newline \\indent \n\n", file = appendix_file, append = TRUE)
+getVaR_table(a_v_v_spec, v_5$log_rtn, lags = (2:4), formulas_file1 = appendix_file)
+cat("\\paragraph{Microsoft} Caclulations.\\newline \\indent \n\n", file = appendix_file, append = TRUE)
+getVaR_table(a_v_msft_spec, msft_5$log_rtn, lags = (2:4), formulas_file1 = appendix_file)
 ```
 
