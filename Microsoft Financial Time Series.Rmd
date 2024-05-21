@@ -6,6 +6,7 @@ output: html_document
 ---
 ```{r, include = FALSE}
 library(tidyverse)
+library(dplyr)
 library(stats)
 library(ggplot2)
 library(dplyr)
@@ -21,6 +22,11 @@ library(forecast)
 library(rugarch)
 library(tseries)
 ```
+
+# Q1 A
+
+This question was answeres directly in the report. The only required code was
+to plot the time-series history (a trivial affair).
 
 # Q1 B
 
@@ -378,7 +384,7 @@ arch_test_and_propose_models <- function(residuals) {
 
 ```{r}
 msft_residuals <-residuals(msft_arma_model)
-msft_arma_garch_model <- arch_test_and_propose_models(msft_residuals)
+msft_arma_garch_model <- arch_test_and_propose_models(data_ts$log_rtn)
 ```
 
 ### Squared residuals Microsoft
@@ -428,10 +434,15 @@ spec_msft <- ugarchspec(
 
 fit_msft <- ugarchfit(spec = spec_msft, data = data_ts$log_rtn)
 
-m_res <- residuals(fit_msft)
-Box.test(m_res, lag = 10, type = "Ljung-Box")
-Box.test(m_res^2, lag = 10, type = "Ljung-Box")
-describe(m_res)
+# m_res <- residuals(fit_msft)
+# Box.test(m_res, lag = 10, type = "Ljung-Box")
+# Box.test(m_res^2, lag = 10, type = "Ljung-Box")
+# describe(m_res)
+m_stand_res <- fit_msft@fit$z
+m_stand_res_squared <- fit_msft@fit$z^2
+Box.test(m_stand_res, lag = 10, type = "Ljung-Box")
+Box.test(m_stand_res_squared, lag = 10, type = "Ljung-Box")
+describe(m_stand_res)
 
 
 spec_visa <- ugarchspec(
@@ -442,10 +453,11 @@ spec_visa <- ugarchspec(
 
 fit_visa <- ugarchfit(spec = spec_visa, data = data_ts_visa$log_rtn)
 
-v_res <- residuals(fit_visa)
-Box.test(v_res, lag = 10, type = "Ljung-Box")
-Box.test(v_res^2, lag = 10, type = "Ljung-Box")
-describe(v_res)
+v_stand_res <- fit_visa@fit$z
+v_stand_res_squared <- fit_visa@fit$z^2
+Box.test(v_stand_res, lag = 10, type = "Ljung-Box")
+Box.test(v_stand_res_squared, lag = 10, type = "Ljung-Box")
+describe(v_stand_res)
 ```
 
 
@@ -477,14 +489,14 @@ arch_test_and_propose_models_tstudent <- function(residuals) {
   for (p in 0:5) {
     for (q in 0:5) {
       if (p == 0 && q == 0) next
-      
+      tryCatch({
       spec <- ugarchspec(
-        mean.model = list(armaOrder = c(0, 1)),
+        mean.model = list(armaOrder = c(3, 3)),
         variance.model = list(model = "sGARCH", garchOrder = c(p, q)),
         distribution.model = "std"
       )
       
-      fit <- ugarchfit(spec = spec, data = residuals,, optim.method = "nlminb")
+      fit <- ugarchfit(spec = spec, data = residuals,)
  
       aic <- infocriteria(fit)[1]
       if (aic < best_aic) {
@@ -492,6 +504,9 @@ arch_test_and_propose_models_tstudent <- function(residuals) {
         best_order <- c(p, q)
         best_model <- fit
       }
+      },
+      warning = function(cond){NULL}
+      )
     }
   }
   
@@ -506,52 +521,53 @@ arch_test_and_propose_models_tstudent <- function(residuals) {
 ### Ljung box test and ARMA GARCH model Microsoft:
 ```{r}
 msft_residuals <- residuals(msft_arma_model)
-msft_arma_garch_model <- arch_test_and_propose_models_tstudent(msft_residuals)
-```
-### Squared residuals Microsoft:
-```{r}
-ggplot() +
-  geom_line(aes(x = msft_residuals, y = squared_residuals)) +
-  labs(title = "Squared Residuals",
-       x = "Date",
-       y = "Squared Residuals") +
-  theme_minimal()
+msft_arma_garch_model <- arch_test_and_propose_models_tstudent(data_ts$log_rtn)
 
+spec_msft_std <- ugarchspec(
+  mean.model = list(armaOrder = c(0, 1)),
+  variance.model = list(model = "sGARCH", garchOrder = c(1, 1)),
+  distribution.model = "std"
+)
+
+fit_msft_std <- ugarchfit(spec = spec_msft_std, data = data_ts$log_rtn)
+
+m_stand_res_std <- fit_msft_std@fit$z
+m_stand_res_std_squared <- fit_msft_std@fit$z^2
+Box.test(m_stand_res_std, lag = 10, type = "Ljung-Box")
+Box.test(m_stand_res_std_squared, lag = 10, type = "Ljung-Box")
+describe(m_stand_res_std)
 ```
+
 ### Ljung box test and ARMA GARCH model Visa:
 ```{r}
-Box.test(visa_residuals^2, lag = 10, type = "Ljung-Box")
+visa_residuals <- residuals(visa_arma_model)
+visa_arma_garch_model <- arch_test_and_propose_models_tstudent(data_ts_visa$log_rtn)
 
-visa_arma_garch_model <- arch_test_and_propose_models_tstudent(visa_residuals)
+spec_visa_std <- ugarchspec(
+  mean.model = list(armaOrder = c(3, 3)),
+  variance.model = list(model = "sGARCH", garchOrder = c(1, 1)),
+  distribution.model = "std"
+)
 
-```
-### Squared residuals Visa:
-```{r}
-ggplot() +
-  geom_line(aes(x = visa_residuals, y = squared_residuals)) +
-  labs(title = "Squared Residuals",
-       x = "Date",
-       y = "Squared Residuals") +
-  theme_minimal()
+fit_visa_std <- ugarchfit(spec = spec_visa_std, data = data_ts_visa$log_rtn)
 
+v_stand_res_std <- fit_visa_std@fit$z
+v_stand_res_std_squared <- fit_visa_std@fit$z^2
+Box.test(v_stand_res_std, lag = 10, type = "Ljung-Box")
+Box.test(v_stand_res_std_squared, lag = 10, type = "Ljung-Box")
+describe(v_stand_res_std)
 ```
 
 # Q1 i
 
 ```{r}
+# MICROSOFT
+
 # Specify the start and end indexes for the estimation and forecast periods
 start_estimation <- 1  # Start index of the estimation period
-end_estimation <- nrow(data_ts)  # End index of the estimation period
-start_forecast <- end_estimation - 9  # Start index of the forecast period (last 10 records)
-end_forecast <- end_estimation  # End index of the forecast period
-
-
-# TODO : check if all the code below is ok 
-#        !!!!!!!
-#        !!!!!!!
-#        !!!!!!!
-#        !!!!!!!
-
+end_estimation <- nrow(data_ts) - 200  # End index of the estimation period
+start_forecast <- end_estimation + 1  # Start index of the forecast period (last 10 records)
+end_forecast <- nrow(data_ts)  # End index of the forecast period
 
 # Choose the sample for the estimation period (Microsoft)
 estimation_sample_msft <- window(data_ts$log_rtn, start = start_estimation, end = end_estimation)
@@ -559,9 +575,94 @@ estimation_sample_msft <- window(data_ts$log_rtn, start = start_estimation, end 
 # Choose the sample for the forecast period (Microsoft)
 forecast_sample_msft <- window(data_ts$log_rtn, start = start_forecast, end = end_forecast)
 
-forecast_model_msft <- auto.arima(estimation_sample_msft)
-forecast_results_msft <- forecast(forecast_model_msft, h = length(forecast_sample_msft))
+# Microsoft: MA(1)-GARCH(2, 2), normal: dynamic forecasts
+forecast_model_msft <- ugarchspec(
+  mean.model = list(armaOrder = c(0, 1)),
+  variance.model = list(model = "sGARCH", garchOrder = c(2, 2)),
+  distribution.model = "norm"
+)
+fitted_model_msft <- ugarchfit(spec = forecast_model_msft, data = estimation_sample_msft)
+forecast_results_msft <- ugarchforecast(fitted_model_msft, n.ahead = length(forecast_sample_msft))
 print(forecast_results_msft)
+
+# Microsoft: MA(1)-GARCH(2, 2), normal: static forecasts
+m_sigma_static_forc <- c()
+m_rtn_static_forc <- c()
+.init = start_forecast
+for (i in .init:end_forecast){
+  fit <- rugarch::ugarchfit(data = data_ts$log_rtn[1:i], spec = forecast_model_msft)
+  forc <- rugarch::ugarchforecast(fit,n.ahead = 1)
+  m_sigma_static_forc[i-.init+1] <- forc@forecast$sigmaFor
+  m_rtn_static_forc[i-.init+1] <- forc@forecast$seriesFor
+}
+
+# Microsoft: MA(1)-GARCH(1, 1), t-student: dynamic forecasts
+forecast_model_msft_std <- ugarchspec(
+  mean.model = list(armaOrder = c(0, 1)),
+  variance.model = list(model = "sGARCH", garchOrder = c(1, 1)),
+  distribution.model = "std"
+)
+fitted_model_msft_std <- ugarchfit(spec = forecast_model_msft_std, data = estimation_sample_msft)
+forecast_results_msft_std <- ugarchforecast(fitted_model_msft_std, n.ahead = length(forecast_sample_msft))
+print(forecast_results_msft_std)
+
+# Microsoft: MA(1)-GARCH(1, 1), t-student: static forecasts
+m_sigma_static_forc_std <- c()
+m_rtn_static_forc_std <- c()
+.init = start_forecast
+for (i in .init:end_forecast){
+  fit <- rugarch::ugarchfit(data = data_ts$log_rtn[1:i], spec = forecast_model_msft_std)
+  forc <- rugarch::ugarchforecast(fit,n.ahead = 1)
+  m_sigma_static_forc_std[i-.init+1] <- forc@forecast$sigmaFor
+  m_rtn_static_forc_std[i-.init+1] <- forc@forecast$seriesFor
+}
+
+# Plot the sigma forecasts
+data_tibble <- tibble(index = 1:(length(m_sigma_static_forc_std)),
+       abs_rtns=abs(data_ts$log_rtn[start_forecast:end_forecast]),
+       dynamic_normal_sigma=forecast_results_msft@forecast$sigmaFor,
+       static_normal_sigma=m_sigma_static_forc,
+       dynamic_std_sigma=forecast_results_msft_std@forecast$sigmaFor,
+       static_std_sigma=m_sigma_static_forc_std)
+# Convert to tsibble
+data_tsibble <- data_tibble %>%
+  as_tsibble(index = index)
+# Reshape to long format
+data_long <- data_tsibble %>%
+  pivot_longer(cols = -index, names_to = "series", values_to = "value")
+# Plot the data on the same axes
+ggplot(data_long, aes(x = index, y = value, color = series)) +
+  geom_line() +
+  labs(title = "Time Series Plot",
+       x = "Index",
+       y = "Value",
+       color = "Series") +
+  theme_minimal()
+
+# Plot the return forecasts
+data_tibble <- tibble(index = 1:(length(m_sigma_static_forc_std)),
+       abs_rtns=data_ts$log_rtn[start_forecast:end_forecast],
+       dynamic_normal_rtn=forecast_results_msft@forecast$seriesFor,
+       static_normal_rtn=m_rtn_static_forc,
+       dynamic_std_rtn=forecast_results_msft_std@forecast$seriesFor,
+       static_std_rtn=m_rtn_static_forc_std)
+# Convert to tsibble
+data_tsibble <- data_tibble %>%
+  as_tsibble(index = index)
+# Reshape to long format
+data_long <- data_tsibble %>%
+  pivot_longer(cols = -index, names_to = "series", values_to = "value")
+# Plot the data on the same axes
+ggplot(data_long, aes(x = index, y = value, color = series)) +
+  geom_line() +
+  labs(title = "Time Series Plot",
+       x = "Index",
+       y = "Value",
+       color = "Series") +
+  theme_minimal()
+
+
+# VISA
 
 # Choose the sample for the estimation period (Visa)
 estimation_sample_visa <- window(data_ts_visa$log_rtn, start = start_estimation, end = end_estimation)
@@ -569,12 +670,158 @@ estimation_sample_visa <- window(data_ts_visa$log_rtn, start = start_estimation,
 # Choose the sample for the forecast period (Visa)
 forecast_sample_visa <- window(data_ts_visa$log_rtn, start = start_forecast, end = end_forecast)
 
-forecast_model_visa <- auto.arima(estimation_sample_visa)
-forecast_results_visa <- forecast(forecast_model_visa, h = length(forecast_sample_visa))
+# Visa: ARMA(3,3)-GARCH(2, 3), normal: dynamic forecasts
+forecast_model_visa <- ugarchspec(
+  mean.model = list(armaOrder = c(3, 3)),
+  variance.model = list(model = "sGARCH", garchOrder = c(2, 3)),
+  distribution.model = "norm"
+)
+fitted_model_visa <- ugarchfit(spec = forecast_model_visa, data = estimation_sample_visa)
+forecast_results_visa <- ugarchforecast(fitted_model_visa, n.ahead = length(forecast_sample_visa))
 print(forecast_results_visa)
 
+# Visa: ARMA(3,3)-GARCH(2, 3), normal: static forecasts
+v_sigma_static_forc <- c()
+v_rtn_static_forc <- c()
+.init = start_forecast
+for (i in .init:end_forecast){
+  tryCatch(
+  {
+    fit <- rugarch::ugarchfit(data = data_ts_visa$log_rtn[1:i], spec = forecast_model_visa)
+    forc <- rugarch::ugarchforecast(fit,n.ahead = 1)
+    v_sigma_static_forc[i-.init+1] <- forc@forecast$sigmaFor
+    v_rtn_static_forc[i-.init+1] <- forc@forecast$seriesFor
+  },
+  error = function(cond){}
+  )
+}
 
-# I belive it needs some more metrics to compare the results
+# Visa: ARMA(3,3)-GARCH(1, 1), t-student: dynamic forecasts
+forecast_model_visa_std <- ugarchspec(
+  mean.model = list(armaOrder = c(3, 3)),
+  variance.model = list(model = "sGARCH", garchOrder = c(1, 1)),
+  distribution.model = "std"
+)
+fitted_model_visa_std <- ugarchfit(spec = forecast_model_visa_std, data = estimation_sample_visa)
+forecast_results_visa_std <- ugarchforecast(fitted_model_visa_std, n.ahead = length(forecast_sample_visa))
+print(forecast_results_visa_std)
+
+# Visa: MA(1)-GARCH(1, 1), t-student: static forecasts
+v_sigma_static_forc_std <- c()
+v_rtn_static_forc_std <- c()
+.init = start_forecast
+for (i in .init:end_forecast){
+  tryCatch(
+  {
+    fit <- rugarch::ugarchfit(data = data_ts_visa$log_rtn[1:i], spec = forecast_model_visa_std)
+    forc <- rugarch::ugarchforecast(fit,n.ahead = 1)
+    v_sigma_static_forc_std[i-.init+1] <- forc@forecast$sigmaFor
+    v_rtn_static_forc_std[i-.init+1] <- forc@forecast$seriesFor
+  },
+  error = function(cond){}
+  )
+}
+
+# Plot the sigma forecasts
+data_tibble <- tibble(index = 1:(length(v_sigma_static_forc_std)),
+        abs_rtns=abs(data_ts_visa$log_rtn[start_forecast:end_forecast]),
+       dynamic_normal_sigma=forecast_results_visa@forecast$sigmaFor,
+       static_normal_sigma=v_sigma_static_forc,
+       dynamic_std_sigma=forecast_results_visa_std@forecast$sigmaFor,
+       static_std_sigma=v_sigma_static_forc_std)
+# Convert to tsibble
+data_tsibble <- data_tibble %>%
+  as_tsibble(index = index)
+# Reshape to long format
+data_long <- data_tsibble %>%
+  pivot_longer(cols = -index, names_to = "series", values_to = "value")
+# Plot the data on the same axes
+ggplot(data_long, aes(x = index, y = value, color = series)) +
+  geom_line() +
+  labs(title = "Time Series Plot",
+       x = "Index",
+       y = "Value",
+       color = "Series") +
+  theme_minimal()
+
+# Plot the return forecasts
+data_tibble <- tibble(index = 1:(length(v_sigma_static_forc_std)),
+       abs_rtns=data_ts_visa$log_rtn[start_forecast:end_forecast],
+       dynamic_normal_rtn=forecast_results_visa@forecast$seriesFor,
+       static_normal_rtn=v_rtn_static_forc,
+       dynamic_std_rtn=forecast_results_visa_std@forecast$seriesFor,
+       static_std_rtn=m_rtn_static_forc_std)
+# Convert to tsibble
+data_tsibble <- data_tibble %>%
+  as_tsibble(index = index)
+# Reshape to long format
+data_long <- data_tsibble %>%
+  pivot_longer(cols = -index, names_to = "series", values_to = "value")
+# Plot the data on the same axes
+ggplot(data_long, aes(x = index, y = value, color = series)) +
+  geom_line() +
+  labs(title = "Time Series Plot",
+       x = "Index",
+       y = "Value",
+       color = "Series") +
+  theme_minimal()
+
+
 ```
 
+# Q1 j
 
+```{r}
+# MICROSOFT
+
+# Microsoft: MA(1)-GARCH(2, 2), normal: dynamic forecasts
+forecast_model_msft <- ugarchspec(
+  mean.model = list(armaOrder = c(0, 1)),
+  variance.model = list(model = "sGARCH", garchOrder = c(2, 2)),
+  distribution.model = "norm"
+)
+fitted_model_msft <- ugarchfit(spec = forecast_model_msft, data = data_ts$log_rtn)
+forecast_results_msft <- ugarchforecast(fitted_model_msft, n.ahead = 2)
+print(forecast_results_msft)
+
+# Microsoft: MA(1)-GARCH(1, 1), t-student: dynamic forecasts
+forecast_model_msft_std <- ugarchspec(
+  mean.model = list(armaOrder = c(0, 1)),
+  variance.model = list(model = "sGARCH", garchOrder = c(1, 1)),
+  distribution.model = "std"
+)
+fitted_model_msft_std <- ugarchfit(spec = forecast_model_msft_std, data = data_ts$log_rtn)
+forecast_results_msft_std <- ugarchforecast(fitted_model_msft_std, n.ahead = 2)
+print(forecast_results_msft_std)
+```
+
+# Q1 k
+
+```{r}
+# Microsoft leverage effects
+data_ts %>% as_tibble() %>%
+  summarise(corr = cor(log_rtn^2, lag(log_rtn), use='complete.obs'))
+
+# Visa leverage effects
+data_ts_visa %>% as_tibble() %>%
+  summarise(corr = cor(log_rtn^2, lag(log_rtn), use='complete.obs'))
+
+# Microsoft risk premium
+garchm_spec <-  rugarch::ugarchspec(variance.model=list(model="sGARCH",
+                                                 garchOrder=c(2,2)),
+                             mean.model=list(armaOrder=c(0,1),
+                                             include.mean=TRUE,
+                                             archm=TRUE),
+                             distribution.model = "norm")
+garchm_msft <- rugarch::ugarchfit(data = data_ts$log_rtn, spec = garchm_spec)
+
+
+# Visa risk premium
+garchm_spec <-  rugarch::ugarchspec(variance.model=list(model="sGARCH",
+                                                 garchOrder=c(2,3)),
+                             mean.model=list(armaOrder=c(3,3),
+                                             include.mean=TRUE,
+                                             archm=TRUE),
+                             distribution.model = "norm")
+rugarch::ugarchfit(data = data_ts_visa$log_rtn, spec = garchm_spec)
+```
