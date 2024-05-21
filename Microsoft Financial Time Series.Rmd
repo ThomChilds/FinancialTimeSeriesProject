@@ -495,3 +495,45 @@ ggplot() +
 
 ```
 
+# Q1 i
+
+```{r}
+# Specify the start and end indexes for the estimation and forecast periods
+start_estimation <- 1  # Start index of the estimation period
+end_estimation <- nrow(data_ts)  # End index of the estimation period
+start_forecast <- end_estimation - 9  # Start index of the forecast period (last 10 records)
+end_forecast <- end_estimation  # End index of the forecast period
+
+
+# TODO : check if all the code below is ok 
+#        !!!!!!!
+#        !!!!!!!
+#        !!!!!!!
+#        !!!!!!!
+
+
+# Choose the sample for the estimation period (Microsoft)
+estimation_sample_msft <- window(data_ts$log_rtn, start = start_estimation, end = end_estimation)
+
+# Choose the sample for the forecast period (Microsoft)
+forecast_sample_msft <- window(data_ts$log_rtn, start = start_forecast, end = end_forecast)
+
+forecast_model_msft <- auto.arima(estimation_sample_msft)
+forecast_results_msft <- forecast(forecast_model_msft, h = length(forecast_sample_msft))
+print(forecast_results_msft)
+
+# Choose the sample for the estimation period (Visa)
+estimation_sample_visa <- window(data_ts_visa$log_rtn, start = start_estimation, end = end_estimation)
+
+# Choose the sample for the forecast period (Visa)
+forecast_sample_visa <- window(data_ts_visa$log_rtn, start = start_forecast, end = end_forecast)
+
+forecast_model_visa <- auto.arima(estimation_sample_visa)
+forecast_results_visa <- forecast(forecast_model_visa, h = length(forecast_sample_visa))
+print(forecast_results_visa)
+
+
+# I belive it needs some more metrics to compare the results
+```
+
+
