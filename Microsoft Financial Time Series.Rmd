@@ -415,6 +415,47 @@ squared_residuals <- visa_residuals^2
     theme_minimal()
 ```
 
+# Q1 f
+
+Evaluate the adequacy of the proposed models with the appropriate diagnostic checking procedures. Select the ARMA-GARCH model that best fits the dynamic properties of the log returns. Justify your choice.
+
+```{r}
+spec_msft <- ugarchspec(
+  mean.model = list(armaOrder = c(0, 1)),
+  variance.model = list(model = "sGARCH", garchOrder = c(2, 2)),
+  distribution.model = "norm"
+)
+
+fit_msft <- ugarchfit(spec = spec_msft, data = data_ts$log_rtn)
+
+m_res <- residuals(fit_msft)
+Box.test(m_res, lag = 10, type = "Ljung-Box")
+Box.test(m_res^2, lag = 10, type = "Ljung-Box")
+describe(m_res)
+
+
+spec_visa <- ugarchspec(
+  mean.model = list(armaOrder = c(3, 3)),
+  variance.model = list(model = "sGARCH", garchOrder = c(2, 3)),
+  distribution.model = "norm"
+)
+
+fit_visa <- ugarchfit(spec = spec_visa, data = data_ts_visa$log_rtn)
+
+v_res <- residuals(fit_visa)
+Box.test(v_res, lag = 10, type = "Ljung-Box")
+Box.test(v_res^2, lag = 10, type = "Ljung-Box")
+describe(v_res)
+```
+
+
+# Q1 g
+
+Write explicitly the estimated equation in the standard mathematical ARMA- GARCH form. Approximate your results to 3 decimal places.
+
+[done exlusively in the report]
+
+
 # Q1 h
 
 Redo the previous 3 items on the basis of the t-distribution for the error term.
