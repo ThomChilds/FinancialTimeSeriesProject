@@ -166,22 +166,7 @@ pre code {
 
 <p>The only model that can be formed using just unconditional moments is the constant model <span class="math display">\[R_t = \epsilon_t, \epsilon_t \overset{\text{w.n.}}{\sim} N(\mu, \sigma^2),\]</span> with <span class="math inline">\(\hat \mu = \bar R_t, \hat{\sigma^2} = Var(R_t)\)</span>, for <span class="math inline">\(t \in [1,T]\)</span>. Even for a random walk model both the standard deviation of an observation from the preceding one and a last observation would be needed. Both are not given.</p>
 <p>To calculate the VaR of each stock, the historical mean and standard deviation (sd) will be estimated and the respective z value of a standard distribution will be scaled by the sd and shifted by the mean. Since the likelihood of the z value can be read off from the normal distribution, the z value corresponding to the likelihood of interest can be chosen.</p>
-<p>The scaled and shifted z value corresponds to a maximal log return under the given probability. The typically small log returns of stocks are proportional to percent changes in the stock value. Tue to this, maximal the monetary value of currency that is at risk can be calculated by multiplying the result of the previous calculation with the value of bought stock.</p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28\)</span></p>
-<p><span class="math inline">\(\hat{\mu_{T+1|T}} = 0.0009, \hat{\sigma_{T+1|T}} = 0.0192\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns}) = 0.0009 + 0.0192\times-1.28 = -0.0236\)</span> <span class="math inline">\(VaR_{10\%} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0236 = -236303.82 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64\)</span></p>
-<p><span class="math inline">\(\hat{\mu_{T+1|T}} = 0.0009, \hat{\sigma_{T+1|T}} = 0.0192\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns}) = 0.0009 + 0.0192\times-1.64 = -0.0306\)</span> <span class="math inline">\(VaR_{5\%} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0306 = -305890.67 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33\)</span></p>
-<p><span class="math inline">\(\hat{\mu_{T+1|T}} = 0.0009, \hat{\sigma_{T+1|T}} = 0.0192\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns}) = 0.0009 + 0.0192\times-2.33 = -0.0436\)</span> <span class="math inline">\(VaR_{1\%} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0436 = -436424.02 \text{\euro}\)</span></p>
-<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the MSFT stock, the loss incuring over one day will be smaller than -236303.82, -305890.67and -436424.02with 90%Confidence.</p>
-<p>The due to simplicity of the model, the 5-day VaR is the same as the 1-day VaR.</p>
-<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the MSFT stock, the loss incuring over one day will be smaller than -236303.82, -305890.67and -436424.02with 95%Confidence.</p>
-<p>The due to simplicity of the model, the 5-day VaR is the same as the 1-day VaR.</p>
-<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the MSFT stock, the loss incuring over one day will be smaller than -236303.82, -305890.67and -436424.02with 99%Confidence.</p>
-<p>The due to simplicity of the model, the 5-day VaR is the same as the 1-day VaR.</p>
+The scaled and shifted z value corresponds to a maximal log return under the given probability. The typically small log returns of stocks are proportional to percent changes in the stock value. Tue to this, maximal the monetary value of currency that is at risk can be calculated by multiplying the result of the previous calculation with the value of bought stock.
 <p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28  \hat{\mu_{T+1|T}} = 0.0004, \hat{\sigma_{T+1|T}} = 0.0176\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns}) = 0.0004 + 0.0176\times-1.28 = -0.0221\)</span></p>
 <p><span class="math inline">\(VaR_{10\%} = \text{ Value in Euros } \times VaR(\log returns) = 10000000 \text{\euro} \times-0.0221 = -220709.87 \text{\euro}\)</span></p>
@@ -191,311 +176,403 @@ pre code {
 <p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33  \hat{\mu_{T+1|T}} = 0.0004, \hat{\sigma_{T+1|T}} = 0.0176\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns}) = 0.0004 + 0.0176\times-2.33 = -0.0404\)</span></p>
 <p><span class="math inline">\(VaR_{1\%} = \text{ Value in Euros } \times VaR(\log returns) = 10000000 \text{\euro} \times-0.0404 = -404114.71 \text{\euro}\)</span></p>
-<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the V stock, the loss incuring over one day will be smaller than -220709.87, -284484.36and -404114.71with 90%Confidence.</p>
+<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the Visa stock, the loss incurring over one day will be smaller than -220709.87<span class="math inline">\(\text{\euro}\)</span>, -284484.36<span class="math inline">\(\text{\euro}\)</span> and -404114.71<span class="math inline">\(\text{\euro}\)</span> with a confidence level of 90%, 95% and 99%.</p>
 <p>The due to simplicity of the model, the 5-day VaR is the same as the 1-day VaR.</p>
-<p>According to this model, the MSFT stock has a way larger VaR than the V stock.</p>
-<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the V stock, the loss incuring over one day will be smaller than -220709.87, -284484.36and -404114.71with 95%Confidence.</p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+1|T}} = 0.0009, \hat{\sigma_{T+1|T}} = 0.0192\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns}) = 0.0009 + 0.0192\times-1.28 = -0.0236\)</span> <span class="math inline">\(VaR_{10\%} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0236 = -236303.82 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+1|T}} = 0.0009, \hat{\sigma_{T+1|T}} = 0.0192\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns}) = 0.0009 + 0.0192\times-1.64 = -0.0306\)</span> <span class="math inline">\(VaR_{5\%} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0306 = -305890.67 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+1|T}} = 0.0009, \hat{\sigma_{T+1|T}} = 0.0192\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns}) = 0.0009 + 0.0192\times-2.33 = -0.0436\)</span> <span class="math inline">\(VaR_{1\%} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0436 = -436424.02 \text{\euro}\)</span></p>
+<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the Microsoft stock, the loss incurring over one day will be smaller than -236303.82<span class="math inline">\(\text{\euro}\)</span>, -305890.67<span class="math inline">\(\text{\euro}\)</span> and -436424.02<span class="math inline">\(\text{\euro}\)</span> with a confidence level of 90%, 95% and 99%.</p>
 <p>The due to simplicity of the model, the 5-day VaR is the same as the 1-day VaR.</p>
-<p>According to this model, the MSFT stock has a way larger VaR than the V stock.</p>
-<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the V stock, the loss incuring over one day will be smaller than -220709.87, -284484.36and -404114.71with 99%Confidence.</p>
-<p>The due to simplicity of the model, the 5-day VaR is the same as the 1-day VaR.</p>
-<p>According to this model, the MSFT stock has a way larger VaR than the V stock.</p>
-<p>The following GARCH model will be fitted <span class="math display">\[\begin{cases} R_t = \mu_t + \epsilon_t, \epsilon_t = \sigma_t  * z_t, z_t \overset{i.i.d.}{\sim} N(0,1) \ \sigma^2_t = \alpha_0 + \alpha_1 \epsilon^2_{t-1} + \beta_1 \sigma^2_{t-1} \ \mu_t = \mu_0 \end{cases}\]</span></p>
+<p>The following GARCH model will be fitted <span class="math display">\[\begin{cases} R_t = \mu_t + \epsilon_t, \epsilon_t = \sigma_t  * z_t, z_t \overset{i.i.d.}{\sim} N(0,1) \\ \sigma^2_t = \alpha_0 + \alpha_1 \epsilon^2_{t-1} + \beta_1 \sigma^2_{t-1} \\ \mu_t = \mu_0 \end{cases}\]</span></p>
 A more sophisticated model will be used to estimate the VaR in this subtask. The model will be specified and fitted to the historical data. The fitted model can then be used to make predictions about the stock returns in the future. The predicted mean and sd of the returns can be used to scale and shift a z value like in the previous subtask. The use of this scaled and shifted z value in the further calculation of the VaR is identical to the previous, current and the later subtasks.
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28\)</span><span class="math inline">\(\hat{\mu_{T+1|T}} = 0.0013, \hat{\sigma_{T+1|T}} = 0.013\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 1} = 0.0013 + 0.013\times-1.28 = -0.0154\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,1,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0154 = -154418.3 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64\)</span><span class="math inline">\(\hat{\mu_{T+1|T}} = 0.0013, \hat{\sigma_{T+1|T}} = 0.013\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 1} = 0.0013 + 0.013\times-1.64 = -0.0202\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,1,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0202 = -201792.7 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33\)</span><span class="math inline">\(\hat{\mu_{T+1|T}} = 0.0013, \hat{\sigma_{T+1|T}} = 0.013\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 1} = 0.0013 + 0.013\times-2.33 = -0.0291\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,1,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0291 = -290659.18 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28\)</span><span class="math inline">\(\hat{\mu_{T+2|T}} = 0.0013, \hat{\sigma_{T+2|T}} = 0.0132\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 2} = 0.0013 + 0.0132\times-1.28 = -0.0156\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,2,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0156 = -156238.14 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64\)</span><span class="math inline">\(\hat{\mu_{T+2|T}} = 0.0013, \hat{\sigma_{T+2|T}} = 0.0132\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 2} = 0.0013 + 0.0132\times-1.64 = -0.0204\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,2,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0204 = -204128.44 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33\)</span><span class="math inline">\(\hat{\mu_{T+2|T}} = 0.0013, \hat{\sigma_{T+2|T}} = 0.0132\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 2} = 0.0013 + 0.0132\times-2.33 = -0.0294\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,2,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0294 = -293962.67 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28\)</span><span class="math inline">\(\hat{\mu_{T+3|T}} = 0.0013, \hat{\sigma_{T+3|T}} = 0.0133\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 3} = 0.0013 + 0.0133\times-1.28 = -0.0158\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,3,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0158 = -158009.37 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64\)</span><span class="math inline">\(\hat{\mu_{T+3|T}} = 0.0013, \hat{\sigma_{T+3|T}} = 0.0133\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 3} = 0.0013 + 0.0133\times-1.64 = -0.0206\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,3,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0206 = -206401.79 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33\)</span><span class="math inline">\(\hat{\mu_{T+3|T}} = 0.0013, \hat{\sigma_{T+3|T}} = 0.0133\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 3} = 0.0013 + 0.0133\times-2.33 = -0.0297\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,3,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0297 = -297177.91 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28\)</span><span class="math inline">\(\hat{\mu_{T+4|T}} = 0.0013, \hat{\sigma_{T+4|T}} = 0.0135\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 4} = 0.0013 + 0.0135\times-1.28 = -0.016\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,4,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.016 = -159733.96 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64\)</span><span class="math inline">\(\hat{\mu_{T+4|T}} = 0.0013, \hat{\sigma_{T+4|T}} = 0.0135\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 4} = 0.0013 + 0.0135\times-1.64 = -0.0209\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,4,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0209 = -208615.27 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33\)</span><span class="math inline">\(\hat{\mu_{T+4|T}} = 0.0013, \hat{\sigma_{T+4|T}} = 0.0135\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 4} = 0.0013 + 0.0135\times-2.33 = -0.03\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,4,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.03 = -300308.48 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28\)</span><span class="math inline">\(\hat{\mu_{T+5|T}} = 0.0013, \hat{\sigma_{T+5|T}} = 0.0136\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 5} = 0.0013 + 0.0136\times-1.28 = -0.0161\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,5,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0161 = -161413.74 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64\)</span><span class="math inline">\(\hat{\mu_{T+5|T}} = 0.0013, \hat{\sigma_{T+5|T}} = 0.0136\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 5} = 0.0013 + 0.0136\times-1.64 = -0.0211\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,5,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0211 = -210771.25 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33\)</span><span class="math inline">\(\hat{\mu_{T+5|T}} = 0.0013, \hat{\sigma_{T+5|T}} = 0.0136\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 5} = 0.0013 + 0.0136\times-2.33 = -0.0303\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,5,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0303 = -303357.72 \text{\euro}\)</span></p>
-<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the MSFT stock, the loss incuring over one day will be smaller than -154418.30, -201792.70and -290659.18with 90%Confidence. The loss after 5 days will be smaller than-161413.74, -210771.25 and -303357.72Euros with 90%Confidence.</p>
-<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the MSFT stock, the loss incuring over one day will be smaller than -154418.30, -201792.70and -290659.18with 95%Confidence. The loss after 5 days will be smaller than-161413.74, -210771.25 and -303357.72Euros with 95%Confidence.</p>
-<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the MSFT stock, the loss incuring over one day will be smaller than -154418.30, -201792.70and -290659.18with 99%Confidence. The loss after 5 days will be smaller than-161413.74, -210771.25 and -303357.72Euros with 99%Confidence.</p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28\)</span><span class="math inline">\(\hat{\mu_{T+1|T}} = 0.0006, \hat{\sigma_{T+1|T}} = 0.0094\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+1|T}} = 0.0006, \hat{\sigma_{T+1|T}} = 0.0094\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 1} = 0.0006 + 0.0094\times-1.28 = -0.0114\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,1,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0114 = -114043.89 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64\)</span><span class="math inline">\(\hat{\mu_{T+1|T}} = 0.0006, \hat{\sigma_{T+1|T}} = 0.0094\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0114 = -114043.89 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+1|T}} = 0.0006, \hat{\sigma_{T+1|T}} = 0.0094\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 1} = 0.0006 + 0.0094\times-1.64 = -0.0148\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,1,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0148 = -148128.33 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33\)</span><span class="math inline">\(\hat{\mu_{T+1|T}} = 0.0006, \hat{\sigma_{T+1|T}} = 0.0094\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0148 = -148128.33 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+1|T}} = 0.0006, \hat{\sigma_{T+1|T}} = 0.0094\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 1} = 0.0006 + 0.0094\times-2.33 = -0.0212\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,1,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0212 = -212065.07 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28\)</span><span class="math inline">\(\hat{\mu_{T+2|T}} = 0.0006, \hat{\sigma_{T+2|T}} = 0.0096\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0212 = -212065.07 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+2|T}} = 0.0006, \hat{\sigma_{T+2|T}} = 0.0096\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 2} = 0.0006 + 0.0096\times-1.28 = -0.0116\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,2,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0116 = -116326.52 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64\)</span><span class="math inline">\(\hat{\mu_{T+2|T}} = 0.0006, \hat{\sigma_{T+2|T}} = 0.0096\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0116 = -116326.52 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+2|T}} = 0.0006, \hat{\sigma_{T+2|T}} = 0.0096\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 2} = 0.0006 + 0.0096\times-1.64 = -0.0151\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,2,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0151 = -151058.05 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33\)</span><span class="math inline">\(\hat{\mu_{T+2|T}} = 0.0006, \hat{\sigma_{T+2|T}} = 0.0096\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0151 = -151058.05 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+2|T}} = 0.0006, \hat{\sigma_{T+2|T}} = 0.0096\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 2} = 0.0006 + 0.0096\times-2.33 = -0.0216\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,2,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0216 = -216208.64 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28\)</span><span class="math inline">\(\hat{\mu_{T+3|T}} = 0.0006, \hat{\sigma_{T+3|T}} = 0.0097\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0216 = -216208.64 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+3|T}} = 0.0006, \hat{\sigma_{T+3|T}} = 0.0097\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 3} = 0.0006 + 0.0097\times-1.28 = -0.0119\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,3,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0119 = -118538.19 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64\)</span><span class="math inline">\(\hat{\mu_{T+3|T}} = 0.0006, \hat{\sigma_{T+3|T}} = 0.0097\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0119 = -118538.19 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+3|T}} = 0.0006, \hat{\sigma_{T+3|T}} = 0.0097\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 3} = 0.0006 + 0.0097\times-1.64 = -0.0154\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,3,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0154 = -153896.7 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33\)</span><span class="math inline">\(\hat{\mu_{T+3|T}} = 0.0006, \hat{\sigma_{T+3|T}} = 0.0097\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0154 = -153896.7 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+3|T}} = 0.0006, \hat{\sigma_{T+3|T}} = 0.0097\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 3} = 0.0006 + 0.0097\times-2.33 = -0.022\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,3,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.022 = -220223.39 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28\)</span><span class="math inline">\(\hat{\mu_{T+4|T}} = 0.0006, \hat{\sigma_{T+4|T}} = 0.0099\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.022 = -220223.39 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+4|T}} = 0.0006, \hat{\sigma_{T+4|T}} = 0.0099\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 4} = 0.0006 + 0.0099\times-1.28 = -0.0121\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,4,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0121 = -120682.99 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64\)</span><span class="math inline">\(\hat{\mu_{T+4|T}} = 0.0006, \hat{\sigma_{T+4|T}} = 0.0099\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0121 = -120682.99 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+4|T}} = 0.0006, \hat{\sigma_{T+4|T}} = 0.0099\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 4} = 0.0006 + 0.0099\times-1.64 = -0.0157\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,4,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0157 = -156649.52 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33\)</span><span class="math inline">\(\hat{\mu_{T+4|T}} = 0.0006, \hat{\sigma_{T+4|T}} = 0.0099\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0157 = -156649.52 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+4|T}} = 0.0006, \hat{\sigma_{T+4|T}} = 0.0099\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 4} = 0.0006 + 0.0099\times-2.33 = -0.0224\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,4,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0224 = -224116.75 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28\)</span><span class="math inline">\(\hat{\mu_{T+5|T}} = 0.0006, \hat{\sigma_{T+5|T}} = 0.0101\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0224 = -224116.75 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+5|T}} = 0.0006, \hat{\sigma_{T+5|T}} = 0.0101\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 5} = 0.0006 + 0.0101\times-1.28 = -0.0123\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,5,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0123 = -122764.61 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64\)</span><span class="math inline">\(\hat{\mu_{T+5|T}} = 0.0006, \hat{\sigma_{T+5|T}} = 0.0101\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0123 = -122764.61 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+5|T}} = 0.0006, \hat{\sigma_{T+5|T}} = 0.0101\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 5} = 0.0006 + 0.0101\times-1.64 = -0.0159\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,5,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0159 = -159321.26 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33\)</span><span class="math inline">\(\hat{\mu_{T+5|T}} = 0.0006, \hat{\sigma_{T+5|T}} = 0.0101\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0159 = -159321.26 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+5|T}} = 0.0006, \hat{\sigma_{T+5|T}} = 0.0101\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 5} = 0.0006 + 0.0101\times-2.33 = -0.0228\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,5,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0228 = -227895.44 \text{\euro}\)</span></p>
-<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the V stock, the loss incuring over one day will be smaller than -114043.89, -148128.33and -212065.07with 90% Confidence. The loss after 5 days will be smaller than-122764.61, -159321.26 and -227895.44Euros with 90% Confidence.</p>
-<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the V stock, the loss incuring over one day will be smaller than -114043.89, -148128.33and -212065.07with 95% Confidence. The loss after 5 days will be smaller than-122764.61, -159321.26 and -227895.44Euros with 95% Confidence.</p>
-<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the V stock, the loss incuring over one day will be smaller than -114043.89, -148128.33and -212065.07with 99% Confidence. The loss after 5 days will be smaller than-122764.61, -159321.26 and -227895.44Euros with 99% Confidence. Based on this model, the VaR is smaller for investments into the V stock than for investiments into the MSFT stock.</p>
+<p><span class="math inline">\(VaR_{1\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0228 = -227895.44 \text{\euro}\)</span></p>
+<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the Visa stock, the loss incurring over one day will be smaller than -114043.89<span class="math inline">\(\text{\euro}\)</span>, -148128.33<span class="math inline">\(\text{\euro}\)</span> and -212065.07<span class="math inline">\(\text{\euro}\)</span> with a confidence level of 90%, 95% and 99%.</p>
+<p>The loss after 5 days will be smaller than -122764.61<span class="math inline">\(\text{\euro}\)</span>, -159321.26<span class="math inline">\(\text{\euro}\)</span> and -227895.44<span class="math inline">\(\text{\euro}\)</span> with a confidence level of 90%, 95% and 99%.</p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+1|T}} = 0.0013, \hat{\sigma_{T+1|T}} = 0.013\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 1} = 0.0013 + 0.013\times-1.28 = -0.0154\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0154 = -154418.3 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+1|T}} = 0.0013, \hat{\sigma_{T+1|T}} = 0.013\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 1} = 0.0013 + 0.013\times-1.64 = -0.0202\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0202 = -201792.7 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+1|T}} = 0.0013, \hat{\sigma_{T+1|T}} = 0.013\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 1} = 0.0013 + 0.013\times-2.33 = -0.0291\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0291 = -290659.18 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+2|T}} = 0.0013, \hat{\sigma_{T+2|T}} = 0.0132\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 2} = 0.0013 + 0.0132\times-1.28 = -0.0156\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0156 = -156238.14 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+2|T}} = 0.0013, \hat{\sigma_{T+2|T}} = 0.0132\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 2} = 0.0013 + 0.0132\times-1.64 = -0.0204\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0204 = -204128.44 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+2|T}} = 0.0013, \hat{\sigma_{T+2|T}} = 0.0132\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 2} = 0.0013 + 0.0132\times-2.33 = -0.0294\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0294 = -293962.67 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+3|T}} = 0.0013, \hat{\sigma_{T+3|T}} = 0.0133\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 3} = 0.0013 + 0.0133\times-1.28 = -0.0158\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0158 = -158009.37 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+3|T}} = 0.0013, \hat{\sigma_{T+3|T}} = 0.0133\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 3} = 0.0013 + 0.0133\times-1.64 = -0.0206\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0206 = -206401.79 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+3|T}} = 0.0013, \hat{\sigma_{T+3|T}} = 0.0133\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 3} = 0.0013 + 0.0133\times-2.33 = -0.0297\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0297 = -297177.91 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+4|T}} = 0.0013, \hat{\sigma_{T+4|T}} = 0.0135\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 4} = 0.0013 + 0.0135\times-1.28 = -0.016\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.016 = -159733.96 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+4|T}} = 0.0013, \hat{\sigma_{T+4|T}} = 0.0135\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 4} = 0.0013 + 0.0135\times-1.64 = -0.0209\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0209 = -208615.27 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+4|T}} = 0.0013, \hat{\sigma_{T+4|T}} = 0.0135\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 4} = 0.0013 + 0.0135\times-2.33 = -0.03\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.03 = -300308.48 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+5|T}} = 0.0013, \hat{\sigma_{T+5|T}} = 0.0136\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 5} = 0.0013 + 0.0136\times-1.28 = -0.0161\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0161 = -161413.74 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+5|T}} = 0.0013, \hat{\sigma_{T+5|T}} = 0.0136\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 5} = 0.0013 + 0.0136\times-1.64 = -0.0211\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0211 = -210771.25 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+5|T}} = 0.0013, \hat{\sigma_{T+5|T}} = 0.0136\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 5} = 0.0013 + 0.0136\times-2.33 = -0.0303\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0303 = -303357.72 \text{\euro}\)</span></p>
+<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the Microsoft stock, the loss incurring over one day will be smaller than -154418.30<span class="math inline">\(\text{\euro}\)</span>, -201792.70<span class="math inline">\(\text{\euro}\)</span> and -290659.18<span class="math inline">\(\text{\euro}\)</span> with a confidence level of 90%, 95% and 99%.</p>
+<p>The loss after 5 days will be smaller than -161413.74<span class="math inline">\(\text{\euro}\)</span>, -210771.25<span class="math inline">\(\text{\euro}\)</span> and -303357.72<span class="math inline">\(\text{\euro}\)</span> with a confidence level of 90%, 95% and 99%.</p>
+<p>Based on this model, the VaR is smaller for investments into the Visa than for investiments into the Microsoft.</p>
 <p>The all VaR obtained by this model are smaller than the VaR obtained by the simplistic model in the first subtask. That is due to the small time window, for which the time dependent variance and the VaR is computed. In this case, the time dependent variance is usually smaller than the historic variance.</p>
-<p>The following GARCH model will be fitted in this subtask <span class="math inline">\(\begin{cases} R_t = \mu_t + \epsilon_t, \epsilon_t = \sigma_t * z_t, z_t \overset{i.i.d.}{\sim} N(0,1) \ \sigma^2_t = \alpha_0 + \alpha_1 \epsilon^2_{t-1} + \beta_1 \sigma^2_{t-1} \ \mu_t = \mu_0 + \phi_i R_{t-1} \end{cases}\)</span></p>
+<p>The following GARCH model will be fitted in this subtask <span class="math display">\[\begin{cases} R_t = \mu_t + \epsilon_t, \epsilon_t = \sigma_t  * z_t, z_t \overset{i.i.d.}{\sim} N(0,1) \\ \sigma^2_t = \alpha_0 + \alpha_1 \epsilon^2_{t-1} + \beta_1 \sigma^2_{t-1} \\ \mu_t = \mu_0 + \phi_i R_{t-1} \end{cases}\]</span></p>
 here <span class="math inline">\(\mu_t\)</span> is not only modeled as a constant but as a function of the past <span class="math inline">\(\mu_{t-1}\)</span>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28\)</span><span class="math inline">\(\hat{\mu_{T+1|T}} = 0.0011, \hat{\sigma_{T+1|T}} = 0.0133\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 1} = 0.0011 + 0.0133\times-1.28 = -0.0159\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,1,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0159 = -159257.48 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64\)</span><span class="math inline">\(\hat{\mu_{T+1|T}} = 0.0011, \hat{\sigma_{T+1|T}} = 0.0133\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 1} = 0.0011 + 0.0133\times-1.64 = -0.0207\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,1,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0207 = -207448.05 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33\)</span><span class="math inline">\(\hat{\mu_{T+1|T}} = 0.0011, \hat{\sigma_{T+1|T}} = 0.0133\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 1} = 0.0011 + 0.0133\times-2.33 = -0.0298\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,1,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0298 = -297845.55 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28\)</span><span class="math inline">\(\hat{\mu_{T+2|T}} = 0.0013, \hat{\sigma_{T+2|T}} = 0.0134\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 2} = 0.0013 + 0.0134\times-1.28 = -0.0159\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,2,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0159 = -158767.68 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64\)</span><span class="math inline">\(\hat{\mu_{T+2|T}} = 0.0013, \hat{\sigma_{T+2|T}} = 0.0134\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 2} = 0.0013 + 0.0134\times-1.64 = -0.0207\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,2,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0207 = -207435.64 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33\)</span><span class="math inline">\(\hat{\mu_{T+2|T}} = 0.0013, \hat{\sigma_{T+2|T}} = 0.0134\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 2} = 0.0013 + 0.0134\times-2.33 = -0.0299\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,2,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0299 = -298728.66 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28\)</span><span class="math inline">\(\hat{\mu_{T+3|T}} = 0.0013, \hat{\sigma_{T+3|T}} = 0.0135\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 3} = 0.0013 + 0.0135\times-1.28 = -0.0161\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,3,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0161 = -160591.11 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64\)</span><span class="math inline">\(\hat{\mu_{T+3|T}} = 0.0013, \hat{\sigma_{T+3|T}} = 0.0135\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 3} = 0.0013 + 0.0135\times-1.64 = -0.021\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,3,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.021 = -209723.98 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33\)</span><span class="math inline">\(\hat{\mu_{T+3|T}} = 0.0013, \hat{\sigma_{T+3|T}} = 0.0135\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 3} = 0.0013 + 0.0135\times-2.33 = -0.0302\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,3,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0302 = -301889.08 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28\)</span><span class="math inline">\(\hat{\mu_{T+4|T}} = 0.0013, \hat{\sigma_{T+4|T}} = 0.0136\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 4} = 0.0013 + 0.0136\times-1.28 = -0.0162\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,4,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0162 = -162173.23 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64\)</span><span class="math inline">\(\hat{\mu_{T+4|T}} = 0.0013, \hat{\sigma_{T+4|T}} = 0.0136\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 4} = 0.0013 + 0.0136\times-1.64 = -0.0212\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,4,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0212 = -211759 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33\)</span><span class="math inline">\(\hat{\mu_{T+4|T}} = 0.0013, \hat{\sigma_{T+4|T}} = 0.0136\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 4} = 0.0013 + 0.0136\times-2.33 = -0.0305\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,4,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0305 = -304773.66 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28\)</span><span class="math inline">\(\hat{\mu_{T+5|T}} = 0.0013, \hat{\sigma_{T+5|T}} = 0.0138\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 5} = 0.0013 + 0.0138\times-1.28 = -0.0164\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,5,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0164 = -163731.38 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64\)</span><span class="math inline">\(\hat{\mu_{T+5|T}} = 0.0013, \hat{\sigma_{T+5|T}} = 0.0138\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 5} = 0.0013 + 0.0138\times-1.64 = -0.0214\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,5,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0214 = -213758.49 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33\)</span><span class="math inline">\(\hat{\mu_{T+5|T}} = 0.0013, \hat{\sigma_{T+5|T}} = 0.0138\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 5} = 0.0013 + 0.0138\times-2.33 = -0.0308\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,5,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0308 = -307601.04 \text{\euro}\)</span></p>
-<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the MSFT stock, the loss incuring over one day will be smaller than -159257.48, -207448.05and -297845.55with 90%Confidence. The loss after 5 days will be smaller than-163731.38, -213758.49 and -307601.04Euros with 90%Confidence.</p>
-<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the MSFT stock, the loss incuring over one day will be smaller than -159257.48, -207448.05and -297845.55with 95%Confidence. The loss after 5 days will be smaller than-163731.38, -213758.49 and -307601.04Euros with 95%Confidence.</p>
-<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the MSFT stock, the loss incuring over one day will be smaller than -159257.48, -207448.05and -297845.55with 99%Confidence. The loss after 5 days will be smaller than-163731.38, -213758.49 and -307601.04Euros with 99%Confidence.</p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28\)</span><span class="math inline">\(\hat{\mu_{T+1|T}} = 0.0005, \hat{\sigma_{T+1|T}} = 0.0094\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+1|T}} = 0.0005, \hat{\sigma_{T+1|T}} = 0.0094\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 1} = 0.0005 + 0.0094\times-1.28 = -0.0115\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,1,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0115 = -114877.12 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64\)</span><span class="math inline">\(\hat{\mu_{T+1|T}} = 0.0005, \hat{\sigma_{T+1|T}} = 0.0094\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0115 = -114877.12 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+1|T}} = 0.0005, \hat{\sigma_{T+1|T}} = 0.0094\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 1} = 0.0005 + 0.0094\times-1.64 = -0.0149\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,1,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0149 = -148974.66 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33\)</span><span class="math inline">\(\hat{\mu_{T+1|T}} = 0.0005, \hat{\sigma_{T+1|T}} = 0.0094\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0149 = -148974.66 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+1|T}} = 0.0005, \hat{\sigma_{T+1|T}} = 0.0094\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 1} = 0.0005 + 0.0094\times-2.33 = -0.0213\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,1,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0213 = -212935.98 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28\)</span><span class="math inline">\(\hat{\mu_{T+2|T}} = 0.0006, \hat{\sigma_{T+2|T}} = 0.0096\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0213 = -212935.98 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+2|T}} = 0.0006, \hat{\sigma_{T+2|T}} = 0.0096\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 2} = 0.0006 + 0.0096\times-1.28 = -0.0116\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,2,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0116 = -116213.31 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64\)</span><span class="math inline">\(\hat{\mu_{T+2|T}} = 0.0006, \hat{\sigma_{T+2|T}} = 0.0096\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0116 = -116213.31 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+2|T}} = 0.0006, \hat{\sigma_{T+2|T}} = 0.0096\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 2} = 0.0006 + 0.0096\times-1.64 = -0.0151\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,2,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0151 = -150948.86 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33\)</span><span class="math inline">\(\hat{\mu_{T+2|T}} = 0.0006, \hat{\sigma_{T+2|T}} = 0.0096\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0151 = -150948.86 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+2|T}} = 0.0006, \hat{\sigma_{T+2|T}} = 0.0096\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 2} = 0.0006 + 0.0096\times-2.33 = -0.0216\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,2,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0216 = -216106.96 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28\)</span><span class="math inline">\(\hat{\mu_{T+3|T}} = 0.0006, \hat{\sigma_{T+3|T}} = 0.0097\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0216 = -216106.96 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+3|T}} = 0.0006, \hat{\sigma_{T+3|T}} = 0.0097\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 3} = 0.0006 + 0.0097\times-1.28 = -0.0118\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,3,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0118 = -118425.27 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64\)</span><span class="math inline">\(\hat{\mu_{T+3|T}} = 0.0006, \hat{\sigma_{T+3|T}} = 0.0097\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0118 = -118425.27 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+3|T}} = 0.0006, \hat{\sigma_{T+3|T}} = 0.0097\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 3} = 0.0006 + 0.0097\times-1.64 = -0.0154\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,3,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0154 = -153779.32 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33\)</span><span class="math inline">\(\hat{\mu_{T+3|T}} = 0.0006, \hat{\sigma_{T+3|T}} = 0.0097\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0154 = -153779.32 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+3|T}} = 0.0006, \hat{\sigma_{T+3|T}} = 0.0097\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 3} = 0.0006 + 0.0097\times-2.33 = -0.022\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,3,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.022 = -220097.65 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28\)</span><span class="math inline">\(\hat{\mu_{T+4|T}} = 0.0006, \hat{\sigma_{T+4|T}} = 0.0099\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.022 = -220097.65 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+4|T}} = 0.0006, \hat{\sigma_{T+4|T}} = 0.0099\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 4} = 0.0006 + 0.0099\times-1.28 = -0.0121\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,4,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0121 = -120541.24 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64\)</span><span class="math inline">\(\hat{\mu_{T+4|T}} = 0.0006, \hat{\sigma_{T+4|T}} = 0.0099\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0121 = -120541.24 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+4|T}} = 0.0006, \hat{\sigma_{T+4|T}} = 0.0099\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 4} = 0.0006 + 0.0099\times-1.64 = -0.0156\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,4,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0156 = -156495.43 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33\)</span><span class="math inline">\(\hat{\mu_{T+4|T}} = 0.0006, \hat{\sigma_{T+4|T}} = 0.0099\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0156 = -156495.43 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+4|T}} = 0.0006, \hat{\sigma_{T+4|T}} = 0.0099\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 4} = 0.0006 + 0.0099\times-2.33 = -0.0224\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,4,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0224 = -223939.51 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28\)</span><span class="math inline">\(\hat{\mu_{T+5|T}} = 0.0006, \hat{\sigma_{T+5|T}} = 0.0101\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0224 = -223939.51 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+5|T}} = 0.0006, \hat{\sigma_{T+5|T}} = 0.0101\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 5} = 0.0006 + 0.0101\times-1.28 = -0.0123\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,5,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0123 = -122596.95 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64\)</span><span class="math inline">\(\hat{\mu_{T+5|T}} = 0.0006, \hat{\sigma_{T+5|T}} = 0.0101\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0123 = -122596.95 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+5|T}} = 0.0006, \hat{\sigma_{T+5|T}} = 0.0101\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 5} = 0.0006 + 0.0101\times-1.64 = -0.0159\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,5,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0159 = -159133.89 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33\)</span><span class="math inline">\(\hat{\mu_{T+5|T}} = 0.0006, \hat{\sigma_{T+5|T}} = 0.0101\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0159 = -159133.89 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+5|T}} = 0.0006, \hat{\sigma_{T+5|T}} = 0.0101\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 5} = 0.0006 + 0.0101\times-2.33 = -0.0228\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,5,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0228 = -227671.12 \text{\euro}\)</span></p>
-<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the V stock, the loss incuring over one day will be smaller than -114877.12, -148974.66and -212935.98with 90%Confidence. The loss after 5 days will be smaller than-122596.95, -159133.89 and -227671.12Euros with 90%Confidence.</p>
-<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the V stock, the loss incuring over one day will be smaller than -114877.12, -148974.66and -212935.98with 95%Confidence. The loss after 5 days will be smaller than-122596.95, -159133.89 and -227671.12Euros with 95%Confidence.</p>
-<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the V stock, the loss incuring over one day will be smaller than -114877.12, -148974.66and -212935.98with 99%Confidence. The loss after 5 days will be smaller than-122596.95, -159133.89 and -227671.12Euros with 99%Confidence.</p>
+<p><span class="math inline">\(VaR_{1\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0228 = -227671.12 \text{\euro}\)</span></p>
+<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the Visa stock, the loss incurring over one day will be smaller than -114877.12<span class="math inline">\(\text{\euro}\)</span>, -148974.66<span class="math inline">\(\text{\euro}\)</span> and -212935.98<span class="math inline">\(\text{\euro}\)</span> with a confidence level of 90%, 95% and 99%.</p>
+<p>The loss after 5 days will be smaller than -122596.95<span class="math inline">\(\text{\euro}\)</span>, -159133.89<span class="math inline">\(\text{\euro}\)</span> and -227671.12<span class="math inline">\(\text{\euro}\)</span> with a confidence level of 90%, 95% and 99%.</p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+1|T}} = 0.0011, \hat{\sigma_{T+1|T}} = 0.0133\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 1} = 0.0011 + 0.0133\times-1.28 = -0.0159\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0159 = -159257.48 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+1|T}} = 0.0011, \hat{\sigma_{T+1|T}} = 0.0133\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 1} = 0.0011 + 0.0133\times-1.64 = -0.0207\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0207 = -207448.05 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+1|T}} = 0.0011, \hat{\sigma_{T+1|T}} = 0.0133\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 1} = 0.0011 + 0.0133\times-2.33 = -0.0298\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0298 = -297845.55 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+2|T}} = 0.0013, \hat{\sigma_{T+2|T}} = 0.0134\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 2} = 0.0013 + 0.0134\times-1.28 = -0.0159\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0159 = -158767.68 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+2|T}} = 0.0013, \hat{\sigma_{T+2|T}} = 0.0134\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 2} = 0.0013 + 0.0134\times-1.64 = -0.0207\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0207 = -207435.64 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+2|T}} = 0.0013, \hat{\sigma_{T+2|T}} = 0.0134\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 2} = 0.0013 + 0.0134\times-2.33 = -0.0299\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0299 = -298728.66 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+3|T}} = 0.0013, \hat{\sigma_{T+3|T}} = 0.0135\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 3} = 0.0013 + 0.0135\times-1.28 = -0.0161\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0161 = -160591.11 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+3|T}} = 0.0013, \hat{\sigma_{T+3|T}} = 0.0135\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 3} = 0.0013 + 0.0135\times-1.64 = -0.021\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.021 = -209723.98 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+3|T}} = 0.0013, \hat{\sigma_{T+3|T}} = 0.0135\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 3} = 0.0013 + 0.0135\times-2.33 = -0.0302\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0302 = -301889.08 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+4|T}} = 0.0013, \hat{\sigma_{T+4|T}} = 0.0136\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 4} = 0.0013 + 0.0136\times-1.28 = -0.0162\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0162 = -162173.23 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+4|T}} = 0.0013, \hat{\sigma_{T+4|T}} = 0.0136\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 4} = 0.0013 + 0.0136\times-1.64 = -0.0212\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0212 = -211759 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+4|T}} = 0.0013, \hat{\sigma_{T+4|T}} = 0.0136\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 4} = 0.0013 + 0.0136\times-2.33 = -0.0305\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0305 = -304773.66 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+5|T}} = 0.0013, \hat{\sigma_{T+5|T}} = 0.0138\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 5} = 0.0013 + 0.0138\times-1.28 = -0.0164\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0164 = -163731.38 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+5|T}} = 0.0013, \hat{\sigma_{T+5|T}} = 0.0138\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 5} = 0.0013 + 0.0138\times-1.64 = -0.0214\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0214 = -213758.49 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+5|T}} = 0.0013, \hat{\sigma_{T+5|T}} = 0.0138\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 5} = 0.0013 + 0.0138\times-2.33 = -0.0308\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0308 = -307601.04 \text{\euro}\)</span></p>
+<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the Microsoft stock, the loss incurring over one day will be smaller than -154418.30<span class="math inline">\(\text{\euro}\)</span>, -201792.70<span class="math inline">\(\text{\euro}\)</span> and -290659.18<span class="math inline">\(\text{\euro}\)</span> with a confidence level of 90%, 95% and 99%.</p>
+<p>The loss after 5 days will be smaller than -163731.38<span class="math inline">\(\text{\euro}\)</span>, -213758.49<span class="math inline">\(\text{\euro}\)</span> and -307601.04<span class="math inline">\(\text{\euro}\)</span> with a confidence level of 90%, 95% and 99%.</p>
 <p>The estimated VaR don’t really differ between the previous model which modeled the mean as constant, and the current one, which models the mean of the time series using an AR(1). The reason for this indifference could be, that the conditional mean of stock returns cannot really be predicted from preceding returns. It is already a good aproximation to model this conditional mean as constant. This is consitent with financial theory.</p>
 <p>In this subtask, innovations of <span class="math inline">\(R_t\)</span> will not be modeled after a Normal distribution but a t-Student distibution (std)</p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.1) = -1.41\)</span><span class="math inline">\(\hat{\mu_{T+1|T}} = 0.0014, \hat{\sigma_{T+1|T}} = 0.0134\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 1} = 0.0014 + 0.0134\times-1.41 = -0.0176\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,1,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0176 = -176045.17 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.05) = -1.88\)</span><span class="math inline">\(\hat{\mu_{T+1|T}} = 0.0014, \hat{\sigma_{T+1|T}} = 0.0134\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 1} = 0.0014 + 0.0134\times-1.88 = -0.024\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,1,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.024 = -239879.38 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.01) = -2.97\)</span><span class="math inline">\(\hat{\mu_{T+1|T}} = 0.0014, \hat{\sigma_{T+1|T}} = 0.0134\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 1} = 0.0014 + 0.0134\times-2.97 = -0.0386\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,1,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0386 = -385621.58 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.1) = -1.41\)</span><span class="math inline">\(\hat{\mu_{T+2|T}} = 0.0015, \hat{\sigma_{T+2|T}} = 0.0136\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 2} = 0.0015 + 0.0136\times-1.41 = -0.0177\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,2,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0177 = -176748.92 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.05) = -1.88\)</span><span class="math inline">\(\hat{\mu_{T+2|T}} = 0.0015, \hat{\sigma_{T+2|T}} = 0.0136\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 2} = 0.0015 + 0.0136\times-1.88 = -0.0241\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,2,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0241 = -241347.07 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.01) = -2.97\)</span><span class="math inline">\(\hat{\mu_{T+2|T}} = 0.0015, \hat{\sigma_{T+2|T}} = 0.0136\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 2} = 0.0015 + 0.0136\times-2.97 = -0.0389\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,2,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0389 = -388833.43 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.1) = -1.41\)</span><span class="math inline">\(\hat{\mu_{T+3|T}} = 0.0015, \hat{\sigma_{T+3|T}} = 0.0138\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 3} = 0.0015 + 0.0138\times-1.41 = -0.0179\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,3,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0179 = -179053.2 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.05) = -1.88\)</span><span class="math inline">\(\hat{\mu_{T+3|T}} = 0.0015, \hat{\sigma_{T+3|T}} = 0.0138\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 3} = 0.0015 + 0.0138\times-1.88 = -0.0244\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,3,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0244 = -244391.47 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.01) = -2.97\)</span><span class="math inline">\(\hat{\mu_{T+3|T}} = 0.0015, \hat{\sigma_{T+3|T}} = 0.0138\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 3} = 0.0015 + 0.0138\times-2.97 = -0.0394\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,3,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0394 = -393567.64 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.1) = -1.41\)</span><span class="math inline">\(\hat{\mu_{T+4|T}} = 0.0015, \hat{\sigma_{T+4|T}} = 0.0139\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 4} = 0.0015 + 0.0139\times-1.41 = -0.0181\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,4,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0181 = -181176.27 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.05) = -1.88\)</span><span class="math inline">\(\hat{\mu_{T+4|T}} = 0.0015, \hat{\sigma_{T+4|T}} = 0.0139\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 4} = 0.0015 + 0.0139\times-1.88 = -0.0247\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,4,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0247 = -247231.96 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.01) = -2.97\)</span><span class="math inline">\(\hat{\mu_{T+4|T}} = 0.0015, \hat{\sigma_{T+4|T}} = 0.0139\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 4} = 0.0015 + 0.0139\times-2.97 = -0.0398\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,4,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0398 = -398046.1 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.1) = -1.41\)</span><span class="math inline">\(\hat{\mu_{T+5|T}} = 0.0015, \hat{\sigma_{T+5|T}} = 0.0141\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 5} = 0.0015 + 0.0141\times-1.41 = -0.0183\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,5,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0183 = -183242.66 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.05) = -1.88\)</span><span class="math inline">\(\hat{\mu_{T+5|T}} = 0.0015, \hat{\sigma_{T+5|T}} = 0.0141\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 5} = 0.0015 + 0.0141\times-1.88 = -0.025\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,5,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.025 = -249994.08 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.01) = -2.97\)</span><span class="math inline">\(\hat{\mu_{T+5|T}} = 0.0015, \hat{\sigma_{T+5|T}} = 0.0141\)</span></p>
-<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 5} = 0.0015 + 0.0141\times-2.97 = -0.0402\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,5,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0402 = -402396.65 \text{\euro}\)</span></p>
-<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the MSFT stock, the loss incuring over one day will be smaller than -176045.17, -239879.38and -385621.58with 90%Confidence. The loss after 5 days will be smaller than-183242.66, -249994.08 and -402396.65Euros with 90%Confidence.</p>
-<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the MSFT stock, the loss incuring over one day will be smaller than -176045.17, -239879.38and -385621.58with 95%Confidence. The loss after 5 days will be smaller than-183242.66, -249994.08 and -402396.65Euros with 95%Confidence.</p>
-<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the MSFT stock, the loss incuring over one day will be smaller than -176045.17, -239879.38and -385621.58with 99%Confidence. The loss after 5 days will be smaller than-183242.66, -249994.08 and -402396.65Euros with 99%Confidence.</p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.1) = -1.46\)</span><span class="math inline">\(\hat{\mu_{T+1|T}} = 0.0009, \hat{\sigma_{T+1|T}} = 0.0096\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+1|T}} = 0.0009, \hat{\sigma_{T+1|T}} = 0.0096\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 1} = 0.0009 + 0.0096\times-1.46 = -0.0131\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,1,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0131 = -130610.68 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.05) = -1.99\)</span><span class="math inline">\(\hat{\mu_{T+1|T}} = 0.0009, \hat{\sigma_{T+1|T}} = 0.0096\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0131 = -130610.68 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.05) = -1.99,\hat{\mu_{T+1|T}} = 0.0009, \hat{\sigma_{T+1|T}} = 0.0096\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 1} = 0.0009 + 0.0096\times-1.99 = -0.0181\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,1,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0181 = -180885.55 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.01) = -3.27\)</span><span class="math inline">\(\hat{\mu_{T+1|T}} = 0.0009, \hat{\sigma_{T+1|T}} = 0.0096\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0181 = -180885.55 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+1|T}} = 0.0009, \hat{\sigma_{T+1|T}} = 0.0096\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 1} = 0.0009 + 0.0096\times-3.27 = -0.0304\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,1,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0304 = -304332.17 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.1) = -1.46\)</span><span class="math inline">\(\hat{\mu_{T+2|T}} = 0.001, \hat{\sigma_{T+2|T}} = 0.0098\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0304 = -304332.17 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+2|T}} = 0.001, \hat{\sigma_{T+2|T}} = 0.0098\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 2} = 0.001 + 0.0098\times-1.46 = -0.0133\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,2,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0133 = -132845.59 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.05) = -1.99\)</span><span class="math inline">\(\hat{\mu_{T+2|T}} = 0.001, \hat{\sigma_{T+2|T}} = 0.0098\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0133 = -132845.59 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.05) = -1.99,\hat{\mu_{T+2|T}} = 0.001, \hat{\sigma_{T+2|T}} = 0.0098\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 2} = 0.001 + 0.0098\times-1.99 = -0.0184\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,2,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0184 = -184166.93 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.01) = -3.27\)</span><span class="math inline">\(\hat{\mu_{T+2|T}} = 0.001, \hat{\sigma_{T+2|T}} = 0.0098\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0184 = -184166.93 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+2|T}} = 0.001, \hat{\sigma_{T+2|T}} = 0.0098\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 2} = 0.001 + 0.0098\times-3.27 = -0.031\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,2,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.031 = -310183.12 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.1) = -1.46\)</span><span class="math inline">\(\hat{\mu_{T+3|T}} = 0.001, \hat{\sigma_{T+3|T}} = 0.01\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.031 = -310183.12 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+3|T}} = 0.001, \hat{\sigma_{T+3|T}} = 0.01\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 3} = 0.001 + 0.01\times-1.46 = -0.0136\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,3,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0136 = -135672 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.05) = -1.99\)</span><span class="math inline">\(\hat{\mu_{T+3|T}} = 0.001, \hat{\sigma_{T+3|T}} = 0.01\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0136 = -135672 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.05) = -1.99,\hat{\mu_{T+3|T}} = 0.001, \hat{\sigma_{T+3|T}} = 0.01\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 3} = 0.001 + 0.01\times-1.99 = -0.0188\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,3,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0188 = -188001.27 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.01) = -3.27\)</span><span class="math inline">\(\hat{\mu_{T+3|T}} = 0.001, \hat{\sigma_{T+3|T}} = 0.01\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0188 = -188001.27 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+3|T}} = 0.001, \hat{\sigma_{T+3|T}} = 0.01\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 3} = 0.001 + 0.01\times-3.27 = -0.0316\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,3,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0316 = -316492.34 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.1) = -1.46\)</span><span class="math inline">\(\hat{\mu_{T+4|T}} = 0.001, \hat{\sigma_{T+4|T}} = 0.0102\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0316 = -316492.34 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+4|T}} = 0.001, \hat{\sigma_{T+4|T}} = 0.0102\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 4} = 0.001 + 0.0102\times-1.46 = -0.0138\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,4,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0138 = -138377.96 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.05) = -1.99\)</span><span class="math inline">\(\hat{\mu_{T+4|T}} = 0.001, \hat{\sigma_{T+4|T}} = 0.0102\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0138 = -138377.96 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.05) = -1.99,\hat{\mu_{T+4|T}} = 0.001, \hat{\sigma_{T+4|T}} = 0.0102\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 4} = 0.001 + 0.0102\times-1.99 = -0.0192\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,4,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0192 = -191679.08 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.01) = -3.27\)</span><span class="math inline">\(\hat{\mu_{T+4|T}} = 0.001, \hat{\sigma_{T+4|T}} = 0.0102\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0192 = -191679.08 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+4|T}} = 0.001, \hat{\sigma_{T+4|T}} = 0.0102\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 4} = 0.001 + 0.0102\times-3.27 = -0.0323\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,4,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0323 = -322556.47 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.1) = -1.46\)</span><span class="math inline">\(\hat{\mu_{T+5|T}} = 0.001, \hat{\sigma_{T+5|T}} = 0.0103\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0323 = -322556.47 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+5|T}} = 0.001, \hat{\sigma_{T+5|T}} = 0.0103\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 5} = 0.001 + 0.0103\times-1.46 = -0.0141\)</span></p>
-<p><span class="math inline">\(VaR_{10\%, T + ,5,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0141 = -140990.25 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.05) = -1.99\)</span><span class="math inline">\(\hat{\mu_{T+5|T}} = 0.001, \hat{\sigma_{T+5|T}} = 0.0103\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0141 = -140990.25 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.05) = -1.99,\hat{\mu_{T+5|T}} = 0.001, \hat{\sigma_{T+5|T}} = 0.0103\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 5} = 0.001 + 0.0103\times-1.99 = -0.0195\)</span></p>
-<p><span class="math inline">\(VaR_{5\%, T + ,5,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0195 = -195229.37 \text{\euro}\)</span></p>
-<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.01) = -3.27\)</span><span class="math inline">\(\hat{\mu_{T+5|T}} = 0.001, \hat{\sigma_{T+5|T}} = 0.0103\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0195 = -195229.37 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+5|T}} = 0.001, \hat{\sigma_{T+5|T}} = 0.0103\)</span></p>
 <p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 5} = 0.001 + 0.0103\times-3.27 = -0.0328\)</span></p>
-<p><span class="math inline">\(VaR_{1\%, T + ,5,} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0328 = -328409.98 \text{\euro}\)</span></p>
-<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the V stock, the loss incuring over one day will be smaller than -130610.68, -180885.55and -304332.17with 90%Confidence. The loss after 5 days will be smaller than-140990.25, -195229.37 and -328409.98Euros with 90%Confidence.</p>
-<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the V stock, the loss incuring over one day will be smaller than -130610.68, -180885.55and -304332.17with 95%Confidence. The loss after 5 days will be smaller than-140990.25, -195229.37 and -328409.98Euros with 95%Confidence.</p>
-<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the V stock, the loss incuring over one day will be smaller than -130610.68, -180885.55and -304332.17with 99%Confidence. The loss after 5 days will be smaller than-140990.25, -195229.37 and -328409.98Euros with 99%Confidence.</p>
-<p>The VaR obtained by the current models using t-stundent innovations are much larger than the ones obtained by the similar models using normaly distributed innovations. This is caused by the shift of likelohood towards the tails in t-student distributions. This can reflect an increased likelihood of extreme events like negative price shocks.</p>
+<p><span class="math inline">\(VaR_{1\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0328 = -328409.98 \text{\euro}\)</span></p>
+<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the Visa stock, the loss incurring over one day will be smaller than -130610.68<span class="math inline">\(\text{\euro}\)</span>, -180885.55<span class="math inline">\(\text{\euro}\)</span> and -304332.17<span class="math inline">\(\text{\euro}\)</span> with a confidence level of 90%, 95% and 99%.</p>
+<p>The loss after 5 days will be smaller than -140990.25<span class="math inline">\(\text{\euro}\)</span>, -195229.37<span class="math inline">\(\text{\euro}\)</span> and -328409.98<span class="math inline">\(\text{\euro}\)</span> with a confidence level of 90%, 95% and 99%.</p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+1|T}} = 0.0014, \hat{\sigma_{T+1|T}} = 0.0134\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 1} = 0.0014 + 0.0134\times-1.41 = -0.0176\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0176 = -176045.17 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.05) = -1.88,\hat{\mu_{T+1|T}} = 0.0014, \hat{\sigma_{T+1|T}} = 0.0134\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 1} = 0.0014 + 0.0134\times-1.88 = -0.024\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.024 = -239879.38 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+1|T}} = 0.0014, \hat{\sigma_{T+1|T}} = 0.0134\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 1} = 0.0014 + 0.0134\times-2.97 = -0.0386\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0386 = -385621.58 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+2|T}} = 0.0015, \hat{\sigma_{T+2|T}} = 0.0136\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 2} = 0.0015 + 0.0136\times-1.41 = -0.0177\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0177 = -176748.92 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.05) = -1.88,\hat{\mu_{T+2|T}} = 0.0015, \hat{\sigma_{T+2|T}} = 0.0136\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 2} = 0.0015 + 0.0136\times-1.88 = -0.0241\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0241 = -241347.07 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+2|T}} = 0.0015, \hat{\sigma_{T+2|T}} = 0.0136\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 2} = 0.0015 + 0.0136\times-2.97 = -0.0389\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0389 = -388833.43 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+3|T}} = 0.0015, \hat{\sigma_{T+3|T}} = 0.0138\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 3} = 0.0015 + 0.0138\times-1.41 = -0.0179\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0179 = -179053.2 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.05) = -1.88,\hat{\mu_{T+3|T}} = 0.0015, \hat{\sigma_{T+3|T}} = 0.0138\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 3} = 0.0015 + 0.0138\times-1.88 = -0.0244\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0244 = -244391.47 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+3|T}} = 0.0015, \hat{\sigma_{T+3|T}} = 0.0138\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 3} = 0.0015 + 0.0138\times-2.97 = -0.0394\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0394 = -393567.64 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+4|T}} = 0.0015, \hat{\sigma_{T+4|T}} = 0.0139\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 4} = 0.0015 + 0.0139\times-1.41 = -0.0181\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0181 = -181176.27 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.05) = -1.88,\hat{\mu_{T+4|T}} = 0.0015, \hat{\sigma_{T+4|T}} = 0.0139\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 4} = 0.0015 + 0.0139\times-1.88 = -0.0247\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0247 = -247231.96 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+4|T}} = 0.0015, \hat{\sigma_{T+4|T}} = 0.0139\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 4} = 0.0015 + 0.0139\times-2.97 = -0.0398\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0398 = -398046.1 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+5|T}} = 0.0015, \hat{\sigma_{T+5|T}} = 0.0141\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 5} = 0.0015 + 0.0141\times-1.41 = -0.0183\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0183 = -183242.66 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.05) = -1.88,\hat{\mu_{T+5|T}} = 0.0015, \hat{\sigma_{T+5|T}} = 0.0141\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 5} = 0.0015 + 0.0141\times-1.88 = -0.025\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.025 = -249994.08 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+5|T}} = 0.0015, \hat{\sigma_{T+5|T}} = 0.0141\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 5} = 0.0015 + 0.0141\times-2.97 = -0.0402\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0402 = -402396.65 \text{\euro}\)</span></p>
+<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the Microsoft stock, the loss incurring over one day will be smaller than -176045.17<span class="math inline">\(\text{\euro}\)</span>, -239879.38<span class="math inline">\(\text{\euro}\)</span> and -385621.58<span class="math inline">\(\text{\euro}\)</span> with a confidence level of 90%, 95% and 99%.</p>
+<p>The loss after 5 days will be smaller than -183242.66<span class="math inline">\(\text{\euro}\)</span>, -249994.08<span class="math inline">\(\text{\euro}\)</span> and -402396.65<span class="math inline">\(\text{\euro}\)</span> with a confidence level of 90%, 95% and 99%.</p>
+The VaR obtained by the current models using t-stundent innovations are much larger than the ones obtained by the similar models using normaly distributed innovations. This is caused by the shift of likelohood towards the tails in t-student distributions. This can reflect an increased likelihood of extreme events like negative price shocks.
+<p>An AR(0)-GARCH(2,3) model with normal innovations is used to obtain VaR values in this subtask. The model was chosen based on the problem statement and the Box-Jenkins-Methodology</p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+1|T}} = 0.001, \hat{\sigma_{T+1|T}} = 0.0096\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 1} = 0.001 + 0.0096\times-1.46 = -0.0131\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0131 = -131014.75 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.05) = -1.98,\hat{\mu_{T+1|T}} = 0.001, \hat{\sigma_{T+1|T}} = 0.0096\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 1} = 0.001 + 0.0096\times-1.98 = -0.0182\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0182 = -181531.61 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+1|T}} = 0.001, \hat{\sigma_{T+1|T}} = 0.0096\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 1} = 0.001 + 0.0096\times-3.27 = -0.0305\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0305 = -305375.38 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+2|T}} = 0.001, \hat{\sigma_{T+2|T}} = 0.0096\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 2} = 0.001 + 0.0096\times-1.46 = -0.013\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.013 = -130319.29 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.05) = -1.98,\hat{\mu_{T+2|T}} = 0.001, \hat{\sigma_{T+2|T}} = 0.0096\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 2} = 0.001 + 0.0096\times-1.98 = -0.0181\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0181 = -180586.77 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+2|T}} = 0.001, \hat{\sigma_{T+2|T}} = 0.0096\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 2} = 0.001 + 0.0096\times-3.27 = -0.0304\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0304 = -303819.19 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+3|T}} = 0.001, \hat{\sigma_{T+3|T}} = 0.0101\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 3} = 0.001 + 0.0101\times-1.46 = -0.0137\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0137 = -137016.17 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.05) = -1.98,\hat{\mu_{T+3|T}} = 0.001, \hat{\sigma_{T+3|T}} = 0.0101\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 3} = 0.001 + 0.0101\times-1.98 = -0.019\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.019 = -189684.97 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+3|T}} = 0.001, \hat{\sigma_{T+3|T}} = 0.0101\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 3} = 0.001 + 0.0101\times-3.27 = -0.0319\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0319 = -318804.31 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+4|T}} = 0.001, \hat{\sigma_{T+4|T}} = 0.0102\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 4} = 0.001 + 0.0102\times-1.46 = -0.0139\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0139 = -138907.79 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.05) = -1.98,\hat{\mu_{T+4|T}} = 0.001, \hat{\sigma_{T+4|T}} = 0.0102\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 4} = 0.001 + 0.0102\times-1.98 = -0.0192\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0192 = -192254.88 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+4|T}} = 0.001, \hat{\sigma_{T+4|T}} = 0.0102\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 4} = 0.001 + 0.0102\times-3.27 = -0.0323\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0323 = -323037.06 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+5|T}} = 0.001, \hat{\sigma_{T+5|T}} = 0.0103\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 5} = 0.001 + 0.0103\times-1.46 = -0.014\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.014 = -140149.55 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.05) = -1.98,\hat{\mu_{T+5|T}} = 0.001, \hat{\sigma_{T+5|T}} = 0.0103\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 5} = 0.001 + 0.0103\times-1.98 = -0.0194\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0194 = -193941.91 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+5|T}} = 0.001, \hat{\sigma_{T+5|T}} = 0.0103\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 5} = 0.001 + 0.0103\times-3.27 = -0.0326\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0326 = -325815.67 \text{\euro}\)</span></p>
+<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the Visa stock, the loss incurring over one day will be smaller than -131014.75<span class="math inline">\(\text{\euro}\)</span>, -181531.61<span class="math inline">\(\text{\euro}\)</span> and -305375.38<span class="math inline">\(\text{\euro}\)</span> with a confidence level of 90%, 95% and 99%.</p>
+<p>The loss after 5 days will be smaller than -140149.55<span class="math inline">\(\text{\euro}\)</span>, -193941.91<span class="math inline">\(\text{\euro}\)</span> and -325815.67<span class="math inline">\(\text{\euro}\)</span> with a confidence level of 90%, 95% and 99%.</p>
+<p>An AR(0)-GARCH(2,2) model with normal innovations is used to obtain VaR values in this subtask. The model was chosen based on the problem statement and the Box-Jenkins-Methodology</p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+1|T}} = 0.0015, \hat{\sigma_{T+1|T}} = 0.0132\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 1} = 0.0015 + 0.0132\times-1.41 = -0.0171\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0171 = -171297.95 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.05) = -1.89,\hat{\mu_{T+1|T}} = 0.0015, \hat{\sigma_{T+1|T}} = 0.0132\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 1} = 0.0015 + 0.0132\times-1.89 = -0.0234\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0234 = -234064.61 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+1|T}} = 0.0015, \hat{\sigma_{T+1|T}} = 0.0132\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 1} = 0.0015 + 0.0132\times-2.97 = -0.0378\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0378 = -377535.41 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+2|T}} = 0.0015, \hat{\sigma_{T+2|T}} = 0.0134\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 2} = 0.0015 + 0.0134\times-1.41 = -0.0175\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0175 = -174679.64 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.05) = -1.89,\hat{\mu_{T+2|T}} = 0.0015, \hat{\sigma_{T+2|T}} = 0.0134\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 2} = 0.0015 + 0.0134\times-1.89 = -0.0239\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0239 = -238586.28 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+2|T}} = 0.0015, \hat{\sigma_{T+2|T}} = 0.0134\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 2} = 0.0015 + 0.0134\times-2.97 = -0.0385\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0385 = -384662.86 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+3|T}} = 0.0015, \hat{\sigma_{T+3|T}} = 0.0136\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 3} = 0.0015 + 0.0136\times-1.41 = -0.0177\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0177 = -176945.69 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.05) = -1.89,\hat{\mu_{T+3|T}} = 0.0015, \hat{\sigma_{T+3|T}} = 0.0136\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 3} = 0.0015 + 0.0136\times-1.89 = -0.0242\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0242 = -241616.24 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+3|T}} = 0.0015, \hat{\sigma_{T+3|T}} = 0.0136\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 3} = 0.0015 + 0.0136\times-2.97 = -0.0389\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0389 = -389438.94 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+4|T}} = 0.0015, \hat{\sigma_{T+4|T}} = 0.0138\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 4} = 0.0015 + 0.0138\times-1.41 = -0.0179\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0179 = -179214.98 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.05) = -1.89,\hat{\mu_{T+4|T}} = 0.0015, \hat{\sigma_{T+4|T}} = 0.0138\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 4} = 0.0015 + 0.0138\times-1.89 = -0.0245\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0245 = -244650.52 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+4|T}} = 0.0015, \hat{\sigma_{T+4|T}} = 0.0138\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 4} = 0.0015 + 0.0138\times-2.97 = -0.0394\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0394 = -394221.83 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+5|T}} = 0.0015, \hat{\sigma_{T+5|T}} = 0.0139\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{10\%, T + 5} = 0.0015 + 0.0139\times-1.41 = -0.0181\)</span></p>
+<p><span class="math inline">\(VaR_{10\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0181 = -181407.55 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.05) = -1.89,\hat{\mu_{T+5|T}} = 0.0015, \hat{\sigma_{T+5|T}} = 0.0139\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{5\%, T + 5} = 0.0015 + 0.0139\times-1.89 = -0.0248\)</span></p>
+<p><span class="math inline">\(VaR_{5\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0248 = -247582.23 \text{\euro}\)</span></p>
+<p><span class="math inline">\(\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+5|T}} = 0.0015, \hat{\sigma_{T+5|T}} = 0.0139\)</span></p>
+<p><span class="math inline">\(VaR(\log \text{returns})_{1\%, T + 5} = 0.0015 + 0.0139\times-2.97 = -0.0399\)</span></p>
+<p><span class="math inline">\(VaR_{1\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0399 = -398843.04 \text{\euro}\)</span></p>
+<p>Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the Microsoft stock, the loss incurring over one day will be smaller than -171297.95<span class="math inline">\(\text{\euro}\)</span>, -234064.61<span class="math inline">\(\text{\euro}\)</span> and -377535.41<span class="math inline">\(\text{\euro}\)</span> with a confidence level of 90%, 95% and 99%.</p>
+<p>The loss after 5 days will be smaller than -181407.55<span class="math inline">\(\text{\euro}\)</span>, -247582.23<span class="math inline">\(\text{\euro}\)</span> and -398843.04<span class="math inline">\(\text{\euro}\)</span> with a confidence level of 90%, 95% and 99%.</p>
 
 
 

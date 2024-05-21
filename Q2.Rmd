@@ -181,8 +181,8 @@ getVaR_table = function(spec1, data1, lags = c(1:5), value_stock1 = value_stock,
       string_list = c(string_list, "\n",
                       
       #q,mu,sigma                
-      paste0("$\\text{Quantile}_\\text{",distr1,"}(",alpha,") = ",q,"$",
-             "$\\hat{\\mu_{T+",lag,"|T}} = ",m,
+      paste0("$\\text{Quantile}_\\text{",distr1,"}(",alpha,") = ",q,
+             ",\\hat{\\mu_{T+",lag,"|T}} = ",m,
              ", \\hat{\\sigma_{T+",lag,"|T}} = ",s, "$\n"),
       
       #VaR log returns
@@ -190,7 +190,7 @@ getVaR_table = function(spec1, data1, lags = c(1:5), value_stock1 = value_stock,
              " = ", round(var_log_ret, 4) ,"$\n"),
       
       #VaR Euro
-      paste0("$VaR_{",alpha*100,"\\%, T + ,",lag,",} = \\text{ Value in Euros } \\times VaR(\\log returns) = ",
+      paste0("$VaR_{",alpha*100,"\\%, T + ",lag,"} = \\text{ Value in Euros } \\times VaR(\\log returns) = ",
              format(value_stock1, big.mark = " ", scientific = FALSE)," \\text{\\euro} \\times",
              round(var_log_ret, 4)," = ",round(value_stock1*var_log_ret, 2)," \\text{\\euro}$"))
       }
@@ -208,7 +208,7 @@ getVaR_table = function(spec1, data1, lags = c(1:5), value_stock1 = value_stock,
                max_neg_change_euro))
 }
 
-enum_str_list = function(string_list, sep = ", ", last = " and "){
+enum_str_list = function(string_list, sep = ", ", last = "  and "){
   #function that collapses a list of strings to a string.
   # "sep": seperator for all but the last element
   # "last": seperator for the last element
@@ -222,6 +222,39 @@ enum_str_list = function(string_list, sep = ", ", last = " and "){
       )
     )
 }
+
+var_template_1_d = function(vaR,
+                            stock_name,
+                            day_num,
+                            currency = "$\\text{\\euro}$",
+                            alphas1 = alphas){
+  day_text = switch(as.character(day_num),
+    "1" = paste0("\n\nFollowing the modeling assumptions of this subtask, the available stock data and the given sum invested in the ", 
+           stock_name,
+           " stock, the loss incurring over one day will be smaller than "),
+    "5" = "The loss after 5 days will be smaller than "
+  )
+  return(
+    paste0(day_text,
+           enum_str_list(
+             paste0(
+               format(
+                 round(vaR,2),
+                 nsmall = 2,
+                 scientific = F
+                 ),
+               currency)
+             ),
+           "  with a confidence level of " ,
+           enum_str_list(
+             paste0(
+               100*(1-alphas1),
+               "\\%")
+             ),
+           ".\n"
+           )
+  )
+}
   
 ```
 
@@ -230,7 +263,10 @@ enum_str_list = function(string_list, sep = ", ", last = " and "){
 #### the unconditional moments of an assumed normal distribution (historical  mean and standard deviation)
 
 ```{r start latex doc}
-text_i = "\\subsubsection{Subtask(i)}
+text_i = "\\section{Value at Risk (VaR) Analysis}
+\\label{sec:q2_value_at_risk_analysis}
+\\subsection{VaR calculations}
+\\subsubsection{(i) Constant Model}
 
 The only model that can be formed using just unconditional moments is the constant model $$R_t = \\epsilon_t, \\epsilon_t \\overset{\\text{w.n.}}{\\sim} N(\\mu, \\sigma^2),$$
 with $\\hat \\mu = \\bar R_t, \\hat{\\sigma^2} = Var(R_t)$, for $t \\in [1,T]$. 
@@ -243,70 +279,15 @@ Since the likelihood of the z value can be read off from the normal distribution
 
 The scaled and shifted z value corresponds to a maximal log return under the given probability. The typically small log returns of stocks are proportional to percent changes in the stock value. Tue to this, maximal the monetary value of currency that is at risk can be calculated by multiplying the result of the previous calculation with the value of bought stock."
 
-cat(c("\\section{Value at Risk (VaR) Analysis}
-\\label{sec:q2_value_at_risk_analysis}
-\\subsection{A - VaR calculations}
-", text_i), file = formulas_file, sep = "\n") 
-```
+cat(text_i, file = formulas_file) 
 
-`r text_i`
-```{r i msft 1 day}
-#write to file
-cat("\n
-\\paragraph{MSFT Stock}\n", file = formulas_file, append = TRUE)
-
-## get historical, unconditional mean and sd
-msft_m = msft_5$log_rtn %>% mean()
-msft_sd = msft_5$log_rtn %>% var() %>% sqrt()
-
-## next day
-p_msft_1 =  msft_m + (msft_sd* qnorm(alphas))
-msft_a_i_max_1_day_neg_change = value_stock * p_msft_1 #assume proportionality to percents
-
-#print results
-print(paste("nomal quantiles:", paste(round(qnorm(alphas),2),collapse = ",")))
-print(paste("mu: ", round(msft_m,4), ", sd: ", round(msft_sd, 4)))
-print(paste("VaR(log rtn):", paste(round(p_msft_1,4),collapse = ",")))
-print(paste("VaR(Euro):", paste(round(msft_a_i_max_1_day_neg_change, 2),collapse = ",")))
-
-#print latex formulas
-string_list = c()
-    
-lag = 1
-for (alpha in alphas){
-  var_log_ret = msft_m[lag] + msft_sd[lag]*qnorm(alpha)
-  q = round(qnorm(alpha),2)
-  m = format(round(msft_m[lag],4), scientific = FALSE)
-  s = format(round(msft_sd[lag],4), scientific = FALSE)
-  string_list = c(string_list, "\n",
-  paste0("$\\text{Quantile}_\\text{norm}(",alpha,") = ",q,"$\n"),
-  paste0("$\\hat{\\mu_{T+",lag,"|T}} = ",m,", \\hat{\\sigma_{T+",lag,"|T}} = ",s, "$\n"),
-  paste0("$VaR(\\log \\text{returns}) = ",m," + ",s,"\\times",q,
-         " = ", round(var_log_ret, 4) ,"$"),
-  paste0("$VaR_{",alpha*100,"\\%} = \\text{ Value in Euros } \\times VaR(\\log returns) = ",
-         format(value_stock, big.mark = " ", scientific = FALSE)," \\text{\\euro} \\times",
-         round(var_log_ret, 4)," = ",round(value_stock*var_log_ret, 2)," \\text{\\euro}$"))
-}
-
-text_i_msft = paste0("\n\nFollowing the modeling assumptions of this subtask, the available stock data and the given sum invested in the MSFT stock, the loss incuring over one day will be smaller than ",
-enum_str_list(
-  paste0(format(
-    round(msft_a_i_max_1_day_neg_change,2),
-         nsmall = 2, scientific = F
-         )
-  , "\\euro")),
-  " with " ,paste0(100*(1-alphas), "%"), "Confidence.
-
-
-The due to simplicity of the model, the 5-day VaR is the same as the 1-day VaR.
-")
-cat(c(string_list, text_i_msft), file = formulas_file, append = TRUE, sep = "\n")
+text_i_5d = "The due to simplicity of the model, the 5-day VaR is the same as the 1-day VaR.\n"
 ```
 
 
 ``` {r i v 1 day}
 #write to file
-cat("\n\\paragraph{V Stock}\n", file = formulas_file, append = TRUE)
+cat("\n\\paragraph{Visa}\n", file = formulas_file, append = TRUE)
 
 
 ## get mean and sd
@@ -342,22 +323,54 @@ for (alpha in alphas){
          round(var_log_ret, 4)," = ",round(value_stock*var_log_ret, 2)," \\text{\\euro}$"))
 }
 
-text_i_msft = paste0("\n\nFollowing the modeling assumptions of this subtask, the available stock data and the given sum invested in the V stock, the loss incuring over one day will be smaller than ",
-enum_str_list(
-  paste0(format(
-    round(v_a_i_max_1_day_neg_change,2),
-         nsmall = 2, scientific = F
-         )
-  , "\\euro"))," with " ,paste0(100*(1-alphas), "%"), "Confidence.
+text_i_v_1d = var_template_1_d(v_a_i_max_1_day_neg_change, stock_name = "Visa", day_num = 1)
 
-
-The due to simplicity of the model, the 5-day VaR is the same as the 1-day VaR.
-
-
-According to this model, the MSFT stock has a way larger VaR than the V stock.")
-cat(c(string_list, text_i_msft), file = formulas_file, append = TRUE, sep = "\n")
+cat(c(string_list, text_i_v_1d,text_i_5d), file = formulas_file, append = TRUE, sep = "\n")
 ```
 
+
+```{r i msft 1 day}
+#write to file
+cat("\n
+\\paragraph{Microsoft}\n", file = formulas_file, append = TRUE)
+
+## get historical, unconditional mean and sd
+msft_m = msft_5$log_rtn %>% mean()
+msft_sd = msft_5$log_rtn %>% var() %>% sqrt()
+
+## next day
+p_msft_1 =  msft_m + (msft_sd* qnorm(alphas))
+msft_a_i_max_1_day_neg_change = value_stock * p_msft_1 #assume proportionality to percents
+
+#print results
+print(paste("nomal quantiles:", paste(round(qnorm(alphas),2),collapse = ",")))
+print(paste("mu: ", round(msft_m,4), ", sd: ", round(msft_sd, 4)))
+print(paste("VaR(log rtn):", paste(round(p_msft_1,4),collapse = ",")))
+print(paste("VaR(Euro):", paste(round(msft_a_i_max_1_day_neg_change, 2),collapse = ",")))
+
+#print latex formulas
+string_list = c()
+    
+lag = 1
+for (alpha in alphas){
+  var_log_ret = msft_m[lag] + msft_sd[lag]*qnorm(alpha)
+  q = round(qnorm(alpha),2)
+  m = format(round(msft_m[lag],4), scientific = FALSE)
+  s = format(round(msft_sd[lag],4), scientific = FALSE)
+  string_list = c(string_list, "\n",
+  paste0("$\\text{Quantile}_\\text{norm}(",alpha,") = ",q,
+         ",\\hat{\\mu_{T+",lag,"|T}} = ",m,", \\hat{\\sigma_{T+",lag,"|T}} = ",s, "$\n"),
+  paste0("$VaR(\\log \\text{returns}) = ",m," + ",s,"\\times",q,
+         " = ", round(var_log_ret, 4) ,"$"),
+  paste0("$VaR_{",alpha*100,"\\%} = \\text{ Value in Euros } \\times VaR(\\log returns) = ",
+         format(value_stock, big.mark = " ", scientific = FALSE)," \\text{\\euro} \\times",
+         round(var_log_ret, 4)," = ",round(value_stock*var_log_ret, 2)," \\text{\\euro}$"))
+}
+
+text_i_msft_1d = var_template_1_d(msft_a_i_max_1_day_neg_change, stock_name = "Microsoft", day_num = 1)
+
+cat(c(string_list, text_i_msft_1d,text_i_5d), file = formulas_file, append = TRUE, sep = "\n")
+```
 
 ### (ii)
 #### a GARCH(1,1) with only a constant in the conditional mean function and normal errors. Hint: for an ARMA(0,0) model, it is possible to show that ψi = 0 for every i.
@@ -366,14 +379,14 @@ cat(c(string_list, text_i_msft), file = formulas_file, append = TRUE, sep = "\n"
 
 ```{r ii model}
 text_ii = "The following GARCH model will be fitted 
-$$\\begin{cases} R_t = \\mu_t + \\epsilon_t, \\epsilon_t = \\sigma_t  * z_t, z_t \\overset{i.i.d.}{\\sim} N(0,1) \\ \\sigma^2_t = \\alpha_0 + \\alpha_1 \\epsilon^2_{t-1} + \\beta_1 \\sigma^2_{t-1} \\ \\mu_t = \\mu_0 \\end{cases}$$
+$$\\begin{cases} R_t = \\mu_t + \\epsilon_t, \\epsilon_t = \\sigma_t  * z_t, z_t \\overset{i.i.d.}{\\sim} N(0,1) \\\\ \\sigma^2_t = \\alpha_0 + \\alpha_1 \\epsilon^2_{t-1} + \\beta_1 \\sigma^2_{t-1} \\\\ \\mu_t = \\mu_0 \\end{cases}$$
 
 A more sophisticated model will be used to estimate the VaR in this subtask. 
 The model will be specified and fitted to the historical data. The fitted model can then be used to make predictions about the stock returns in the future. The predicted mean and sd of the returns can be used to scale and shift a z value like in the previous subtask.
 The use of this scaled and shifted z value in the further calculation of the VaR is identical to the previous, current and the later subtasks."
 
 #write to file 
-cat(c("\n\\subsubsection{Subtask(ii)}\n",text_ii), file = formulas_file, append = TRUE)
+cat(c("\n\\subsubsection{(ii) AR(0)-GARCH(1,1)}\n",text_ii), file = formulas_file, append = TRUE)
 
 #specify model 
 a_ii_spec = rugarch::ugarchspec(variance.model=list(model="sGARCH", 
@@ -382,69 +395,48 @@ a_ii_spec = rugarch::ugarchspec(variance.model=list(model="sGARCH",
                              distribution.model="norm")
 ```
 
-```{r ii msft}
-#write to file
-cat("\n\\paragraph{MSFT Stock}\n", file = formulas_file, append = TRUE)
-
-#get VaR
-msft_a_ii_table = getVaR_table(a_ii_spec, msft_5$log_rtn)
-
-#write conclusion
-text_ii_msft = paste0("\n\nFollowing the modeling assumptions of this subtask, the available stock data and the given sum invested in the MSFT stock, the loss incuring over one day will be smaller than ",
-enum_str_list(
-  paste0(format(
-    msft_a_ii_table[1,((ncol(msft_a_ii_table)-2):(ncol(msft_a_ii_table)))],
-         nsmall = 2, scientific = F
-         )
-  , "\\euro"))
-
-,"Euros with " ,paste0(100*(1-alphas), "%"), "Confidence.
-The loss after 5 days will be smaller than", enum_str_list(
-  format(
-    msft_a_ii_table[5,((ncol(msft_a_ii_table)-2):(ncol(msft_a_ii_table)))],
-         nsmall = 2, scientific = F
-         )
-  )
-
-,"Euros with " ,paste0(100*(1-alphas), "%"), "Confidence.\n")
-
-cat(text_ii_msft, file = formulas_file, append = TRUE)
-
-```
-
 ```{r ii v}
 #write to file
-cat("\n\\paragraph{V Stock}\n", file = formulas_file, append = TRUE)
+cat("\n\\paragraph{Visa}\n", file = formulas_file, append = TRUE)
 
 #get VaR
 v_a_ii_table = getVaR_table(a_ii_spec, v_5$log_rtn)
 
 
 #write conclusion
-text_ii_v = paste0("\n\nFollowing the modeling assumptions of this subtask, the available stock data and the given sum invested in the V stock, the loss incuring over one day will be smaller than ",
-enum_str_list(
-  paste0(format(
-    v_a_ii_table[1,((ncol(v_a_ii_table)-2):(ncol(v_a_ii_table)))],
-         nsmall = 2, scientific = F
-         )
-  , "\\euro"))
+text_ii_v_1d  = var_template_1_d(v_a_ii_table[1,((ncol(v_a_ii_table)-2):(ncol(v_a_ii_table)))],
+                                    stock_name = "Visa", day_num = 1)
+text_ii_v_5d  = var_template_1_d(v_a_ii_table[5,((ncol(v_a_ii_table)-2):(ncol(v_a_ii_table)))],
+                                    stock_name = "Visa", day_num = 5)
 
-,"Euros with " ,paste0(100*(1-alphas), "%"), " Confidence.
-The loss after 5 days will be smaller than", enum_str_list(
-  format(
-    v_a_ii_table[5,((ncol(v_a_ii_table)-2):(ncol(v_a_ii_table)))],
-         nsmall = 2, scientific = F
-         )
-  )
+cat(c(text_ii_v_1d,text_ii_v_5d), file = formulas_file, append = TRUE, sep = "\n")
+```
 
-,"Euros with " ,paste0(100*(1-alphas), "%"), " Confidence.")
 
-text_ii_final = "Based on this model, the VaR is smaller for investments into the V stock than for investiments into the MSFT stock.
+```{r ii msft}
+#write to file
+cat("\n\\paragraph{Microsoft}\n", file = formulas_file, append = TRUE)
+
+#get VaR
+msft_a_ii_table = getVaR_table(a_ii_spec, msft_5$log_rtn)
+
+#write conclusion
+text_ii_msft_1d  = var_template_1_d(msft_a_ii_table[1,((ncol(msft_a_ii_table)-2):(ncol(msft_a_ii_table)))],
+                                    stock_name = "Microsoft", day_num = 1)
+text_ii_msft_5d  = var_template_1_d(msft_a_ii_table[5,((ncol(msft_a_ii_table)-2):(ncol(msft_a_ii_table)))],
+                                    stock_name = "Microsoft", day_num = 5)
+
+cat(c(text_ii_msft_1d,text_ii_msft_5d), file = formulas_file, append = TRUE, sep = "\n")
+
+```
+
+```{r ii final}
+text_ii_final = "Based on this model, the VaR is smaller for investments into the Visa than for investiments into the Microsoft.
 
 The all VaR obtained by this model are smaller than the VaR obtained by the simplistic model in the first subtask. That is due to the small time window, for which the time dependent variance and the VaR is computed. In this case, the time dependent variance is usually smaller than the historic variance."
 
 
-cat(c(text_ii_v,text_ii_final), file = formulas_file, append = TRUE, sep ="\n")
+cat(c(text_ii_final), file = formulas_file, append = TRUE, sep = "\n")
 
 ```
 
@@ -453,9 +445,9 @@ cat(c(text_ii_v,text_ii_final), file = formulas_file, append = TRUE, sep ="\n")
 
 ```{r iii model}
 #write to file
-cat("\n\\subsubsection{Subtask(iii)}
+cat("\n\\subsubsection{(iii) AR(1)-GARCH(1,1)}
 The following GARCH model will be fitted in this subtask
-$\\begin{cases} R_t = \\mu_t + \\epsilon_t, \\epsilon_t = \\sigma_t  * z_t, z_t \\overset{i.i.d.}{\\sim} N(0,1) \\ \\sigma^2_t = \\alpha_0 + \\alpha_1 \\epsilon^2_{t-1} + \\beta_1 \\sigma^2_{t-1} \\ \\mu_t = \\mu_0 + \\phi_i R_{t-1} \\end{cases}$ 
+$$\\begin{cases} R_t = \\mu_t + \\epsilon_t, \\epsilon_t = \\sigma_t  * z_t, z_t \\overset{i.i.d.}{\\sim} N(0,1) \\\\ \\sigma^2_t = \\alpha_0 + \\alpha_1 \\epsilon^2_{t-1} + \\beta_1 \\sigma^2_{t-1} \\\\ \\mu_t = \\mu_0 + \\phi_i R_{t-1} \\end{cases}$$ 
 
 
 here $\\mu_t$ is not only modeled as a constant but as a function of the past $\\mu_{t-1}$", file = formulas_file, append = TRUE)
@@ -467,76 +459,52 @@ a_iii_spec <-  rugarch::ugarchspec(variance.model=list(model="sGARCH",
                              distribution.model="norm")
 ```
 
-
-```{r iii msft}
-#write to file
-cat("\n\\paragraph{MSFT Stock}\n", file = formulas_file, append = TRUE)
-
-#get VaR
-msft_a_iii_table = getVaR_table(a_iii_spec, msft_5$log_rtn)
-
-#write to file
-text_iii_msft = paste0("\n\nFollowing the modeling assumptions of this subtask, the available stock data and the given sum invested in the MSFT stock, the loss incuring over one day will be smaller than ",
-enum_str_list(
-  paste0(format(
-    msft_a_iii_table[1,((ncol(msft_a_iii_table)-2):(ncol(msft_a_iii_table)))],
-         nsmall = 2, scientific = F
-         )
-  , "\\euro"))
-
-,"Euros with " ,paste0(100*(1-alphas), "%"), "Confidence.
-The loss after 5 days will be smaller than", enum_str_list(
-  format(
-    msft_a_iii_table[5,((ncol(msft_a_iii_table)-2):(ncol(msft_a_iii_table)))],
-         nsmall = 2, scientific = F
-         )
-  )
-
-,"Euros with " ,paste0(100*(1-alphas), "%"), "Confidence.\n")
-
-cat(text_iii_msft, file = formulas_file, append = TRUE)
-
-```
-
-
 ```{r iii v}
 #write to file
-cat("\n\\paragraph{V Stock}\n", file = formulas_file, append = TRUE)
+cat("\n\\paragraph{Visa}\n", file = formulas_file, append = TRUE)
 
 #get VaR
 v_a_iii_table = getVaR_table(a_iii_spec, v_5$log_rtn)
 
 #write to file
-text_iii_v = paste0("\n\nFollowing the modeling assumptions of this subtask, the available stock data and the given sum invested in the V stock, the loss incuring over one day will be smaller than ",
-enum_str_list(
-  paste0(format(
-    v_a_iii_table[1,((ncol(v_a_iii_table)-2):(ncol(v_a_iii_table)))],
-         nsmall = 2, scientific = F
-         )
-  , "\\euro"))
+text_iii_v_1d  = var_template_1_d(v_a_iii_table[1,((ncol(v_a_iii_table)-2):(ncol(v_a_iii_table)))],
+                                    stock_name = "Visa", day_num = 1)
+text_iii_v_5d  = var_template_1_d(v_a_iii_table[5,((ncol(v_a_iii_table)-2):(ncol(v_a_iii_table)))],
+                                    stock_name = "Visa", day_num = 5)
 
-,"Euros with " ,paste0(100*(1-alphas), "%"), "Confidence.
-The loss after 5 days will be smaller than", enum_str_list(
-  format(
-    v_a_iii_table[5,((ncol(v_a_iii_table)-2):(ncol(v_a_iii_table)))],
-         nsmall = 2, scientific = F
-         )
-  )
 
-,"Euros with " ,paste0(100*(1-alphas), "%"), "Confidence.\n")
+cat(c(text_iii_v_1d,text_iii_v_5d), file = formulas_file, append = TRUE, sep = "\n")
+```
 
+
+```{r iii msft}
+#write to file
+cat("\n\\paragraph{Microsoft}\n", file = formulas_file, append = TRUE)
+
+#get VaR
+msft_a_iii_table = getVaR_table(a_iii_spec, msft_5$log_rtn)
+
+#write to file
+text_iii_msft_1d  = var_template_1_d(msft_a_ii_table[1,((ncol(msft_a_iii_table)-2):(ncol(msft_a_iii_table)))],
+                                    stock_name = "Microsoft", day_num = 1)
+text_iii_msft_5d  = var_template_1_d(msft_a_iii_table[5,((ncol(msft_a_iii_table)-2):(ncol(msft_a_iii_table)))],
+                                    stock_name = "Microsoft", day_num = 5)
+
+cat(c(text_iii_msft_1d,text_iii_msft_5d), file = formulas_file, append = TRUE, sep = "\n")
+```
+
+```{r iii final}
 text_iii_final = "The estimated VaR don't really differ between the previous model which modeled the mean as constant, and the current one, which models the mean of the time series using an AR(1). 
 The reason for this indifference could be, that the conditional mean of stock returns cannot really be predicted from preceding returns. It is already a good aproximation to model this conditional mean as constant. This is consitent with financial theory."
 
-cat(c(text_iii_v,text_iii_final), file = formulas_file, append = TRUE, sep = "\n")
+cat(c(text_iii_final), file = formulas_file, append = TRUE, sep = "\n")
 ```
-
 ### (iv) 
 #### an AR(1)-GARCH(1,1) model with Student-t innovations 
 
 ```{r iv model}
 #write to file
-cat("\n\\subsubsection{Subtask(iv)}
+cat("\n\\subsubsection{(iv) AR(1)-GARCH(1,1) with t-Student innovations}
 In this subtask, innovations of $R_t$ will not be modeled after a Normal distribution but a t-Student distibution (std) \n", file = formulas_file, append = TRUE)
 
 #specify model
@@ -546,97 +514,104 @@ a_iv_spec <-  rugarch::ugarchspec(variance.model=list(model="sGARCH",
                              distribution.model="std")
 ```
 
-```{r iv msft}
-#write to file
-cat("\n\\paragraph{MSFT Stock}\n", file = formulas_file, append = TRUE)
-
-#get VaR
-msft_a_iv_table = getVaR_table(a_iv_spec, msft_5$log_rtn)
-
-#write to file
-text_iv_msft = paste0("\n\nFollowing the modeling assumptions of this subtask, the available stock data and the given sum invested in the MSFT stock, the loss incuring over one day will be smaller than ",
-enum_str_list(
-  paste0(format(
-    msft_a_iv_table[1,((ncol(msft_a_iv_table)-2):(ncol(msft_a_iv_table)))],
-         nsmall = 2, scientific = F
-         )
-  , "\\euro"))
-
-,"Euros with " ,paste0(100*(1-alphas), "%"), "Confidence.
-The loss after 5 days will be smaller than", enum_str_list(
-  format(
-    msft_a_iv_table[5,((ncol(msft_a_iv_table)-2):(ncol(msft_a_iv_table)))],
-         nsmall = 2, scientific = F
-         )
-  )
-
-,"Euros with " ,paste0(100*(1-alphas), "%"), "Confidence.\n")
-
-cat(text_iv_msft, file = formulas_file, append = TRUE)
-```
-
 ```{r iv v}
 #write to file
-cat("\n\\paragraph{V Stock}\n", file = formulas_file, append = TRUE)
+cat("\n\\paragraph{Visa}\n", file = formulas_file, append = TRUE)
 
 #get VaR
 v_a_iv_table = getVaR_table(a_iv_spec, v_5$log_rtn)
 
 #write to file
-text_iv_v = paste0("\n\nFollowing the modeling assumptions of this subtask, the available stock data and the given sum invested in the V stock, the loss incuring over one day will be smaller than ",
-enum_str_list(
-  paste0(format(
-    v_a_iv_table[1,((ncol(v_a_iv_table)-2):(ncol(v_a_iv_table)))],
-         nsmall = 2, scientific = F
-         )
-  , "\\euro"))
+text_iv_v_1d  = var_template_1_d(v_a_iv_table[1,((ncol(v_a_iv_table)-2):(ncol(v_a_iv_table)))],
+                                    stock_name = "Visa", day_num = 1)
+text_iv_v_5d  = var_template_1_d(v_a_iv_table[5,((ncol(v_a_iv_table)-2):(ncol(v_a_iv_table)))],
+                                    stock_name = "Visa", day_num = 5)
 
-,"Euros with " ,paste0(100*(1-alphas), "%"), "Confidence.
-The loss after 5 days will be smaller than", enum_str_list(
-  format(
-    v_a_iv_table[5,((ncol(v_a_iv_table)-2):(ncol(v_a_iv_table)))],
-         nsmall = 2, scientific = F
-         )
-  )
 
-,"Euros with " ,paste0(100*(1-alphas), "%"), "Confidence.\n")
+cat(c(text_iv_v_1d,text_iv_v_5d), file = formulas_file, append = TRUE, sep = "\n")
+```
 
+```{r iv msft}
+#write to file
+cat("\n\\paragraph{Microsoft}\n", file = formulas_file, append = TRUE)
+
+#get VaR
+msft_a_iv_table = getVaR_table(a_iv_spec, msft_5$log_rtn)
+
+#write to file
+text_iv_msft_1d  = var_template_1_d(msft_a_iv_table[1,((ncol(msft_a_iv_table)-2):(ncol(msft_a_iv_table)))],
+                                    stock_name = "Microsoft", day_num = 1)
+text_iv_msft_5d  = var_template_1_d(msft_a_iv_table[5,((ncol(msft_a_iv_table)-2):(ncol(msft_a_iv_table)))],
+                                    stock_name = "Microsoft", day_num = 5)
+
+
+cat(c(text_iv_msft_1d,text_iv_msft_5d), file = formulas_file, append = TRUE, sep = "\n")
+```
+
+
+```{r iv final}
 text_iv_final = "The VaR obtained by the current models using t-stundent innovations are much larger than the ones obtained by the similar models using normaly distributed innovations. This is caused by the shift of likelohood towards the tails in t-student distributions. This can reflect an increased likelihood of extreme events like negative price shocks."
 
-cat(c(text_iv_v,text_iv_final), file = formulas_file, append = TRUE, sep = "\n")
+cat(text_iv_final, file = formulas_file, append = T)
 ```
 
 
 ### (v) 
 #### Another ARMA-GARCH specification choosen by the group. Here you should choose either a constant or an AR(1) conditional mean function. For the GARCH specification you may choose a GARCH(m,n) for any m and n with either normal or student-t innovations. You may also explore extensions of the standard GARCH model (GARCH-in-mean,T-GARCH, EGARCH,...). Justify your option
 
-```{r v model}
-#specify model
-# a_v_spec <-  rugarch::ugarchspec(variance.model=list(model="tGARCH", 
-#                                                  garchOrder=c(1,2)),
-#                         mean.model=list(armaOrder=c(1,0)),
-#                              distribution.model="std")
-#                               
-#TODO secify different model
-```
-
-```{r iv msft}
+```{r v heading}
 #write to file
-cat("\n\\subsubsection{Subtask(v)}
-\\paragraph{MSFT Stock}\n", file = formulas_file, append = TRUE)
-
-#get VaR
-# msft_a_v_table = getVaR_table(a_v_spec, msft_5$log_rtn)
+cat("\n\\subsubsection{(v) Other ARMA-GARCH specification}\n", file = formulas_file, append = TRUE)
 ```
 
 ```{r v v}
+#specify model
+a_v_v_spec <-  rugarch::ugarchspec(variance.model=list(model="sGARCH", 
+                                                 garchOrder=c(2,3)),
+                             mean.model=list(armaOrder=c(0,0),include.mean=TRUE),
+                             distribution.model="std")
+
 #write to file
-cat("\n\\paragraph{V Stock}\n", file = formulas_file, append = TRUE)
+cat(c("\n\\paragraph{Visa}\n",
+      "An AR(0)-GARCH(2,3) model with normal innovations is used to obtain VaR values in this subtask. The model was chosen based on the problem statement and the Box-Jenkins-Methodology\n\n"),
+    file = formulas_file, append = TRUE)
 
 #get VaR
-# v_a_v_table = getVaR_table(a_v_spec, v_5$log_rtn)
+v_a_i_table = getVaR_table(a_v_v_spec, v_5$log_rtn)
+
+#write to file
+text_v_v_1d  = var_template_1_d(v_a_i_table[1,((ncol(v_a_i_table)-2):(ncol(v_a_i_table)))],
+                                    stock_name = "Visa", day_num = 1)
+text_v_v_5d  = var_template_1_d(v_a_i_table[5,((ncol(v_a_i_table)-2):(ncol(v_a_i_table)))],
+                                    stock_name = "Visa", day_num = 5)
+
+cat(c(text_v_v_1d,text_v_v_5d), file = formulas_file, append = TRUE, sep = "\n")
 ```
 
+```{r v msft}
+#specify model
+a_v_msft_spec <-  rugarch::ugarchspec(variance.model=list(model="sGARCH", 
+                                                 garchOrder=c(2,2)),
+                             mean.model=list(armaOrder=c(0,0),include.mean=TRUE),
+                             distribution.model="std")
+
+#write to file
+cat(c("\n\\paragraph{Microsoft}\n",
+    "An AR(0)-GARCH(2,2) model with normal innovations is used to obtain VaR values in this subtask. The model was chosen based on the problem statement and the Box-Jenkins-Methodology\n\n"),
+    file = formulas_file, append = TRUE)
+
+#get VaR
+msft_a_i_table = getVaR_table(a_v_msft_spec, msft_5$log_rtn)
+
+#write to file
+text_v_msft_1d  = var_template_1_d(msft_a_i_table[1,((ncol(msft_a_i_table)-2):(ncol(msft_a_i_table)))],
+                                    stock_name = "Microsoft", day_num = 1)
+text_v_msft_5d  = var_template_1_d(msft_a_i_table[5,((ncol(msft_a_i_table)-2):(ncol(msft_a_i_table)))],
+                                    stock_name = "Microsoft", day_num = 5)
+
+
+cat(c(text_v_msft_1d,text_v_msft_5d), file = formulas_file, append = TRUE, sep = "\n")
+```
 
 # Functional Code
 ```{r knit formulas file}
