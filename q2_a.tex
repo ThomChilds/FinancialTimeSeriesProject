@@ -13,31 +13,41 @@ Since the likelihood of the z value can be read off from the normal distribution
 
 
 The scaled and shifted z value corresponds to a maximal log return under the given probability. The typically small log returns of stocks are proportional to percent changes in the stock value. Tue to this, maximal the monetary value of currency that is at risk can be calculated by multiplying the result of the previous calculation with the value of bought stock.
-\paragraph{Visa}
+\paragraph{Visa} Caclulations.\newline \indent 
 
 
-$\text{Quantile}_\text{norm}(0.1) = -1.28
-         \hat{\mu_{T+1|T}} = 0.0004, \hat{\sigma_{T+1|T}} = 0.0176$
-
-$VaR(\log \text{returns}) = 0.0004 + 0.0176\times-1.28 = -0.0221$
-
-$VaR_{10\%} = \text{ Value in Euros } \times VaR(\log returns) = 10000000 \text{\euro} \times-0.0221 = -220709.87 \text{\euro}$
 
 
-$\text{Quantile}_\text{norm}(0.05) = -1.64
-         \hat{\mu_{T+1|T}} = 0.0004, \hat{\sigma_{T+1|T}} = 0.0176$
 
-$VaR(\log \text{returns}) = 0.0004 + 0.0176\times-1.64 = -0.0284$
+Calculation for 90\% Confidence and $T+1$:
 
-$VaR_{5\%} = \text{ Value in Euros } \times VaR(\log returns) = 10000000 \text{\euro} \times-0.0284 = -284484.36 \text{\euro}$
+\indent\indent $\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+1|T}} = 0.0004, \hat{\sigma_{T+1|T}} = 0.0176$
+
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 1} = 0.0004 + 0.0176\times-1.28 = -0.0221$
+
+\indent\indent $VaR_{10\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0221 = -220709.87 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{norm}(0.01) = -2.33
-         \hat{\mu_{T+1|T}} = 0.0004, \hat{\sigma_{T+1|T}} = 0.0176$
 
-$VaR(\log \text{returns}) = 0.0004 + 0.0176\times-2.33 = -0.0404$
 
-$VaR_{1\%} = \text{ Value in Euros } \times VaR(\log returns) = 10000000 \text{\euro} \times-0.0404 = -404114.71 \text{\euro}$
+Calculation for 95\% Confidence and $T+1$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+1|T}} = 0.0004, \hat{\sigma_{T+1|T}} = 0.0176$
+
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 1} = 0.0004 + 0.0176\times-1.64 = -0.0284$
+
+\indent\indent $VaR_{5\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0284 = -284484.36 \text{\euro}$\newline
+
+
+
+
+Calculation for 99\% Confidence and $T+1$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+1|T}} = 0.0004, \hat{\sigma_{T+1|T}} = 0.0176$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 1} = 0.0004 + 0.0176\times-2.33 = -0.0404$
+
+\indent\indent $VaR_{1\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0404 = -404114.71 \text{\euro}$\newline
 
 
 Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the Visa stock, the loss incurring over one day will be smaller than -220709.87$\text{\euro}$, -284484.36$\text{\euro}$  and -404114.71$\text{\euro}$  with a confidence level of 90\%, 95\%  and 99\%.
@@ -46,25 +56,40 @@ The due to simplicity of the model, the 5-day VaR is the same as the 1-day VaR.
 
 
 
-\paragraph{Microsoft}
+\paragraph{Microsoft} Caclulations.\newline \indent 
 
 
-$\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+1|T}} = 0.0009, \hat{\sigma_{T+1|T}} = 0.0192$
-
-$VaR(\log \text{returns}) = 0.0009 + 0.0192\times-1.28 = -0.0236$
-$VaR_{10\%} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0236 = -236303.82 \text{\euro}$
 
 
-$\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+1|T}} = 0.0009, \hat{\sigma_{T+1|T}} = 0.0192$
+Calculation for 90\% Confidence and $T+1$:
 
-$VaR(\log \text{returns}) = 0.0009 + 0.0192\times-1.64 = -0.0306$
-$VaR_{5\%} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0306 = -305890.67 \text{\euro}$
+\indent\indent $\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+1|T}} = 0.0009, \hat{\sigma_{T+1|T}} = 0.0192$
+
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 1} = 0.0009 + 0.0192\times-1.28 = -0.0236$
+
+\indent\indent $VaR_{10\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0236 = -236303.82 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+1|T}} = 0.0009, \hat{\sigma_{T+1|T}} = 0.0192$
 
-$VaR(\log \text{returns}) = 0.0009 + 0.0192\times-2.33 = -0.0436$
-$VaR_{1\%} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0436 = -436424.02 \text{\euro}$
+
+Calculation for 95\% Confidence and $T+1$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+1|T}} = 0.0009, \hat{\sigma_{T+1|T}} = 0.0192$
+
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 1} = 0.0009 + 0.0192\times-1.64 = -0.0306$
+
+\indent\indent $VaR_{5\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0306 = -305890.67 \text{\euro}$\newline
+
+
+
+
+Calculation for 99\% Confidence and $T+1$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+1|T}} = 0.0009, \hat{\sigma_{T+1|T}} = 0.0192$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 1} = 0.0009 + 0.0192\times-2.33 = -0.0436$
+
+\indent\indent $VaR_{1\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0436 = -436424.02 \text{\euro}$\newline
 
 
 Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the Microsoft stock, the loss incurring over one day will be smaller than -236303.82$\text{\euro}$, -305890.67$\text{\euro}$  and -436424.02$\text{\euro}$  with a confidence level of 90\%, 95\%  and 99\%.
@@ -76,115 +101,175 @@ The due to simplicity of the model, the 5-day VaR is the same as the 1-day VaR.
  The following GARCH model will be fitted 
 $$\begin{cases} R_t = \mu_t + \epsilon_t, \epsilon_t = \sigma_t  * z_t, z_t \overset{i.i.d.}{\sim} N(0,1) \\ \sigma^2_t = \alpha_0 + \alpha_1 \epsilon^2_{t-1} + \beta_1 \sigma^2_{t-1} \\ \mu_t = \mu_0 \end{cases}$$
 
-A more sophisticated model will be used to estimate the VaR in this subtask. 
+The model fitted in this subtask is more sophisticated than a simple model using only unconditional constants. 
 The model will be specified and fitted to the historical data. The fitted model can then be used to make predictions about the stock returns in the future. The predicted mean and sd of the returns can be used to scale and shift a z value like in the previous subtask.
 The use of this scaled and shifted z value in the further calculation of the VaR is identical to the previous, current and the later subtasks.
-\paragraph{Visa}
+\paragraph{Visa} Caclulations.\newline \indent 
 
 
-$\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+1|T}} = 0.0006, \hat{\sigma_{T+1|T}} = 0.0094$
-
-$VaR(\log \text{returns})_{10\%, T + 1} = 0.0006 + 0.0094\times-1.28 = -0.0114$
-
-$VaR_{10\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0114 = -114043.89 \text{\euro}$
 
 
-$\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+1|T}} = 0.0006, \hat{\sigma_{T+1|T}} = 0.0094$
+Calculation for 90\% Confidence and $T+1$:
 
-$VaR(\log \text{returns})_{5\%, T + 1} = 0.0006 + 0.0094\times-1.64 = -0.0148$
+\indent\indent $\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+1|T}} = 0.0006, \hat{\sigma_{T+1|T}} = 0.0094$
 
-$VaR_{5\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0148 = -148128.33 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 1} = 0.0006 + 0.0094\times-1.28 = -0.0114$
 
-
-$\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+1|T}} = 0.0006, \hat{\sigma_{T+1|T}} = 0.0094$
-
-$VaR(\log \text{returns})_{1\%, T + 1} = 0.0006 + 0.0094\times-2.33 = -0.0212$
-
-$VaR_{1\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0212 = -212065.07 \text{\euro}$
+\indent\indent $VaR_{10\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0114 = -114043.89 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+2|T}} = 0.0006, \hat{\sigma_{T+2|T}} = 0.0096$
-
-$VaR(\log \text{returns})_{10\%, T + 2} = 0.0006 + 0.0096\times-1.28 = -0.0116$
-
-$VaR_{10\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0116 = -116326.52 \text{\euro}$
 
 
-$\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+2|T}} = 0.0006, \hat{\sigma_{T+2|T}} = 0.0096$
+Calculation for 95\% Confidence and $T+1$:
 
-$VaR(\log \text{returns})_{5\%, T + 2} = 0.0006 + 0.0096\times-1.64 = -0.0151$
+\indent\indent $\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+1|T}} = 0.0006, \hat{\sigma_{T+1|T}} = 0.0094$
 
-$VaR_{5\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0151 = -151058.05 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 1} = 0.0006 + 0.0094\times-1.64 = -0.0148$
 
-
-$\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+2|T}} = 0.0006, \hat{\sigma_{T+2|T}} = 0.0096$
-
-$VaR(\log \text{returns})_{1\%, T + 2} = 0.0006 + 0.0096\times-2.33 = -0.0216$
-
-$VaR_{1\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0216 = -216208.64 \text{\euro}$
+\indent\indent $VaR_{5\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0148 = -148128.33 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+3|T}} = 0.0006, \hat{\sigma_{T+3|T}} = 0.0097$
-
-$VaR(\log \text{returns})_{10\%, T + 3} = 0.0006 + 0.0097\times-1.28 = -0.0119$
-
-$VaR_{10\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0119 = -118538.19 \text{\euro}$
 
 
-$\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+3|T}} = 0.0006, \hat{\sigma_{T+3|T}} = 0.0097$
+Calculation for 99\% Confidence and $T+1$:
 
-$VaR(\log \text{returns})_{5\%, T + 3} = 0.0006 + 0.0097\times-1.64 = -0.0154$
+\indent\indent $\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+1|T}} = 0.0006, \hat{\sigma_{T+1|T}} = 0.0094$
 
-$VaR_{5\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0154 = -153896.7 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 1} = 0.0006 + 0.0094\times-2.33 = -0.0212$
 
-
-$\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+3|T}} = 0.0006, \hat{\sigma_{T+3|T}} = 0.0097$
-
-$VaR(\log \text{returns})_{1\%, T + 3} = 0.0006 + 0.0097\times-2.33 = -0.022$
-
-$VaR_{1\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.022 = -220223.39 \text{\euro}$
+\indent\indent $VaR_{1\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0212 = -212065.07 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+4|T}} = 0.0006, \hat{\sigma_{T+4|T}} = 0.0099$
-
-$VaR(\log \text{returns})_{10\%, T + 4} = 0.0006 + 0.0099\times-1.28 = -0.0121$
-
-$VaR_{10\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0121 = -120682.99 \text{\euro}$
 
 
-$\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+4|T}} = 0.0006, \hat{\sigma_{T+4|T}} = 0.0099$
+Calculation for 90\% Confidence and $T+2$:
 
-$VaR(\log \text{returns})_{5\%, T + 4} = 0.0006 + 0.0099\times-1.64 = -0.0157$
+\indent\indent $\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+2|T}} = 0.0006, \hat{\sigma_{T+2|T}} = 0.0096$
 
-$VaR_{5\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0157 = -156649.52 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 2} = 0.0006 + 0.0096\times-1.28 = -0.0116$
 
-
-$\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+4|T}} = 0.0006, \hat{\sigma_{T+4|T}} = 0.0099$
-
-$VaR(\log \text{returns})_{1\%, T + 4} = 0.0006 + 0.0099\times-2.33 = -0.0224$
-
-$VaR_{1\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0224 = -224116.75 \text{\euro}$
+\indent\indent $VaR_{10\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0116 = -116326.52 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+5|T}} = 0.0006, \hat{\sigma_{T+5|T}} = 0.0101$
-
-$VaR(\log \text{returns})_{10\%, T + 5} = 0.0006 + 0.0101\times-1.28 = -0.0123$
-
-$VaR_{10\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0123 = -122764.61 \text{\euro}$
 
 
-$\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+5|T}} = 0.0006, \hat{\sigma_{T+5|T}} = 0.0101$
+Calculation for 95\% Confidence and $T+2$:
 
-$VaR(\log \text{returns})_{5\%, T + 5} = 0.0006 + 0.0101\times-1.64 = -0.0159$
+\indent\indent $\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+2|T}} = 0.0006, \hat{\sigma_{T+2|T}} = 0.0096$
 
-$VaR_{5\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0159 = -159321.26 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 2} = 0.0006 + 0.0096\times-1.64 = -0.0151$
+
+\indent\indent $VaR_{5\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0151 = -151058.05 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+5|T}} = 0.0006, \hat{\sigma_{T+5|T}} = 0.0101$
 
-$VaR(\log \text{returns})_{1\%, T + 5} = 0.0006 + 0.0101\times-2.33 = -0.0228$
 
-$VaR_{1\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0228 = -227895.44 \text{\euro}$
+Calculation for 99\% Confidence and $T+2$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+2|T}} = 0.0006, \hat{\sigma_{T+2|T}} = 0.0096$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 2} = 0.0006 + 0.0096\times-2.33 = -0.0216$
+
+\indent\indent $VaR_{1\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0216 = -216208.64 \text{\euro}$\newline
+
+
+
+
+Calculation for 90\% Confidence and $T+3$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+3|T}} = 0.0006, \hat{\sigma_{T+3|T}} = 0.0097$
+
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 3} = 0.0006 + 0.0097\times-1.28 = -0.0119$
+
+\indent\indent $VaR_{10\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0119 = -118538.19 \text{\euro}$\newline
+
+
+
+
+Calculation for 95\% Confidence and $T+3$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+3|T}} = 0.0006, \hat{\sigma_{T+3|T}} = 0.0097$
+
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 3} = 0.0006 + 0.0097\times-1.64 = -0.0154$
+
+\indent\indent $VaR_{5\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0154 = -153896.7 \text{\euro}$\newline
+
+
+
+
+Calculation for 99\% Confidence and $T+3$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+3|T}} = 0.0006, \hat{\sigma_{T+3|T}} = 0.0097$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 3} = 0.0006 + 0.0097\times-2.33 = -0.022$
+
+\indent\indent $VaR_{1\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.022 = -220223.39 \text{\euro}$\newline
+
+
+
+
+Calculation for 90\% Confidence and $T+4$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+4|T}} = 0.0006, \hat{\sigma_{T+4|T}} = 0.0099$
+
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 4} = 0.0006 + 0.0099\times-1.28 = -0.0121$
+
+\indent\indent $VaR_{10\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0121 = -120682.99 \text{\euro}$\newline
+
+
+
+
+Calculation for 95\% Confidence and $T+4$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+4|T}} = 0.0006, \hat{\sigma_{T+4|T}} = 0.0099$
+
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 4} = 0.0006 + 0.0099\times-1.64 = -0.0157$
+
+\indent\indent $VaR_{5\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0157 = -156649.52 \text{\euro}$\newline
+
+
+
+
+Calculation for 99\% Confidence and $T+4$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+4|T}} = 0.0006, \hat{\sigma_{T+4|T}} = 0.0099$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 4} = 0.0006 + 0.0099\times-2.33 = -0.0224$
+
+\indent\indent $VaR_{1\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0224 = -224116.75 \text{\euro}$\newline
+
+
+
+
+Calculation for 90\% Confidence and $T+5$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+5|T}} = 0.0006, \hat{\sigma_{T+5|T}} = 0.0101$
+
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 5} = 0.0006 + 0.0101\times-1.28 = -0.0123$
+
+\indent\indent $VaR_{10\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0123 = -122764.61 \text{\euro}$\newline
+
+
+
+
+Calculation for 95\% Confidence and $T+5$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+5|T}} = 0.0006, \hat{\sigma_{T+5|T}} = 0.0101$
+
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 5} = 0.0006 + 0.0101\times-1.64 = -0.0159$
+
+\indent\indent $VaR_{5\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0159 = -159321.26 \text{\euro}$\newline
+
+
+
+
+Calculation for 99\% Confidence and $T+5$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+5|T}} = 0.0006, \hat{\sigma_{T+5|T}} = 0.0101$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 5} = 0.0006 + 0.0101\times-2.33 = -0.0228$
+
+\indent\indent $VaR_{1\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0228 = -227895.44 \text{\euro}$\newline
 
 
 Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the Visa stock, the loss incurring over one day will be smaller than -114043.89$\text{\euro}$, -148128.33$\text{\euro}$  and -212065.07$\text{\euro}$  with a confidence level of 90\%, 95\%  and 99\%.
@@ -192,112 +277,172 @@ Following the modeling assumptions of this subtask, the available stock data and
 The loss after 5 days will be smaller than -122764.61$\text{\euro}$, -159321.26$\text{\euro}$  and -227895.44$\text{\euro}$  with a confidence level of 90\%, 95\%  and 99\%.
 
 
-\paragraph{Microsoft}
+\paragraph{Microsoft} Caclulations.\newline \indent 
 
 
-$\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+1|T}} = 0.0013, \hat{\sigma_{T+1|T}} = 0.013$
-
-$VaR(\log \text{returns})_{10\%, T + 1} = 0.0013 + 0.013\times-1.28 = -0.0154$
-
-$VaR_{10\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0154 = -154418.3 \text{\euro}$
 
 
-$\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+1|T}} = 0.0013, \hat{\sigma_{T+1|T}} = 0.013$
+Calculation for 90\% Confidence and $T+1$:
 
-$VaR(\log \text{returns})_{5\%, T + 1} = 0.0013 + 0.013\times-1.64 = -0.0202$
+\indent\indent $\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+1|T}} = 0.0013, \hat{\sigma_{T+1|T}} = 0.013$
 
-$VaR_{5\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0202 = -201792.7 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 1} = 0.0013 + 0.013\times-1.28 = -0.0154$
 
-
-$\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+1|T}} = 0.0013, \hat{\sigma_{T+1|T}} = 0.013$
-
-$VaR(\log \text{returns})_{1\%, T + 1} = 0.0013 + 0.013\times-2.33 = -0.0291$
-
-$VaR_{1\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0291 = -290659.18 \text{\euro}$
+\indent\indent $VaR_{10\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0154 = -154418.3 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+2|T}} = 0.0013, \hat{\sigma_{T+2|T}} = 0.0132$
-
-$VaR(\log \text{returns})_{10\%, T + 2} = 0.0013 + 0.0132\times-1.28 = -0.0156$
-
-$VaR_{10\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0156 = -156238.14 \text{\euro}$
 
 
-$\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+2|T}} = 0.0013, \hat{\sigma_{T+2|T}} = 0.0132$
+Calculation for 95\% Confidence and $T+1$:
 
-$VaR(\log \text{returns})_{5\%, T + 2} = 0.0013 + 0.0132\times-1.64 = -0.0204$
+\indent\indent $\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+1|T}} = 0.0013, \hat{\sigma_{T+1|T}} = 0.013$
 
-$VaR_{5\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0204 = -204128.44 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 1} = 0.0013 + 0.013\times-1.64 = -0.0202$
 
-
-$\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+2|T}} = 0.0013, \hat{\sigma_{T+2|T}} = 0.0132$
-
-$VaR(\log \text{returns})_{1\%, T + 2} = 0.0013 + 0.0132\times-2.33 = -0.0294$
-
-$VaR_{1\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0294 = -293962.67 \text{\euro}$
+\indent\indent $VaR_{5\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0202 = -201792.7 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+3|T}} = 0.0013, \hat{\sigma_{T+3|T}} = 0.0133$
-
-$VaR(\log \text{returns})_{10\%, T + 3} = 0.0013 + 0.0133\times-1.28 = -0.0158$
-
-$VaR_{10\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0158 = -158009.37 \text{\euro}$
 
 
-$\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+3|T}} = 0.0013, \hat{\sigma_{T+3|T}} = 0.0133$
+Calculation for 99\% Confidence and $T+1$:
 
-$VaR(\log \text{returns})_{5\%, T + 3} = 0.0013 + 0.0133\times-1.64 = -0.0206$
+\indent\indent $\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+1|T}} = 0.0013, \hat{\sigma_{T+1|T}} = 0.013$
 
-$VaR_{5\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0206 = -206401.79 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 1} = 0.0013 + 0.013\times-2.33 = -0.0291$
 
-
-$\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+3|T}} = 0.0013, \hat{\sigma_{T+3|T}} = 0.0133$
-
-$VaR(\log \text{returns})_{1\%, T + 3} = 0.0013 + 0.0133\times-2.33 = -0.0297$
-
-$VaR_{1\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0297 = -297177.91 \text{\euro}$
+\indent\indent $VaR_{1\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0291 = -290659.18 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+4|T}} = 0.0013, \hat{\sigma_{T+4|T}} = 0.0135$
-
-$VaR(\log \text{returns})_{10\%, T + 4} = 0.0013 + 0.0135\times-1.28 = -0.016$
-
-$VaR_{10\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.016 = -159733.96 \text{\euro}$
 
 
-$\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+4|T}} = 0.0013, \hat{\sigma_{T+4|T}} = 0.0135$
+Calculation for 90\% Confidence and $T+2$:
 
-$VaR(\log \text{returns})_{5\%, T + 4} = 0.0013 + 0.0135\times-1.64 = -0.0209$
+\indent\indent $\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+2|T}} = 0.0013, \hat{\sigma_{T+2|T}} = 0.0132$
 
-$VaR_{5\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0209 = -208615.27 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 2} = 0.0013 + 0.0132\times-1.28 = -0.0156$
 
-
-$\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+4|T}} = 0.0013, \hat{\sigma_{T+4|T}} = 0.0135$
-
-$VaR(\log \text{returns})_{1\%, T + 4} = 0.0013 + 0.0135\times-2.33 = -0.03$
-
-$VaR_{1\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.03 = -300308.48 \text{\euro}$
+\indent\indent $VaR_{10\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0156 = -156238.14 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+5|T}} = 0.0013, \hat{\sigma_{T+5|T}} = 0.0136$
-
-$VaR(\log \text{returns})_{10\%, T + 5} = 0.0013 + 0.0136\times-1.28 = -0.0161$
-
-$VaR_{10\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0161 = -161413.74 \text{\euro}$
 
 
-$\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+5|T}} = 0.0013, \hat{\sigma_{T+5|T}} = 0.0136$
+Calculation for 95\% Confidence and $T+2$:
 
-$VaR(\log \text{returns})_{5\%, T + 5} = 0.0013 + 0.0136\times-1.64 = -0.0211$
+\indent\indent $\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+2|T}} = 0.0013, \hat{\sigma_{T+2|T}} = 0.0132$
 
-$VaR_{5\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0211 = -210771.25 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 2} = 0.0013 + 0.0132\times-1.64 = -0.0204$
+
+\indent\indent $VaR_{5\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0204 = -204128.44 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+5|T}} = 0.0013, \hat{\sigma_{T+5|T}} = 0.0136$
 
-$VaR(\log \text{returns})_{1\%, T + 5} = 0.0013 + 0.0136\times-2.33 = -0.0303$
 
-$VaR_{1\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0303 = -303357.72 \text{\euro}$
+Calculation for 99\% Confidence and $T+2$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+2|T}} = 0.0013, \hat{\sigma_{T+2|T}} = 0.0132$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 2} = 0.0013 + 0.0132\times-2.33 = -0.0294$
+
+\indent\indent $VaR_{1\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0294 = -293962.67 \text{\euro}$\newline
+
+
+
+
+Calculation for 90\% Confidence and $T+3$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+3|T}} = 0.0013, \hat{\sigma_{T+3|T}} = 0.0133$
+
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 3} = 0.0013 + 0.0133\times-1.28 = -0.0158$
+
+\indent\indent $VaR_{10\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0158 = -158009.37 \text{\euro}$\newline
+
+
+
+
+Calculation for 95\% Confidence and $T+3$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+3|T}} = 0.0013, \hat{\sigma_{T+3|T}} = 0.0133$
+
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 3} = 0.0013 + 0.0133\times-1.64 = -0.0206$
+
+\indent\indent $VaR_{5\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0206 = -206401.79 \text{\euro}$\newline
+
+
+
+
+Calculation for 99\% Confidence and $T+3$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+3|T}} = 0.0013, \hat{\sigma_{T+3|T}} = 0.0133$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 3} = 0.0013 + 0.0133\times-2.33 = -0.0297$
+
+\indent\indent $VaR_{1\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0297 = -297177.91 \text{\euro}$\newline
+
+
+
+
+Calculation for 90\% Confidence and $T+4$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+4|T}} = 0.0013, \hat{\sigma_{T+4|T}} = 0.0135$
+
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 4} = 0.0013 + 0.0135\times-1.28 = -0.016$
+
+\indent\indent $VaR_{10\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.016 = -159733.96 \text{\euro}$\newline
+
+
+
+
+Calculation for 95\% Confidence and $T+4$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+4|T}} = 0.0013, \hat{\sigma_{T+4|T}} = 0.0135$
+
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 4} = 0.0013 + 0.0135\times-1.64 = -0.0209$
+
+\indent\indent $VaR_{5\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0209 = -208615.27 \text{\euro}$\newline
+
+
+
+
+Calculation for 99\% Confidence and $T+4$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+4|T}} = 0.0013, \hat{\sigma_{T+4|T}} = 0.0135$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 4} = 0.0013 + 0.0135\times-2.33 = -0.03$
+
+\indent\indent $VaR_{1\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.03 = -300308.48 \text{\euro}$\newline
+
+
+
+
+Calculation for 90\% Confidence and $T+5$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+5|T}} = 0.0013, \hat{\sigma_{T+5|T}} = 0.0136$
+
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 5} = 0.0013 + 0.0136\times-1.28 = -0.0161$
+
+\indent\indent $VaR_{10\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0161 = -161413.74 \text{\euro}$\newline
+
+
+
+
+Calculation for 95\% Confidence and $T+5$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+5|T}} = 0.0013, \hat{\sigma_{T+5|T}} = 0.0136$
+
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 5} = 0.0013 + 0.0136\times-1.64 = -0.0211$
+
+\indent\indent $VaR_{5\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0211 = -210771.25 \text{\euro}$\newline
+
+
+
+
+Calculation for 99\% Confidence and $T+5$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+5|T}} = 0.0013, \hat{\sigma_{T+5|T}} = 0.0136$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 5} = 0.0013 + 0.0136\times-2.33 = -0.0303$
+
+\indent\indent $VaR_{1\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0303 = -303357.72 \text{\euro}$\newline
 
 
 Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the Microsoft stock, the loss incurring over one day will be smaller than -154418.30$\text{\euro}$, -201792.70$\text{\euro}$  and -290659.18$\text{\euro}$  with a confidence level of 90\%, 95\%  and 99\%.
@@ -314,112 +459,172 @@ $$\begin{cases} R_t = \mu_t + \epsilon_t, \epsilon_t = \sigma_t  * z_t, z_t \ove
 
 
 here $\mu_t$ is not only modeled as a constant but as a function of the past $\mu_{t-1}$
-\paragraph{Visa}
+\paragraph{Visa} Caclulations.\newline \indent 
 
 
-$\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+1|T}} = 0.0005, \hat{\sigma_{T+1|T}} = 0.0094$
-
-$VaR(\log \text{returns})_{10\%, T + 1} = 0.0005 + 0.0094\times-1.28 = -0.0115$
-
-$VaR_{10\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0115 = -114877.12 \text{\euro}$
 
 
-$\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+1|T}} = 0.0005, \hat{\sigma_{T+1|T}} = 0.0094$
+Calculation for 90\% Confidence and $T+1$:
 
-$VaR(\log \text{returns})_{5\%, T + 1} = 0.0005 + 0.0094\times-1.64 = -0.0149$
+\indent\indent $\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+1|T}} = 0.0005, \hat{\sigma_{T+1|T}} = 0.0094$
 
-$VaR_{5\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0149 = -148974.66 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 1} = 0.0005 + 0.0094\times-1.28 = -0.0115$
 
-
-$\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+1|T}} = 0.0005, \hat{\sigma_{T+1|T}} = 0.0094$
-
-$VaR(\log \text{returns})_{1\%, T + 1} = 0.0005 + 0.0094\times-2.33 = -0.0213$
-
-$VaR_{1\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0213 = -212935.98 \text{\euro}$
+\indent\indent $VaR_{10\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0115 = -114877.12 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+2|T}} = 0.0006, \hat{\sigma_{T+2|T}} = 0.0096$
-
-$VaR(\log \text{returns})_{10\%, T + 2} = 0.0006 + 0.0096\times-1.28 = -0.0116$
-
-$VaR_{10\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0116 = -116213.31 \text{\euro}$
 
 
-$\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+2|T}} = 0.0006, \hat{\sigma_{T+2|T}} = 0.0096$
+Calculation for 95\% Confidence and $T+1$:
 
-$VaR(\log \text{returns})_{5\%, T + 2} = 0.0006 + 0.0096\times-1.64 = -0.0151$
+\indent\indent $\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+1|T}} = 0.0005, \hat{\sigma_{T+1|T}} = 0.0094$
 
-$VaR_{5\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0151 = -150948.86 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 1} = 0.0005 + 0.0094\times-1.64 = -0.0149$
 
-
-$\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+2|T}} = 0.0006, \hat{\sigma_{T+2|T}} = 0.0096$
-
-$VaR(\log \text{returns})_{1\%, T + 2} = 0.0006 + 0.0096\times-2.33 = -0.0216$
-
-$VaR_{1\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0216 = -216106.96 \text{\euro}$
+\indent\indent $VaR_{5\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0149 = -148974.66 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+3|T}} = 0.0006, \hat{\sigma_{T+3|T}} = 0.0097$
-
-$VaR(\log \text{returns})_{10\%, T + 3} = 0.0006 + 0.0097\times-1.28 = -0.0118$
-
-$VaR_{10\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0118 = -118425.27 \text{\euro}$
 
 
-$\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+3|T}} = 0.0006, \hat{\sigma_{T+3|T}} = 0.0097$
+Calculation for 99\% Confidence and $T+1$:
 
-$VaR(\log \text{returns})_{5\%, T + 3} = 0.0006 + 0.0097\times-1.64 = -0.0154$
+\indent\indent $\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+1|T}} = 0.0005, \hat{\sigma_{T+1|T}} = 0.0094$
 
-$VaR_{5\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0154 = -153779.32 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 1} = 0.0005 + 0.0094\times-2.33 = -0.0213$
 
-
-$\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+3|T}} = 0.0006, \hat{\sigma_{T+3|T}} = 0.0097$
-
-$VaR(\log \text{returns})_{1\%, T + 3} = 0.0006 + 0.0097\times-2.33 = -0.022$
-
-$VaR_{1\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.022 = -220097.65 \text{\euro}$
+\indent\indent $VaR_{1\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0213 = -212935.98 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+4|T}} = 0.0006, \hat{\sigma_{T+4|T}} = 0.0099$
-
-$VaR(\log \text{returns})_{10\%, T + 4} = 0.0006 + 0.0099\times-1.28 = -0.0121$
-
-$VaR_{10\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0121 = -120541.24 \text{\euro}$
 
 
-$\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+4|T}} = 0.0006, \hat{\sigma_{T+4|T}} = 0.0099$
+Calculation for 90\% Confidence and $T+2$:
 
-$VaR(\log \text{returns})_{5\%, T + 4} = 0.0006 + 0.0099\times-1.64 = -0.0156$
+\indent\indent $\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+2|T}} = 0.0006, \hat{\sigma_{T+2|T}} = 0.0096$
 
-$VaR_{5\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0156 = -156495.43 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 2} = 0.0006 + 0.0096\times-1.28 = -0.0116$
 
-
-$\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+4|T}} = 0.0006, \hat{\sigma_{T+4|T}} = 0.0099$
-
-$VaR(\log \text{returns})_{1\%, T + 4} = 0.0006 + 0.0099\times-2.33 = -0.0224$
-
-$VaR_{1\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0224 = -223939.51 \text{\euro}$
+\indent\indent $VaR_{10\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0116 = -116213.31 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+5|T}} = 0.0006, \hat{\sigma_{T+5|T}} = 0.0101$
-
-$VaR(\log \text{returns})_{10\%, T + 5} = 0.0006 + 0.0101\times-1.28 = -0.0123$
-
-$VaR_{10\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0123 = -122596.95 \text{\euro}$
 
 
-$\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+5|T}} = 0.0006, \hat{\sigma_{T+5|T}} = 0.0101$
+Calculation for 95\% Confidence and $T+2$:
 
-$VaR(\log \text{returns})_{5\%, T + 5} = 0.0006 + 0.0101\times-1.64 = -0.0159$
+\indent\indent $\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+2|T}} = 0.0006, \hat{\sigma_{T+2|T}} = 0.0096$
 
-$VaR_{5\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0159 = -159133.89 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 2} = 0.0006 + 0.0096\times-1.64 = -0.0151$
+
+\indent\indent $VaR_{5\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0151 = -150948.86 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+5|T}} = 0.0006, \hat{\sigma_{T+5|T}} = 0.0101$
 
-$VaR(\log \text{returns})_{1\%, T + 5} = 0.0006 + 0.0101\times-2.33 = -0.0228$
 
-$VaR_{1\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0228 = -227671.12 \text{\euro}$
+Calculation for 99\% Confidence and $T+2$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+2|T}} = 0.0006, \hat{\sigma_{T+2|T}} = 0.0096$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 2} = 0.0006 + 0.0096\times-2.33 = -0.0216$
+
+\indent\indent $VaR_{1\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0216 = -216106.96 \text{\euro}$\newline
+
+
+
+
+Calculation for 90\% Confidence and $T+3$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+3|T}} = 0.0006, \hat{\sigma_{T+3|T}} = 0.0097$
+
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 3} = 0.0006 + 0.0097\times-1.28 = -0.0118$
+
+\indent\indent $VaR_{10\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0118 = -118425.27 \text{\euro}$\newline
+
+
+
+
+Calculation for 95\% Confidence and $T+3$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+3|T}} = 0.0006, \hat{\sigma_{T+3|T}} = 0.0097$
+
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 3} = 0.0006 + 0.0097\times-1.64 = -0.0154$
+
+\indent\indent $VaR_{5\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0154 = -153779.32 \text{\euro}$\newline
+
+
+
+
+Calculation for 99\% Confidence and $T+3$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+3|T}} = 0.0006, \hat{\sigma_{T+3|T}} = 0.0097$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 3} = 0.0006 + 0.0097\times-2.33 = -0.022$
+
+\indent\indent $VaR_{1\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.022 = -220097.65 \text{\euro}$\newline
+
+
+
+
+Calculation for 90\% Confidence and $T+4$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+4|T}} = 0.0006, \hat{\sigma_{T+4|T}} = 0.0099$
+
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 4} = 0.0006 + 0.0099\times-1.28 = -0.0121$
+
+\indent\indent $VaR_{10\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0121 = -120541.24 \text{\euro}$\newline
+
+
+
+
+Calculation for 95\% Confidence and $T+4$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+4|T}} = 0.0006, \hat{\sigma_{T+4|T}} = 0.0099$
+
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 4} = 0.0006 + 0.0099\times-1.64 = -0.0156$
+
+\indent\indent $VaR_{5\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0156 = -156495.43 \text{\euro}$\newline
+
+
+
+
+Calculation for 99\% Confidence and $T+4$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+4|T}} = 0.0006, \hat{\sigma_{T+4|T}} = 0.0099$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 4} = 0.0006 + 0.0099\times-2.33 = -0.0224$
+
+\indent\indent $VaR_{1\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0224 = -223939.51 \text{\euro}$\newline
+
+
+
+
+Calculation for 90\% Confidence and $T+5$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+5|T}} = 0.0006, \hat{\sigma_{T+5|T}} = 0.0101$
+
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 5} = 0.0006 + 0.0101\times-1.28 = -0.0123$
+
+\indent\indent $VaR_{10\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0123 = -122596.95 \text{\euro}$\newline
+
+
+
+
+Calculation for 95\% Confidence and $T+5$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+5|T}} = 0.0006, \hat{\sigma_{T+5|T}} = 0.0101$
+
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 5} = 0.0006 + 0.0101\times-1.64 = -0.0159$
+
+\indent\indent $VaR_{5\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0159 = -159133.89 \text{\euro}$\newline
+
+
+
+
+Calculation for 99\% Confidence and $T+5$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+5|T}} = 0.0006, \hat{\sigma_{T+5|T}} = 0.0101$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 5} = 0.0006 + 0.0101\times-2.33 = -0.0228$
+
+\indent\indent $VaR_{1\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0228 = -227671.12 \text{\euro}$\newline
 
 
 Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the Visa stock, the loss incurring over one day will be smaller than -114877.12$\text{\euro}$, -148974.66$\text{\euro}$  and -212935.98$\text{\euro}$  with a confidence level of 90\%, 95\%  and 99\%.
@@ -427,112 +632,172 @@ Following the modeling assumptions of this subtask, the available stock data and
 The loss after 5 days will be smaller than -122596.95$\text{\euro}$, -159133.89$\text{\euro}$  and -227671.12$\text{\euro}$  with a confidence level of 90\%, 95\%  and 99\%.
 
 
-\paragraph{Microsoft}
+\paragraph{Microsoft} Caclulations.\newline \indent 
 
 
-$\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+1|T}} = 0.0011, \hat{\sigma_{T+1|T}} = 0.0133$
-
-$VaR(\log \text{returns})_{10\%, T + 1} = 0.0011 + 0.0133\times-1.28 = -0.0159$
-
-$VaR_{10\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0159 = -159257.48 \text{\euro}$
 
 
-$\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+1|T}} = 0.0011, \hat{\sigma_{T+1|T}} = 0.0133$
+Calculation for 90\% Confidence and $T+1$:
 
-$VaR(\log \text{returns})_{5\%, T + 1} = 0.0011 + 0.0133\times-1.64 = -0.0207$
+\indent\indent $\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+1|T}} = 0.0011, \hat{\sigma_{T+1|T}} = 0.0133$
 
-$VaR_{5\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0207 = -207448.05 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 1} = 0.0011 + 0.0133\times-1.28 = -0.0159$
 
-
-$\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+1|T}} = 0.0011, \hat{\sigma_{T+1|T}} = 0.0133$
-
-$VaR(\log \text{returns})_{1\%, T + 1} = 0.0011 + 0.0133\times-2.33 = -0.0298$
-
-$VaR_{1\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0298 = -297845.55 \text{\euro}$
+\indent\indent $VaR_{10\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0159 = -159257.48 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+2|T}} = 0.0013, \hat{\sigma_{T+2|T}} = 0.0134$
-
-$VaR(\log \text{returns})_{10\%, T + 2} = 0.0013 + 0.0134\times-1.28 = -0.0159$
-
-$VaR_{10\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0159 = -158767.68 \text{\euro}$
 
 
-$\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+2|T}} = 0.0013, \hat{\sigma_{T+2|T}} = 0.0134$
+Calculation for 95\% Confidence and $T+1$:
 
-$VaR(\log \text{returns})_{5\%, T + 2} = 0.0013 + 0.0134\times-1.64 = -0.0207$
+\indent\indent $\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+1|T}} = 0.0011, \hat{\sigma_{T+1|T}} = 0.0133$
 
-$VaR_{5\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0207 = -207435.64 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 1} = 0.0011 + 0.0133\times-1.64 = -0.0207$
 
-
-$\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+2|T}} = 0.0013, \hat{\sigma_{T+2|T}} = 0.0134$
-
-$VaR(\log \text{returns})_{1\%, T + 2} = 0.0013 + 0.0134\times-2.33 = -0.0299$
-
-$VaR_{1\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0299 = -298728.66 \text{\euro}$
+\indent\indent $VaR_{5\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0207 = -207448.05 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+3|T}} = 0.0013, \hat{\sigma_{T+3|T}} = 0.0135$
-
-$VaR(\log \text{returns})_{10\%, T + 3} = 0.0013 + 0.0135\times-1.28 = -0.0161$
-
-$VaR_{10\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0161 = -160591.11 \text{\euro}$
 
 
-$\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+3|T}} = 0.0013, \hat{\sigma_{T+3|T}} = 0.0135$
+Calculation for 99\% Confidence and $T+1$:
 
-$VaR(\log \text{returns})_{5\%, T + 3} = 0.0013 + 0.0135\times-1.64 = -0.021$
+\indent\indent $\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+1|T}} = 0.0011, \hat{\sigma_{T+1|T}} = 0.0133$
 
-$VaR_{5\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.021 = -209723.98 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 1} = 0.0011 + 0.0133\times-2.33 = -0.0298$
 
-
-$\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+3|T}} = 0.0013, \hat{\sigma_{T+3|T}} = 0.0135$
-
-$VaR(\log \text{returns})_{1\%, T + 3} = 0.0013 + 0.0135\times-2.33 = -0.0302$
-
-$VaR_{1\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0302 = -301889.08 \text{\euro}$
+\indent\indent $VaR_{1\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0298 = -297845.55 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+4|T}} = 0.0013, \hat{\sigma_{T+4|T}} = 0.0136$
-
-$VaR(\log \text{returns})_{10\%, T + 4} = 0.0013 + 0.0136\times-1.28 = -0.0162$
-
-$VaR_{10\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0162 = -162173.23 \text{\euro}$
 
 
-$\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+4|T}} = 0.0013, \hat{\sigma_{T+4|T}} = 0.0136$
+Calculation for 90\% Confidence and $T+2$:
 
-$VaR(\log \text{returns})_{5\%, T + 4} = 0.0013 + 0.0136\times-1.64 = -0.0212$
+\indent\indent $\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+2|T}} = 0.0013, \hat{\sigma_{T+2|T}} = 0.0134$
 
-$VaR_{5\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0212 = -211759 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 2} = 0.0013 + 0.0134\times-1.28 = -0.0159$
 
-
-$\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+4|T}} = 0.0013, \hat{\sigma_{T+4|T}} = 0.0136$
-
-$VaR(\log \text{returns})_{1\%, T + 4} = 0.0013 + 0.0136\times-2.33 = -0.0305$
-
-$VaR_{1\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0305 = -304773.66 \text{\euro}$
+\indent\indent $VaR_{10\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0159 = -158767.68 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+5|T}} = 0.0013, \hat{\sigma_{T+5|T}} = 0.0138$
-
-$VaR(\log \text{returns})_{10\%, T + 5} = 0.0013 + 0.0138\times-1.28 = -0.0164$
-
-$VaR_{10\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0164 = -163731.38 \text{\euro}$
 
 
-$\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+5|T}} = 0.0013, \hat{\sigma_{T+5|T}} = 0.0138$
+Calculation for 95\% Confidence and $T+2$:
 
-$VaR(\log \text{returns})_{5\%, T + 5} = 0.0013 + 0.0138\times-1.64 = -0.0214$
+\indent\indent $\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+2|T}} = 0.0013, \hat{\sigma_{T+2|T}} = 0.0134$
 
-$VaR_{5\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0214 = -213758.49 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 2} = 0.0013 + 0.0134\times-1.64 = -0.0207$
+
+\indent\indent $VaR_{5\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0207 = -207435.64 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+5|T}} = 0.0013, \hat{\sigma_{T+5|T}} = 0.0138$
 
-$VaR(\log \text{returns})_{1\%, T + 5} = 0.0013 + 0.0138\times-2.33 = -0.0308$
 
-$VaR_{1\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0308 = -307601.04 \text{\euro}$
+Calculation for 99\% Confidence and $T+2$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+2|T}} = 0.0013, \hat{\sigma_{T+2|T}} = 0.0134$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 2} = 0.0013 + 0.0134\times-2.33 = -0.0299$
+
+\indent\indent $VaR_{1\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0299 = -298728.66 \text{\euro}$\newline
+
+
+
+
+Calculation for 90\% Confidence and $T+3$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+3|T}} = 0.0013, \hat{\sigma_{T+3|T}} = 0.0135$
+
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 3} = 0.0013 + 0.0135\times-1.28 = -0.0161$
+
+\indent\indent $VaR_{10\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0161 = -160591.11 \text{\euro}$\newline
+
+
+
+
+Calculation for 95\% Confidence and $T+3$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+3|T}} = 0.0013, \hat{\sigma_{T+3|T}} = 0.0135$
+
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 3} = 0.0013 + 0.0135\times-1.64 = -0.021$
+
+\indent\indent $VaR_{5\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.021 = -209723.98 \text{\euro}$\newline
+
+
+
+
+Calculation for 99\% Confidence and $T+3$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+3|T}} = 0.0013, \hat{\sigma_{T+3|T}} = 0.0135$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 3} = 0.0013 + 0.0135\times-2.33 = -0.0302$
+
+\indent\indent $VaR_{1\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0302 = -301889.08 \text{\euro}$\newline
+
+
+
+
+Calculation for 90\% Confidence and $T+4$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+4|T}} = 0.0013, \hat{\sigma_{T+4|T}} = 0.0136$
+
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 4} = 0.0013 + 0.0136\times-1.28 = -0.0162$
+
+\indent\indent $VaR_{10\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0162 = -162173.23 \text{\euro}$\newline
+
+
+
+
+Calculation for 95\% Confidence and $T+4$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+4|T}} = 0.0013, \hat{\sigma_{T+4|T}} = 0.0136$
+
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 4} = 0.0013 + 0.0136\times-1.64 = -0.0212$
+
+\indent\indent $VaR_{5\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0212 = -211759 \text{\euro}$\newline
+
+
+
+
+Calculation for 99\% Confidence and $T+4$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+4|T}} = 0.0013, \hat{\sigma_{T+4|T}} = 0.0136$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 4} = 0.0013 + 0.0136\times-2.33 = -0.0305$
+
+\indent\indent $VaR_{1\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0305 = -304773.66 \text{\euro}$\newline
+
+
+
+
+Calculation for 90\% Confidence and $T+5$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.1) = -1.28,\hat{\mu_{T+5|T}} = 0.0013, \hat{\sigma_{T+5|T}} = 0.0138$
+
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 5} = 0.0013 + 0.0138\times-1.28 = -0.0164$
+
+\indent\indent $VaR_{10\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0164 = -163731.38 \text{\euro}$\newline
+
+
+
+
+Calculation for 95\% Confidence and $T+5$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.05) = -1.64,\hat{\mu_{T+5|T}} = 0.0013, \hat{\sigma_{T+5|T}} = 0.0138$
+
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 5} = 0.0013 + 0.0138\times-1.64 = -0.0214$
+
+\indent\indent $VaR_{5\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0214 = -213758.49 \text{\euro}$\newline
+
+
+
+
+Calculation for 99\% Confidence and $T+5$:
+
+\indent\indent $\text{Quantile}_\text{norm}(0.01) = -2.33,\hat{\mu_{T+5|T}} = 0.0013, \hat{\sigma_{T+5|T}} = 0.0138$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 5} = 0.0013 + 0.0138\times-2.33 = -0.0308$
+
+\indent\indent $VaR_{1\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0308 = -307601.04 \text{\euro}$\newline
 
 
 Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the Microsoft stock, the loss incurring over one day will be smaller than -154418.30$\text{\euro}$, -201792.70$\text{\euro}$  and -290659.18$\text{\euro}$  with a confidence level of 90\%, 95\%  and 99\%.
@@ -545,112 +810,172 @@ The reason for this indifference could be, that the conditional mean of stock re
 \subsubsection{(iv) AR(1)-GARCH(1,1) with t-Student innovations}
 In this subtask, innovations of $R_t$ will not be modeled after a Normal distribution but a t-Student distibution (std) 
 
-\paragraph{Visa}
+\paragraph{Visa} Caclulations.\newline \indent 
 
 
-$\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+1|T}} = 0.0009, \hat{\sigma_{T+1|T}} = 0.0096$
-
-$VaR(\log \text{returns})_{10\%, T + 1} = 0.0009 + 0.0096\times-1.46 = -0.0131$
-
-$VaR_{10\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0131 = -130610.68 \text{\euro}$
 
 
-$\text{Quantile}_\text{std(5)}(0.05) = -1.99,\hat{\mu_{T+1|T}} = 0.0009, \hat{\sigma_{T+1|T}} = 0.0096$
+Calculation for 90\% Confidence and $T+1$:
 
-$VaR(\log \text{returns})_{5\%, T + 1} = 0.0009 + 0.0096\times-1.99 = -0.0181$
+\indent\indent $\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+1|T}} = 0.0009, \hat{\sigma_{T+1|T}} = 0.0096$
 
-$VaR_{5\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0181 = -180885.55 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 1} = 0.0009 + 0.0096\times-1.46 = -0.0131$
 
-
-$\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+1|T}} = 0.0009, \hat{\sigma_{T+1|T}} = 0.0096$
-
-$VaR(\log \text{returns})_{1\%, T + 1} = 0.0009 + 0.0096\times-3.27 = -0.0304$
-
-$VaR_{1\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0304 = -304332.17 \text{\euro}$
+\indent\indent $VaR_{10\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0131 = -130610.68 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+2|T}} = 0.001, \hat{\sigma_{T+2|T}} = 0.0098$
-
-$VaR(\log \text{returns})_{10\%, T + 2} = 0.001 + 0.0098\times-1.46 = -0.0133$
-
-$VaR_{10\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0133 = -132845.59 \text{\euro}$
 
 
-$\text{Quantile}_\text{std(5)}(0.05) = -1.99,\hat{\mu_{T+2|T}} = 0.001, \hat{\sigma_{T+2|T}} = 0.0098$
+Calculation for 95\% Confidence and $T+1$:
 
-$VaR(\log \text{returns})_{5\%, T + 2} = 0.001 + 0.0098\times-1.99 = -0.0184$
+\indent\indent $\text{Quantile}_\text{std(5)}(0.05) = -1.99,\hat{\mu_{T+1|T}} = 0.0009, \hat{\sigma_{T+1|T}} = 0.0096$
 
-$VaR_{5\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0184 = -184166.93 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 1} = 0.0009 + 0.0096\times-1.99 = -0.0181$
 
-
-$\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+2|T}} = 0.001, \hat{\sigma_{T+2|T}} = 0.0098$
-
-$VaR(\log \text{returns})_{1\%, T + 2} = 0.001 + 0.0098\times-3.27 = -0.031$
-
-$VaR_{1\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.031 = -310183.12 \text{\euro}$
+\indent\indent $VaR_{5\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0181 = -180885.55 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+3|T}} = 0.001, \hat{\sigma_{T+3|T}} = 0.01$
-
-$VaR(\log \text{returns})_{10\%, T + 3} = 0.001 + 0.01\times-1.46 = -0.0136$
-
-$VaR_{10\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0136 = -135672 \text{\euro}$
 
 
-$\text{Quantile}_\text{std(5)}(0.05) = -1.99,\hat{\mu_{T+3|T}} = 0.001, \hat{\sigma_{T+3|T}} = 0.01$
+Calculation for 99\% Confidence and $T+1$:
 
-$VaR(\log \text{returns})_{5\%, T + 3} = 0.001 + 0.01\times-1.99 = -0.0188$
+\indent\indent $\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+1|T}} = 0.0009, \hat{\sigma_{T+1|T}} = 0.0096$
 
-$VaR_{5\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0188 = -188001.27 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 1} = 0.0009 + 0.0096\times-3.27 = -0.0304$
 
-
-$\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+3|T}} = 0.001, \hat{\sigma_{T+3|T}} = 0.01$
-
-$VaR(\log \text{returns})_{1\%, T + 3} = 0.001 + 0.01\times-3.27 = -0.0316$
-
-$VaR_{1\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0316 = -316492.34 \text{\euro}$
+\indent\indent $VaR_{1\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0304 = -304332.17 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+4|T}} = 0.001, \hat{\sigma_{T+4|T}} = 0.0102$
-
-$VaR(\log \text{returns})_{10\%, T + 4} = 0.001 + 0.0102\times-1.46 = -0.0138$
-
-$VaR_{10\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0138 = -138377.96 \text{\euro}$
 
 
-$\text{Quantile}_\text{std(5)}(0.05) = -1.99,\hat{\mu_{T+4|T}} = 0.001, \hat{\sigma_{T+4|T}} = 0.0102$
+Calculation for 90\% Confidence and $T+2$:
 
-$VaR(\log \text{returns})_{5\%, T + 4} = 0.001 + 0.0102\times-1.99 = -0.0192$
+\indent\indent $\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+2|T}} = 0.001, \hat{\sigma_{T+2|T}} = 0.0098$
 
-$VaR_{5\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0192 = -191679.08 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 2} = 0.001 + 0.0098\times-1.46 = -0.0133$
 
-
-$\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+4|T}} = 0.001, \hat{\sigma_{T+4|T}} = 0.0102$
-
-$VaR(\log \text{returns})_{1\%, T + 4} = 0.001 + 0.0102\times-3.27 = -0.0323$
-
-$VaR_{1\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0323 = -322556.47 \text{\euro}$
+\indent\indent $VaR_{10\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0133 = -132845.59 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+5|T}} = 0.001, \hat{\sigma_{T+5|T}} = 0.0103$
-
-$VaR(\log \text{returns})_{10\%, T + 5} = 0.001 + 0.0103\times-1.46 = -0.0141$
-
-$VaR_{10\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0141 = -140990.25 \text{\euro}$
 
 
-$\text{Quantile}_\text{std(5)}(0.05) = -1.99,\hat{\mu_{T+5|T}} = 0.001, \hat{\sigma_{T+5|T}} = 0.0103$
+Calculation for 95\% Confidence and $T+2$:
 
-$VaR(\log \text{returns})_{5\%, T + 5} = 0.001 + 0.0103\times-1.99 = -0.0195$
+\indent\indent $\text{Quantile}_\text{std(5)}(0.05) = -1.99,\hat{\mu_{T+2|T}} = 0.001, \hat{\sigma_{T+2|T}} = 0.0098$
 
-$VaR_{5\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0195 = -195229.37 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 2} = 0.001 + 0.0098\times-1.99 = -0.0184$
+
+\indent\indent $VaR_{5\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0184 = -184166.93 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+5|T}} = 0.001, \hat{\sigma_{T+5|T}} = 0.0103$
 
-$VaR(\log \text{returns})_{1\%, T + 5} = 0.001 + 0.0103\times-3.27 = -0.0328$
 
-$VaR_{1\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0328 = -328409.98 \text{\euro}$
+Calculation for 99\% Confidence and $T+2$:
+
+\indent\indent $\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+2|T}} = 0.001, \hat{\sigma_{T+2|T}} = 0.0098$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 2} = 0.001 + 0.0098\times-3.27 = -0.031$
+
+\indent\indent $VaR_{1\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.031 = -310183.12 \text{\euro}$\newline
+
+
+
+
+Calculation for 90\% Confidence and $T+3$:
+
+\indent\indent $\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+3|T}} = 0.001, \hat{\sigma_{T+3|T}} = 0.01$
+
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 3} = 0.001 + 0.01\times-1.46 = -0.0136$
+
+\indent\indent $VaR_{10\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0136 = -135672 \text{\euro}$\newline
+
+
+
+
+Calculation for 95\% Confidence and $T+3$:
+
+\indent\indent $\text{Quantile}_\text{std(5)}(0.05) = -1.99,\hat{\mu_{T+3|T}} = 0.001, \hat{\sigma_{T+3|T}} = 0.01$
+
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 3} = 0.001 + 0.01\times-1.99 = -0.0188$
+
+\indent\indent $VaR_{5\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0188 = -188001.27 \text{\euro}$\newline
+
+
+
+
+Calculation for 99\% Confidence and $T+3$:
+
+\indent\indent $\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+3|T}} = 0.001, \hat{\sigma_{T+3|T}} = 0.01$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 3} = 0.001 + 0.01\times-3.27 = -0.0316$
+
+\indent\indent $VaR_{1\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0316 = -316492.34 \text{\euro}$\newline
+
+
+
+
+Calculation for 90\% Confidence and $T+4$:
+
+\indent\indent $\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+4|T}} = 0.001, \hat{\sigma_{T+4|T}} = 0.0102$
+
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 4} = 0.001 + 0.0102\times-1.46 = -0.0138$
+
+\indent\indent $VaR_{10\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0138 = -138377.96 \text{\euro}$\newline
+
+
+
+
+Calculation for 95\% Confidence and $T+4$:
+
+\indent\indent $\text{Quantile}_\text{std(5)}(0.05) = -1.99,\hat{\mu_{T+4|T}} = 0.001, \hat{\sigma_{T+4|T}} = 0.0102$
+
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 4} = 0.001 + 0.0102\times-1.99 = -0.0192$
+
+\indent\indent $VaR_{5\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0192 = -191679.08 \text{\euro}$\newline
+
+
+
+
+Calculation for 99\% Confidence and $T+4$:
+
+\indent\indent $\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+4|T}} = 0.001, \hat{\sigma_{T+4|T}} = 0.0102$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 4} = 0.001 + 0.0102\times-3.27 = -0.0323$
+
+\indent\indent $VaR_{1\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0323 = -322556.47 \text{\euro}$\newline
+
+
+
+
+Calculation for 90\% Confidence and $T+5$:
+
+\indent\indent $\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+5|T}} = 0.001, \hat{\sigma_{T+5|T}} = 0.0103$
+
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 5} = 0.001 + 0.0103\times-1.46 = -0.0141$
+
+\indent\indent $VaR_{10\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0141 = -140990.25 \text{\euro}$\newline
+
+
+
+
+Calculation for 95\% Confidence and $T+5$:
+
+\indent\indent $\text{Quantile}_\text{std(5)}(0.05) = -1.99,\hat{\mu_{T+5|T}} = 0.001, \hat{\sigma_{T+5|T}} = 0.0103$
+
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 5} = 0.001 + 0.0103\times-1.99 = -0.0195$
+
+\indent\indent $VaR_{5\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0195 = -195229.37 \text{\euro}$\newline
+
+
+
+
+Calculation for 99\% Confidence and $T+5$:
+
+\indent\indent $\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+5|T}} = 0.001, \hat{\sigma_{T+5|T}} = 0.0103$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 5} = 0.001 + 0.0103\times-3.27 = -0.0328$
+
+\indent\indent $VaR_{1\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0328 = -328409.98 \text{\euro}$\newline
 
 
 Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the Visa stock, the loss incurring over one day will be smaller than -130610.68$\text{\euro}$, -180885.55$\text{\euro}$  and -304332.17$\text{\euro}$  with a confidence level of 90\%, 95\%  and 99\%.
@@ -658,112 +983,172 @@ Following the modeling assumptions of this subtask, the available stock data and
 The loss after 5 days will be smaller than -140990.25$\text{\euro}$, -195229.37$\text{\euro}$  and -328409.98$\text{\euro}$  with a confidence level of 90\%, 95\%  and 99\%.
 
 
-\paragraph{Microsoft}
+\paragraph{Microsoft} Caclulations.\newline \indent 
 
 
-$\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+1|T}} = 0.0014, \hat{\sigma_{T+1|T}} = 0.0134$
-
-$VaR(\log \text{returns})_{10\%, T + 1} = 0.0014 + 0.0134\times-1.41 = -0.0176$
-
-$VaR_{10\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0176 = -176045.17 \text{\euro}$
 
 
-$\text{Quantile}_\text{std(7)}(0.05) = -1.88,\hat{\mu_{T+1|T}} = 0.0014, \hat{\sigma_{T+1|T}} = 0.0134$
+Calculation for 90\% Confidence and $T+1$:
 
-$VaR(\log \text{returns})_{5\%, T + 1} = 0.0014 + 0.0134\times-1.88 = -0.024$
+\indent\indent $\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+1|T}} = 0.0014, \hat{\sigma_{T+1|T}} = 0.0134$
 
-$VaR_{5\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.024 = -239879.38 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 1} = 0.0014 + 0.0134\times-1.41 = -0.0176$
 
-
-$\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+1|T}} = 0.0014, \hat{\sigma_{T+1|T}} = 0.0134$
-
-$VaR(\log \text{returns})_{1\%, T + 1} = 0.0014 + 0.0134\times-2.97 = -0.0386$
-
-$VaR_{1\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0386 = -385621.58 \text{\euro}$
+\indent\indent $VaR_{10\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0176 = -176045.17 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+2|T}} = 0.0015, \hat{\sigma_{T+2|T}} = 0.0136$
-
-$VaR(\log \text{returns})_{10\%, T + 2} = 0.0015 + 0.0136\times-1.41 = -0.0177$
-
-$VaR_{10\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0177 = -176748.92 \text{\euro}$
 
 
-$\text{Quantile}_\text{std(7)}(0.05) = -1.88,\hat{\mu_{T+2|T}} = 0.0015, \hat{\sigma_{T+2|T}} = 0.0136$
+Calculation for 95\% Confidence and $T+1$:
 
-$VaR(\log \text{returns})_{5\%, T + 2} = 0.0015 + 0.0136\times-1.88 = -0.0241$
+\indent\indent $\text{Quantile}_\text{std(7)}(0.05) = -1.88,\hat{\mu_{T+1|T}} = 0.0014, \hat{\sigma_{T+1|T}} = 0.0134$
 
-$VaR_{5\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0241 = -241347.07 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 1} = 0.0014 + 0.0134\times-1.88 = -0.024$
 
-
-$\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+2|T}} = 0.0015, \hat{\sigma_{T+2|T}} = 0.0136$
-
-$VaR(\log \text{returns})_{1\%, T + 2} = 0.0015 + 0.0136\times-2.97 = -0.0389$
-
-$VaR_{1\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0389 = -388833.43 \text{\euro}$
+\indent\indent $VaR_{5\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.024 = -239879.38 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+3|T}} = 0.0015, \hat{\sigma_{T+3|T}} = 0.0138$
-
-$VaR(\log \text{returns})_{10\%, T + 3} = 0.0015 + 0.0138\times-1.41 = -0.0179$
-
-$VaR_{10\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0179 = -179053.2 \text{\euro}$
 
 
-$\text{Quantile}_\text{std(7)}(0.05) = -1.88,\hat{\mu_{T+3|T}} = 0.0015, \hat{\sigma_{T+3|T}} = 0.0138$
+Calculation for 99\% Confidence and $T+1$:
 
-$VaR(\log \text{returns})_{5\%, T + 3} = 0.0015 + 0.0138\times-1.88 = -0.0244$
+\indent\indent $\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+1|T}} = 0.0014, \hat{\sigma_{T+1|T}} = 0.0134$
 
-$VaR_{5\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0244 = -244391.47 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 1} = 0.0014 + 0.0134\times-2.97 = -0.0386$
 
-
-$\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+3|T}} = 0.0015, \hat{\sigma_{T+3|T}} = 0.0138$
-
-$VaR(\log \text{returns})_{1\%, T + 3} = 0.0015 + 0.0138\times-2.97 = -0.0394$
-
-$VaR_{1\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0394 = -393567.64 \text{\euro}$
+\indent\indent $VaR_{1\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0386 = -385621.58 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+4|T}} = 0.0015, \hat{\sigma_{T+4|T}} = 0.0139$
-
-$VaR(\log \text{returns})_{10\%, T + 4} = 0.0015 + 0.0139\times-1.41 = -0.0181$
-
-$VaR_{10\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0181 = -181176.27 \text{\euro}$
 
 
-$\text{Quantile}_\text{std(7)}(0.05) = -1.88,\hat{\mu_{T+4|T}} = 0.0015, \hat{\sigma_{T+4|T}} = 0.0139$
+Calculation for 90\% Confidence and $T+2$:
 
-$VaR(\log \text{returns})_{5\%, T + 4} = 0.0015 + 0.0139\times-1.88 = -0.0247$
+\indent\indent $\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+2|T}} = 0.0015, \hat{\sigma_{T+2|T}} = 0.0136$
 
-$VaR_{5\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0247 = -247231.96 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 2} = 0.0015 + 0.0136\times-1.41 = -0.0177$
 
-
-$\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+4|T}} = 0.0015, \hat{\sigma_{T+4|T}} = 0.0139$
-
-$VaR(\log \text{returns})_{1\%, T + 4} = 0.0015 + 0.0139\times-2.97 = -0.0398$
-
-$VaR_{1\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0398 = -398046.1 \text{\euro}$
+\indent\indent $VaR_{10\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0177 = -176748.92 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+5|T}} = 0.0015, \hat{\sigma_{T+5|T}} = 0.0141$
-
-$VaR(\log \text{returns})_{10\%, T + 5} = 0.0015 + 0.0141\times-1.41 = -0.0183$
-
-$VaR_{10\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0183 = -183242.66 \text{\euro}$
 
 
-$\text{Quantile}_\text{std(7)}(0.05) = -1.88,\hat{\mu_{T+5|T}} = 0.0015, \hat{\sigma_{T+5|T}} = 0.0141$
+Calculation for 95\% Confidence and $T+2$:
 
-$VaR(\log \text{returns})_{5\%, T + 5} = 0.0015 + 0.0141\times-1.88 = -0.025$
+\indent\indent $\text{Quantile}_\text{std(7)}(0.05) = -1.88,\hat{\mu_{T+2|T}} = 0.0015, \hat{\sigma_{T+2|T}} = 0.0136$
 
-$VaR_{5\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.025 = -249994.08 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 2} = 0.0015 + 0.0136\times-1.88 = -0.0241$
+
+\indent\indent $VaR_{5\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0241 = -241347.07 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+5|T}} = 0.0015, \hat{\sigma_{T+5|T}} = 0.0141$
 
-$VaR(\log \text{returns})_{1\%, T + 5} = 0.0015 + 0.0141\times-2.97 = -0.0402$
 
-$VaR_{1\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0402 = -402396.65 \text{\euro}$
+Calculation for 99\% Confidence and $T+2$:
+
+\indent\indent $\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+2|T}} = 0.0015, \hat{\sigma_{T+2|T}} = 0.0136$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 2} = 0.0015 + 0.0136\times-2.97 = -0.0389$
+
+\indent\indent $VaR_{1\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0389 = -388833.43 \text{\euro}$\newline
+
+
+
+
+Calculation for 90\% Confidence and $T+3$:
+
+\indent\indent $\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+3|T}} = 0.0015, \hat{\sigma_{T+3|T}} = 0.0138$
+
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 3} = 0.0015 + 0.0138\times-1.41 = -0.0179$
+
+\indent\indent $VaR_{10\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0179 = -179053.2 \text{\euro}$\newline
+
+
+
+
+Calculation for 95\% Confidence and $T+3$:
+
+\indent\indent $\text{Quantile}_\text{std(7)}(0.05) = -1.88,\hat{\mu_{T+3|T}} = 0.0015, \hat{\sigma_{T+3|T}} = 0.0138$
+
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 3} = 0.0015 + 0.0138\times-1.88 = -0.0244$
+
+\indent\indent $VaR_{5\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0244 = -244391.47 \text{\euro}$\newline
+
+
+
+
+Calculation for 99\% Confidence and $T+3$:
+
+\indent\indent $\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+3|T}} = 0.0015, \hat{\sigma_{T+3|T}} = 0.0138$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 3} = 0.0015 + 0.0138\times-2.97 = -0.0394$
+
+\indent\indent $VaR_{1\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0394 = -393567.64 \text{\euro}$\newline
+
+
+
+
+Calculation for 90\% Confidence and $T+4$:
+
+\indent\indent $\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+4|T}} = 0.0015, \hat{\sigma_{T+4|T}} = 0.0139$
+
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 4} = 0.0015 + 0.0139\times-1.41 = -0.0181$
+
+\indent\indent $VaR_{10\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0181 = -181176.27 \text{\euro}$\newline
+
+
+
+
+Calculation for 95\% Confidence and $T+4$:
+
+\indent\indent $\text{Quantile}_\text{std(7)}(0.05) = -1.88,\hat{\mu_{T+4|T}} = 0.0015, \hat{\sigma_{T+4|T}} = 0.0139$
+
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 4} = 0.0015 + 0.0139\times-1.88 = -0.0247$
+
+\indent\indent $VaR_{5\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0247 = -247231.96 \text{\euro}$\newline
+
+
+
+
+Calculation for 99\% Confidence and $T+4$:
+
+\indent\indent $\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+4|T}} = 0.0015, \hat{\sigma_{T+4|T}} = 0.0139$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 4} = 0.0015 + 0.0139\times-2.97 = -0.0398$
+
+\indent\indent $VaR_{1\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0398 = -398046.1 \text{\euro}$\newline
+
+
+
+
+Calculation for 90\% Confidence and $T+5$:
+
+\indent\indent $\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+5|T}} = 0.0015, \hat{\sigma_{T+5|T}} = 0.0141$
+
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 5} = 0.0015 + 0.0141\times-1.41 = -0.0183$
+
+\indent\indent $VaR_{10\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0183 = -183242.66 \text{\euro}$\newline
+
+
+
+
+Calculation for 95\% Confidence and $T+5$:
+
+\indent\indent $\text{Quantile}_\text{std(7)}(0.05) = -1.88,\hat{\mu_{T+5|T}} = 0.0015, \hat{\sigma_{T+5|T}} = 0.0141$
+
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 5} = 0.0015 + 0.0141\times-1.88 = -0.025$
+
+\indent\indent $VaR_{5\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.025 = -249994.08 \text{\euro}$\newline
+
+
+
+
+Calculation for 99\% Confidence and $T+5$:
+
+\indent\indent $\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+5|T}} = 0.0015, \hat{\sigma_{T+5|T}} = 0.0141$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 5} = 0.0015 + 0.0141\times-2.97 = -0.0402$
+
+\indent\indent $VaR_{1\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0402 = -402396.65 \text{\euro}$\newline
 
 
 Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the Microsoft stock, the loss incurring over one day will be smaller than -176045.17$\text{\euro}$, -239879.38$\text{\euro}$  and -385621.58$\text{\euro}$  with a confidence level of 90\%, 95\%  and 99\%.
@@ -778,109 +1163,169 @@ The VaR obtained by the current models using t-stundent innovations are much lar
 
 
 
-$\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+1|T}} = 0.001, \hat{\sigma_{T+1|T}} = 0.0096$
-
-$VaR(\log \text{returns})_{10\%, T + 1} = 0.001 + 0.0096\times-1.46 = -0.0131$
-
-$VaR_{10\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0131 = -131014.75 \text{\euro}$
 
 
-$\text{Quantile}_\text{std(5)}(0.05) = -1.98,\hat{\mu_{T+1|T}} = 0.001, \hat{\sigma_{T+1|T}} = 0.0096$
+Calculation for 90\% Confidence and $T+1$:
 
-$VaR(\log \text{returns})_{5\%, T + 1} = 0.001 + 0.0096\times-1.98 = -0.0182$
+\indent\indent $\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+1|T}} = 0.001, \hat{\sigma_{T+1|T}} = 0.0096$
 
-$VaR_{5\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0182 = -181531.61 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 1} = 0.001 + 0.0096\times-1.46 = -0.0131$
 
-
-$\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+1|T}} = 0.001, \hat{\sigma_{T+1|T}} = 0.0096$
-
-$VaR(\log \text{returns})_{1\%, T + 1} = 0.001 + 0.0096\times-3.27 = -0.0305$
-
-$VaR_{1\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0305 = -305375.38 \text{\euro}$
+\indent\indent $VaR_{10\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0131 = -131014.75 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+2|T}} = 0.001, \hat{\sigma_{T+2|T}} = 0.0096$
-
-$VaR(\log \text{returns})_{10\%, T + 2} = 0.001 + 0.0096\times-1.46 = -0.013$
-
-$VaR_{10\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.013 = -130319.29 \text{\euro}$
 
 
-$\text{Quantile}_\text{std(5)}(0.05) = -1.98,\hat{\mu_{T+2|T}} = 0.001, \hat{\sigma_{T+2|T}} = 0.0096$
+Calculation for 95\% Confidence and $T+1$:
 
-$VaR(\log \text{returns})_{5\%, T + 2} = 0.001 + 0.0096\times-1.98 = -0.0181$
+\indent\indent $\text{Quantile}_\text{std(5)}(0.05) = -1.98,\hat{\mu_{T+1|T}} = 0.001, \hat{\sigma_{T+1|T}} = 0.0096$
 
-$VaR_{5\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0181 = -180586.77 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 1} = 0.001 + 0.0096\times-1.98 = -0.0182$
 
-
-$\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+2|T}} = 0.001, \hat{\sigma_{T+2|T}} = 0.0096$
-
-$VaR(\log \text{returns})_{1\%, T + 2} = 0.001 + 0.0096\times-3.27 = -0.0304$
-
-$VaR_{1\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0304 = -303819.19 \text{\euro}$
+\indent\indent $VaR_{5\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0182 = -181531.61 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+3|T}} = 0.001, \hat{\sigma_{T+3|T}} = 0.0101$
-
-$VaR(\log \text{returns})_{10\%, T + 3} = 0.001 + 0.0101\times-1.46 = -0.0137$
-
-$VaR_{10\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0137 = -137016.17 \text{\euro}$
 
 
-$\text{Quantile}_\text{std(5)}(0.05) = -1.98,\hat{\mu_{T+3|T}} = 0.001, \hat{\sigma_{T+3|T}} = 0.0101$
+Calculation for 99\% Confidence and $T+1$:
 
-$VaR(\log \text{returns})_{5\%, T + 3} = 0.001 + 0.0101\times-1.98 = -0.019$
+\indent\indent $\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+1|T}} = 0.001, \hat{\sigma_{T+1|T}} = 0.0096$
 
-$VaR_{5\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.019 = -189684.97 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 1} = 0.001 + 0.0096\times-3.27 = -0.0305$
 
-
-$\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+3|T}} = 0.001, \hat{\sigma_{T+3|T}} = 0.0101$
-
-$VaR(\log \text{returns})_{1\%, T + 3} = 0.001 + 0.0101\times-3.27 = -0.0319$
-
-$VaR_{1\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0319 = -318804.31 \text{\euro}$
+\indent\indent $VaR_{1\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0305 = -305375.38 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+4|T}} = 0.001, \hat{\sigma_{T+4|T}} = 0.0102$
-
-$VaR(\log \text{returns})_{10\%, T + 4} = 0.001 + 0.0102\times-1.46 = -0.0139$
-
-$VaR_{10\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0139 = -138907.79 \text{\euro}$
 
 
-$\text{Quantile}_\text{std(5)}(0.05) = -1.98,\hat{\mu_{T+4|T}} = 0.001, \hat{\sigma_{T+4|T}} = 0.0102$
+Calculation for 90\% Confidence and $T+2$:
 
-$VaR(\log \text{returns})_{5\%, T + 4} = 0.001 + 0.0102\times-1.98 = -0.0192$
+\indent\indent $\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+2|T}} = 0.001, \hat{\sigma_{T+2|T}} = 0.0096$
 
-$VaR_{5\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0192 = -192254.88 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 2} = 0.001 + 0.0096\times-1.46 = -0.013$
 
-
-$\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+4|T}} = 0.001, \hat{\sigma_{T+4|T}} = 0.0102$
-
-$VaR(\log \text{returns})_{1\%, T + 4} = 0.001 + 0.0102\times-3.27 = -0.0323$
-
-$VaR_{1\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0323 = -323037.06 \text{\euro}$
+\indent\indent $VaR_{10\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.013 = -130319.29 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+5|T}} = 0.001, \hat{\sigma_{T+5|T}} = 0.0103$
-
-$VaR(\log \text{returns})_{10\%, T + 5} = 0.001 + 0.0103\times-1.46 = -0.014$
-
-$VaR_{10\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.014 = -140149.55 \text{\euro}$
 
 
-$\text{Quantile}_\text{std(5)}(0.05) = -1.98,\hat{\mu_{T+5|T}} = 0.001, \hat{\sigma_{T+5|T}} = 0.0103$
+Calculation for 95\% Confidence and $T+2$:
 
-$VaR(\log \text{returns})_{5\%, T + 5} = 0.001 + 0.0103\times-1.98 = -0.0194$
+\indent\indent $\text{Quantile}_\text{std(5)}(0.05) = -1.98,\hat{\mu_{T+2|T}} = 0.001, \hat{\sigma_{T+2|T}} = 0.0096$
 
-$VaR_{5\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0194 = -193941.91 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 2} = 0.001 + 0.0096\times-1.98 = -0.0181$
+
+\indent\indent $VaR_{5\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0181 = -180586.77 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+5|T}} = 0.001, \hat{\sigma_{T+5|T}} = 0.0103$
 
-$VaR(\log \text{returns})_{1\%, T + 5} = 0.001 + 0.0103\times-3.27 = -0.0326$
 
-$VaR_{1\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0326 = -325815.67 \text{\euro}$
+Calculation for 99\% Confidence and $T+2$:
+
+\indent\indent $\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+2|T}} = 0.001, \hat{\sigma_{T+2|T}} = 0.0096$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 2} = 0.001 + 0.0096\times-3.27 = -0.0304$
+
+\indent\indent $VaR_{1\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0304 = -303819.19 \text{\euro}$\newline
+
+
+
+
+Calculation for 90\% Confidence and $T+3$:
+
+\indent\indent $\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+3|T}} = 0.001, \hat{\sigma_{T+3|T}} = 0.0101$
+
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 3} = 0.001 + 0.0101\times-1.46 = -0.0137$
+
+\indent\indent $VaR_{10\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0137 = -137016.17 \text{\euro}$\newline
+
+
+
+
+Calculation for 95\% Confidence and $T+3$:
+
+\indent\indent $\text{Quantile}_\text{std(5)}(0.05) = -1.98,\hat{\mu_{T+3|T}} = 0.001, \hat{\sigma_{T+3|T}} = 0.0101$
+
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 3} = 0.001 + 0.0101\times-1.98 = -0.019$
+
+\indent\indent $VaR_{5\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.019 = -189684.97 \text{\euro}$\newline
+
+
+
+
+Calculation for 99\% Confidence and $T+3$:
+
+\indent\indent $\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+3|T}} = 0.001, \hat{\sigma_{T+3|T}} = 0.0101$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 3} = 0.001 + 0.0101\times-3.27 = -0.0319$
+
+\indent\indent $VaR_{1\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0319 = -318804.31 \text{\euro}$\newline
+
+
+
+
+Calculation for 90\% Confidence and $T+4$:
+
+\indent\indent $\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+4|T}} = 0.001, \hat{\sigma_{T+4|T}} = 0.0102$
+
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 4} = 0.001 + 0.0102\times-1.46 = -0.0139$
+
+\indent\indent $VaR_{10\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0139 = -138907.79 \text{\euro}$\newline
+
+
+
+
+Calculation for 95\% Confidence and $T+4$:
+
+\indent\indent $\text{Quantile}_\text{std(5)}(0.05) = -1.98,\hat{\mu_{T+4|T}} = 0.001, \hat{\sigma_{T+4|T}} = 0.0102$
+
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 4} = 0.001 + 0.0102\times-1.98 = -0.0192$
+
+\indent\indent $VaR_{5\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0192 = -192254.88 \text{\euro}$\newline
+
+
+
+
+Calculation for 99\% Confidence and $T+4$:
+
+\indent\indent $\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+4|T}} = 0.001, \hat{\sigma_{T+4|T}} = 0.0102$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 4} = 0.001 + 0.0102\times-3.27 = -0.0323$
+
+\indent\indent $VaR_{1\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0323 = -323037.06 \text{\euro}$\newline
+
+
+
+
+Calculation for 90\% Confidence and $T+5$:
+
+\indent\indent $\text{Quantile}_\text{std(5)}(0.1) = -1.46,\hat{\mu_{T+5|T}} = 0.001, \hat{\sigma_{T+5|T}} = 0.0103$
+
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 5} = 0.001 + 0.0103\times-1.46 = -0.014$
+
+\indent\indent $VaR_{10\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.014 = -140149.55 \text{\euro}$\newline
+
+
+
+
+Calculation for 95\% Confidence and $T+5$:
+
+\indent\indent $\text{Quantile}_\text{std(5)}(0.05) = -1.98,\hat{\mu_{T+5|T}} = 0.001, \hat{\sigma_{T+5|T}} = 0.0103$
+
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 5} = 0.001 + 0.0103\times-1.98 = -0.0194$
+
+\indent\indent $VaR_{5\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0194 = -193941.91 \text{\euro}$\newline
+
+
+
+
+Calculation for 99\% Confidence and $T+5$:
+
+\indent\indent $\text{Quantile}_\text{std(5)}(0.01) = -3.27,\hat{\mu_{T+5|T}} = 0.001, \hat{\sigma_{T+5|T}} = 0.0103$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 5} = 0.001 + 0.0103\times-3.27 = -0.0326$
+
+\indent\indent $VaR_{1\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0326 = -325815.67 \text{\euro}$\newline
 
 
 Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the Visa stock, the loss incurring over one day will be smaller than -131014.75$\text{\euro}$, -181531.61$\text{\euro}$  and -305375.38$\text{\euro}$  with a confidence level of 90\%, 95\%  and 99\%.
@@ -893,109 +1338,169 @@ The loss after 5 days will be smaller than -140149.55$\text{\euro}$, -193941.91$
 
 
 
-$\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+1|T}} = 0.0015, \hat{\sigma_{T+1|T}} = 0.0132$
-
-$VaR(\log \text{returns})_{10\%, T + 1} = 0.0015 + 0.0132\times-1.41 = -0.0171$
-
-$VaR_{10\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0171 = -171297.95 \text{\euro}$
 
 
-$\text{Quantile}_\text{std(7)}(0.05) = -1.89,\hat{\mu_{T+1|T}} = 0.0015, \hat{\sigma_{T+1|T}} = 0.0132$
+Calculation for 90\% Confidence and $T+1$:
 
-$VaR(\log \text{returns})_{5\%, T + 1} = 0.0015 + 0.0132\times-1.89 = -0.0234$
+\indent\indent $\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+1|T}} = 0.0015, \hat{\sigma_{T+1|T}} = 0.0132$
 
-$VaR_{5\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0234 = -234064.61 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 1} = 0.0015 + 0.0132\times-1.41 = -0.0171$
 
-
-$\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+1|T}} = 0.0015, \hat{\sigma_{T+1|T}} = 0.0132$
-
-$VaR(\log \text{returns})_{1\%, T + 1} = 0.0015 + 0.0132\times-2.97 = -0.0378$
-
-$VaR_{1\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0378 = -377535.41 \text{\euro}$
+\indent\indent $VaR_{10\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0171 = -171297.95 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+2|T}} = 0.0015, \hat{\sigma_{T+2|T}} = 0.0134$
-
-$VaR(\log \text{returns})_{10\%, T + 2} = 0.0015 + 0.0134\times-1.41 = -0.0175$
-
-$VaR_{10\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0175 = -174679.64 \text{\euro}$
 
 
-$\text{Quantile}_\text{std(7)}(0.05) = -1.89,\hat{\mu_{T+2|T}} = 0.0015, \hat{\sigma_{T+2|T}} = 0.0134$
+Calculation for 95\% Confidence and $T+1$:
 
-$VaR(\log \text{returns})_{5\%, T + 2} = 0.0015 + 0.0134\times-1.89 = -0.0239$
+\indent\indent $\text{Quantile}_\text{std(7)}(0.05) = -1.89,\hat{\mu_{T+1|T}} = 0.0015, \hat{\sigma_{T+1|T}} = 0.0132$
 
-$VaR_{5\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0239 = -238586.28 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 1} = 0.0015 + 0.0132\times-1.89 = -0.0234$
 
-
-$\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+2|T}} = 0.0015, \hat{\sigma_{T+2|T}} = 0.0134$
-
-$VaR(\log \text{returns})_{1\%, T + 2} = 0.0015 + 0.0134\times-2.97 = -0.0385$
-
-$VaR_{1\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0385 = -384662.86 \text{\euro}$
+\indent\indent $VaR_{5\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0234 = -234064.61 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+3|T}} = 0.0015, \hat{\sigma_{T+3|T}} = 0.0136$
-
-$VaR(\log \text{returns})_{10\%, T + 3} = 0.0015 + 0.0136\times-1.41 = -0.0177$
-
-$VaR_{10\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0177 = -176945.69 \text{\euro}$
 
 
-$\text{Quantile}_\text{std(7)}(0.05) = -1.89,\hat{\mu_{T+3|T}} = 0.0015, \hat{\sigma_{T+3|T}} = 0.0136$
+Calculation for 99\% Confidence and $T+1$:
 
-$VaR(\log \text{returns})_{5\%, T + 3} = 0.0015 + 0.0136\times-1.89 = -0.0242$
+\indent\indent $\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+1|T}} = 0.0015, \hat{\sigma_{T+1|T}} = 0.0132$
 
-$VaR_{5\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0242 = -241616.24 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 1} = 0.0015 + 0.0132\times-2.97 = -0.0378$
 
-
-$\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+3|T}} = 0.0015, \hat{\sigma_{T+3|T}} = 0.0136$
-
-$VaR(\log \text{returns})_{1\%, T + 3} = 0.0015 + 0.0136\times-2.97 = -0.0389$
-
-$VaR_{1\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0389 = -389438.94 \text{\euro}$
+\indent\indent $VaR_{1\%, T + 1} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0378 = -377535.41 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+4|T}} = 0.0015, \hat{\sigma_{T+4|T}} = 0.0138$
-
-$VaR(\log \text{returns})_{10\%, T + 4} = 0.0015 + 0.0138\times-1.41 = -0.0179$
-
-$VaR_{10\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0179 = -179214.98 \text{\euro}$
 
 
-$\text{Quantile}_\text{std(7)}(0.05) = -1.89,\hat{\mu_{T+4|T}} = 0.0015, \hat{\sigma_{T+4|T}} = 0.0138$
+Calculation for 90\% Confidence and $T+2$:
 
-$VaR(\log \text{returns})_{5\%, T + 4} = 0.0015 + 0.0138\times-1.89 = -0.0245$
+\indent\indent $\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+2|T}} = 0.0015, \hat{\sigma_{T+2|T}} = 0.0134$
 
-$VaR_{5\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0245 = -244650.52 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 2} = 0.0015 + 0.0134\times-1.41 = -0.0175$
 
-
-$\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+4|T}} = 0.0015, \hat{\sigma_{T+4|T}} = 0.0138$
-
-$VaR(\log \text{returns})_{1\%, T + 4} = 0.0015 + 0.0138\times-2.97 = -0.0394$
-
-$VaR_{1\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0394 = -394221.83 \text{\euro}$
+\indent\indent $VaR_{10\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0175 = -174679.64 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+5|T}} = 0.0015, \hat{\sigma_{T+5|T}} = 0.0139$
-
-$VaR(\log \text{returns})_{10\%, T + 5} = 0.0015 + 0.0139\times-1.41 = -0.0181$
-
-$VaR_{10\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0181 = -181407.55 \text{\euro}$
 
 
-$\text{Quantile}_\text{std(7)}(0.05) = -1.89,\hat{\mu_{T+5|T}} = 0.0015, \hat{\sigma_{T+5|T}} = 0.0139$
+Calculation for 95\% Confidence and $T+2$:
 
-$VaR(\log \text{returns})_{5\%, T + 5} = 0.0015 + 0.0139\times-1.89 = -0.0248$
+\indent\indent $\text{Quantile}_\text{std(7)}(0.05) = -1.89,\hat{\mu_{T+2|T}} = 0.0015, \hat{\sigma_{T+2|T}} = 0.0134$
 
-$VaR_{5\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0248 = -247582.23 \text{\euro}$
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 2} = 0.0015 + 0.0134\times-1.89 = -0.0239$
+
+\indent\indent $VaR_{5\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0239 = -238586.28 \text{\euro}$\newline
 
 
-$\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+5|T}} = 0.0015, \hat{\sigma_{T+5|T}} = 0.0139$
 
-$VaR(\log \text{returns})_{1\%, T + 5} = 0.0015 + 0.0139\times-2.97 = -0.0399$
 
-$VaR_{1\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0399 = -398843.04 \text{\euro}$
+Calculation for 99\% Confidence and $T+2$:
+
+\indent\indent $\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+2|T}} = 0.0015, \hat{\sigma_{T+2|T}} = 0.0134$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 2} = 0.0015 + 0.0134\times-2.97 = -0.0385$
+
+\indent\indent $VaR_{1\%, T + 2} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0385 = -384662.86 \text{\euro}$\newline
+
+
+
+
+Calculation for 90\% Confidence and $T+3$:
+
+\indent\indent $\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+3|T}} = 0.0015, \hat{\sigma_{T+3|T}} = 0.0136$
+
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 3} = 0.0015 + 0.0136\times-1.41 = -0.0177$
+
+\indent\indent $VaR_{10\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0177 = -176945.69 \text{\euro}$\newline
+
+
+
+
+Calculation for 95\% Confidence and $T+3$:
+
+\indent\indent $\text{Quantile}_\text{std(7)}(0.05) = -1.89,\hat{\mu_{T+3|T}} = 0.0015, \hat{\sigma_{T+3|T}} = 0.0136$
+
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 3} = 0.0015 + 0.0136\times-1.89 = -0.0242$
+
+\indent\indent $VaR_{5\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0242 = -241616.24 \text{\euro}$\newline
+
+
+
+
+Calculation for 99\% Confidence and $T+3$:
+
+\indent\indent $\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+3|T}} = 0.0015, \hat{\sigma_{T+3|T}} = 0.0136$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 3} = 0.0015 + 0.0136\times-2.97 = -0.0389$
+
+\indent\indent $VaR_{1\%, T + 3} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0389 = -389438.94 \text{\euro}$\newline
+
+
+
+
+Calculation for 90\% Confidence and $T+4$:
+
+\indent\indent $\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+4|T}} = 0.0015, \hat{\sigma_{T+4|T}} = 0.0138$
+
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 4} = 0.0015 + 0.0138\times-1.41 = -0.0179$
+
+\indent\indent $VaR_{10\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0179 = -179214.98 \text{\euro}$\newline
+
+
+
+
+Calculation for 95\% Confidence and $T+4$:
+
+\indent\indent $\text{Quantile}_\text{std(7)}(0.05) = -1.89,\hat{\mu_{T+4|T}} = 0.0015, \hat{\sigma_{T+4|T}} = 0.0138$
+
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 4} = 0.0015 + 0.0138\times-1.89 = -0.0245$
+
+\indent\indent $VaR_{5\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0245 = -244650.52 \text{\euro}$\newline
+
+
+
+
+Calculation for 99\% Confidence and $T+4$:
+
+\indent\indent $\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+4|T}} = 0.0015, \hat{\sigma_{T+4|T}} = 0.0138$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 4} = 0.0015 + 0.0138\times-2.97 = -0.0394$
+
+\indent\indent $VaR_{1\%, T + 4} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0394 = -394221.83 \text{\euro}$\newline
+
+
+
+
+Calculation for 90\% Confidence and $T+5$:
+
+\indent\indent $\text{Quantile}_\text{std(7)}(0.1) = -1.41,\hat{\mu_{T+5|T}} = 0.0015, \hat{\sigma_{T+5|T}} = 0.0139$
+
+\indent\indent $VaR(\log \text{returns})_{10\%, T + 5} = 0.0015 + 0.0139\times-1.41 = -0.0181$
+
+\indent\indent $VaR_{10\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0181 = -181407.55 \text{\euro}$\newline
+
+
+
+
+Calculation for 95\% Confidence and $T+5$:
+
+\indent\indent $\text{Quantile}_\text{std(7)}(0.05) = -1.89,\hat{\mu_{T+5|T}} = 0.0015, \hat{\sigma_{T+5|T}} = 0.0139$
+
+\indent\indent $VaR(\log \text{returns})_{5\%, T + 5} = 0.0015 + 0.0139\times-1.89 = -0.0248$
+
+\indent\indent $VaR_{5\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0248 = -247582.23 \text{\euro}$\newline
+
+
+
+
+Calculation for 99\% Confidence and $T+5$:
+
+\indent\indent $\text{Quantile}_\text{std(7)}(0.01) = -2.97,\hat{\mu_{T+5|T}} = 0.0015, \hat{\sigma_{T+5|T}} = 0.0139$
+
+\indent\indent $VaR(\log \text{returns})_{1\%, T + 5} = 0.0015 + 0.0139\times-2.97 = -0.0399$
+
+\indent\indent $VaR_{1\%, T + 5} = \text{ Value in Euros } \times VaR(\log returns) = 10 000 000 \text{\euro} \times-0.0399 = -398843.04 \text{\euro}$\newline
 
 
 Following the modeling assumptions of this subtask, the available stock data and the given sum invested in the Microsoft stock, the loss incurring over one day will be smaller than -171297.95$\text{\euro}$, -234064.61$\text{\euro}$  and -377535.41$\text{\euro}$  with a confidence level of 90\%, 95\%  and 99\%.

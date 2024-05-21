@@ -48,6 +48,29 @@ cis = c(.90,.95,.99)
 alphas = 1- cis
 
 #### function for resutls ####
+
+append_calc_string_list = function(string_list_loc, var_log_ret, q, m, s, alpha1, lag1, distr1 = "norm", value_stock1 = value_stock){
+      string_list1 = c(string_list_loc, "\n",
+                      
+      #q,mu,sigma                
+      paste0("\n\n",
+             "Calculation for ", 100*(1-alpha1),"\\% Confidence and $T+", lag1, "$:\n\n",
+             "\\indent\\indent $\\text{Quantile}_\\text{",distr1,"}(",alpha1,") = ",q,
+             ",\\hat{\\mu_{T+",lag1,"|T}} = ",m,
+             ", \\hat{\\sigma_{T+",lag1,"|T}} = ",s, "$\n"),
+      
+      #VaR log returns
+      paste0("\\indent\\indent $VaR(\\log \\text{returns})_{",alpha1*100,"\\%, T + ",lag1,"} = ",m," + ",s,"\\times",q,
+             " = ", round(var_log_ret, 4) ,"$\n"),
+      
+      #VaR Euro
+      paste0("\\indent\\indent $VaR_{",alpha1*100,"\\%, T + ",lag1,"} = \\text{ Value in Euros } \\times VaR(\\log returns) = ",
+             format(value_stock1, big.mark = " ", scientific = FALSE)," \\text{\\euro} \\times",
+             round(var_log_ret, 4)," = ",round(value_stock1*var_log_ret, 2)," \\text{\\euro}$\\newline"))
+  return(string_list1)     
+}
+      
+      
 getVaR_table = function(spec1, data1, lags = c(1:5), value_stock1 = value_stock, alphas1 = alphas, verbose = T,  formulas = T){
   # Function that predcits and forecasts using a rugarch::modelspec object and and tsibble data on log returns. it then gets the VaR for 2 specified lags in the future using a specified stock value and probability bounds
   #Parameters
@@ -173,26 +196,15 @@ getVaR_table = function(spec1, data1, lags = c(1:5), value_stock1 = value_stock,
     
     for (lag in lags){
       for (alpha in alphas1){
-  
-      var_log_ret = mu1[lag] + sig1[lag]*quant_fun(alpha)
-      q = round(quant_fun(alpha),2)
-      m = format(round(mu1[lag],4), scientific = FALSE)
-      s = format(round(sig1[lag],4), scientific = FALSE)
-      string_list = c(string_list, "\n",
-                      
-      #q,mu,sigma                
-      paste0("$\\text{Quantile}_\\text{",distr1,"}(",alpha,") = ",q,
-             ",\\hat{\\mu_{T+",lag,"|T}} = ",m,
-             ", \\hat{\\sigma_{T+",lag,"|T}} = ",s, "$\n"),
+        string_list = append_calc_string_list(string_list_loc = string_list,
+                                              var_log_ret = mu1[lag] + sig1[lag]*quant_fun(alpha),
+      q = round(quant_fun(alpha),2),
+      m = format(round(mu1[lag],4), scientific = FALSE),
+      s = format(round(sig1[lag],4), scientific = FALSE),
+      alpha1 = alpha,
+      lag1 = lag,
+      distr1 = distr1)
       
-      #VaR log returns
-      paste0("$VaR(\\log \\text{returns})_{",alpha*100,"\\%, T + ",lag,"} = ",m," + ",s,"\\times",q,
-             " = ", round(var_log_ret, 4) ,"$\n"),
-      
-      #VaR Euro
-      paste0("$VaR_{",alpha*100,"\\%, T + ",lag,"} = \\text{ Value in Euros } \\times VaR(\\log returns) = ",
-             format(value_stock1, big.mark = " ", scientific = FALSE)," \\text{\\euro} \\times",
-             round(var_log_ret, 4)," = ",round(value_stock1*var_log_ret, 2)," \\text{\\euro}$"))
       }
     }
     cat(string_list, file = formulas_file, append = TRUE, sep = "\n")
@@ -287,7 +299,7 @@ text_i_5d = "The due to simplicity of the model, the 5-day VaR is the same as th
 
 ``` {r i v 1 day}
 #write to file
-cat("\n\\paragraph{Visa}\n", file = formulas_file, append = TRUE)
+cat("\n\\paragraph{Visa} Caclulations.\\newline \\indent \n\n", file = formulas_file, append = TRUE)
 
 
 ## get mean and sd
@@ -309,18 +321,21 @@ string_list = c()
     
 lag = 1
 for (alpha in alphas){
-  var_log_ret = v_m[lag] + (v_sd[lag]*qnorm(alpha))
-  q = round(qnorm(alpha),2)
-  m = format(round(v_m[lag],4), scientific = FALSE)
-  s = format(round(v_sd[lag],4), scientific = FALSE)
-  string_list = c(string_list, "\n",
-  paste0("$\\text{Quantile}_\\text{norm}(",alpha,") = ",q,"
-         \\hat{\\mu_{T+",lag,"|T}} = ",m,", \\hat{\\sigma_{T+",lag,"|T}} = ",s, "$\n"),
-  paste0("$VaR(\\log \\text{returns}) = ",m," + ",s,"\\times",q,
-         " = ", round(var_log_ret, 4) ,"$\n"),
-  paste0("$VaR_{",alpha*100,"\\%} = \\text{ Value in Euros } \\times VaR(\\log returns) = ",
-         format(value_stock, scientific = FALSE)," \\text{\\euro} \\times",
-         round(var_log_ret, 4)," = ",round(value_stock*var_log_ret, 2)," \\text{\\euro}$"))
+  string_list = append_calc_string_list(string_list_loc = string_list,
+                                        var_log_ret = v_m[lag] + (v_sd[lag]*qnorm(alpha)),
+                                        q = round(qnorm(alpha),2),
+                                        m = format(round(v_m[lag],4), scientific = FALSE),
+                                        s = format(round(v_sd[lag],4), scientific = FALSE),
+                                        alpha1 = alpha,
+                                        lag1 = lag)
+  # string_list = c(string_list, "\n",
+  # paste0("$\\text{Quantile}_\\text{norm}(",alpha,") = ",q,"
+  #        \\hat{\\mu_{T+",lag,"|T}} = ",m,", \\hat{\\sigma_{T+",lag,"|T}} = ",s, "$\n"),
+  # paste0("$VaR(\\log \\text{returns}) = ",m," + ",s,"\\times",q,
+  #        " = ", round(var_log_ret, 4) ,"$\n"),
+  # paste0("$VaR_{",alpha*100,"\\%} = \\text{ Value in Euros } \\times VaR(\\log returns) = ",
+  #        format(value_stock, scientific = FALSE)," \\text{\\euro} \\times",
+  #        round(var_log_ret, 4)," = ",round(value_stock*var_log_ret, 2)," \\text{\\euro}$"))
 }
 
 text_i_v_1d = var_template_1_d(v_a_i_max_1_day_neg_change, stock_name = "Visa", day_num = 1)
@@ -332,7 +347,7 @@ cat(c(string_list, text_i_v_1d,text_i_5d), file = formulas_file, append = TRUE, 
 ```{r i msft 1 day}
 #write to file
 cat("\n
-\\paragraph{Microsoft}\n", file = formulas_file, append = TRUE)
+\\paragraph{Microsoft} Caclulations.\\newline \\indent \n", file = formulas_file, append = TRUE)
 
 ## get historical, unconditional mean and sd
 msft_m = msft_5$log_rtn %>% mean()
@@ -353,18 +368,21 @@ string_list = c()
     
 lag = 1
 for (alpha in alphas){
-  var_log_ret = msft_m[lag] + msft_sd[lag]*qnorm(alpha)
-  q = round(qnorm(alpha),2)
-  m = format(round(msft_m[lag],4), scientific = FALSE)
-  s = format(round(msft_sd[lag],4), scientific = FALSE)
-  string_list = c(string_list, "\n",
-  paste0("$\\text{Quantile}_\\text{norm}(",alpha,") = ",q,
-         ",\\hat{\\mu_{T+",lag,"|T}} = ",m,", \\hat{\\sigma_{T+",lag,"|T}} = ",s, "$\n"),
-  paste0("$VaR(\\log \\text{returns}) = ",m," + ",s,"\\times",q,
-         " = ", round(var_log_ret, 4) ,"$"),
-  paste0("$VaR_{",alpha*100,"\\%} = \\text{ Value in Euros } \\times VaR(\\log returns) = ",
-         format(value_stock, big.mark = " ", scientific = FALSE)," \\text{\\euro} \\times",
-         round(var_log_ret, 4)," = ",round(value_stock*var_log_ret, 2)," \\text{\\euro}$"))
+  string_list = append_calc_string_list(string_list_loc = string_list,
+                                        var_log_ret = msft_m[lag] + msft_sd[lag]*qnorm(alpha),
+                                        q = round(qnorm(alpha),2),
+                                        m = format(round(msft_m[lag],4), scientific = FALSE),
+                                        s = format(round(msft_sd[lag],4), scientific = FALSE),
+                                        alpha1 = alpha,
+                                        lag1 = lag)
+  # string_list = c(string_list, "\n",
+  # paste0("$\\text{Quantile}_\\text{norm}(",alpha,") = ",q,
+  #        ",\\hat{\\mu_{T+",lag,"|T}} = ",m,", \\hat{\\sigma_{T+",lag,"|T}} = ",s, "$\n"),
+  # paste0("$VaR(\\log \\text{returns}) = ",m," + ",s,"\\times",q,
+  #        " = ", round(var_log_ret, 4) ,"$"),
+  # paste0("$VaR_{",alpha*100,"\\%} = \\text{ Value in Euros } \\times VaR(\\log returns) = ",
+  #        format(value_stock, big.mark = " ", scientific = FALSE)," \\text{\\euro} \\times",
+  #        round(var_log_ret, 4)," = ",round(value_stock*var_log_ret, 2)," \\text{\\euro}$"))
 }
 
 text_i_msft_1d = var_template_1_d(msft_a_i_max_1_day_neg_change, stock_name = "Microsoft", day_num = 1)
@@ -381,7 +399,7 @@ cat(c(string_list, text_i_msft_1d,text_i_5d), file = formulas_file, append = TRU
 text_ii = "The following GARCH model will be fitted 
 $$\\begin{cases} R_t = \\mu_t + \\epsilon_t, \\epsilon_t = \\sigma_t  * z_t, z_t \\overset{i.i.d.}{\\sim} N(0,1) \\\\ \\sigma^2_t = \\alpha_0 + \\alpha_1 \\epsilon^2_{t-1} + \\beta_1 \\sigma^2_{t-1} \\\\ \\mu_t = \\mu_0 \\end{cases}$$
 
-A more sophisticated model will be used to estimate the VaR in this subtask. 
+The model fitted in this subtask is more sophisticated than a simple model using only unconditional constants. 
 The model will be specified and fitted to the historical data. The fitted model can then be used to make predictions about the stock returns in the future. The predicted mean and sd of the returns can be used to scale and shift a z value like in the previous subtask.
 The use of this scaled and shifted z value in the further calculation of the VaR is identical to the previous, current and the later subtasks."
 
@@ -397,7 +415,7 @@ a_ii_spec = rugarch::ugarchspec(variance.model=list(model="sGARCH",
 
 ```{r ii v}
 #write to file
-cat("\n\\paragraph{Visa}\n", file = formulas_file, append = TRUE)
+cat("\n\\paragraph{Visa} Caclulations.\\newline \\indent \n", file = formulas_file, append = TRUE)
 
 #get VaR
 v_a_ii_table = getVaR_table(a_ii_spec, v_5$log_rtn)
@@ -415,7 +433,7 @@ cat(c(text_ii_v_1d,text_ii_v_5d), file = formulas_file, append = TRUE, sep = "\n
 
 ```{r ii msft}
 #write to file
-cat("\n\\paragraph{Microsoft}\n", file = formulas_file, append = TRUE)
+cat("\n\\paragraph{Microsoft} Caclulations.\\newline \\indent \n", file = formulas_file, append = TRUE)
 
 #get VaR
 msft_a_ii_table = getVaR_table(a_ii_spec, msft_5$log_rtn)
@@ -461,7 +479,7 @@ a_iii_spec <-  rugarch::ugarchspec(variance.model=list(model="sGARCH",
 
 ```{r iii v}
 #write to file
-cat("\n\\paragraph{Visa}\n", file = formulas_file, append = TRUE)
+cat("\n\\paragraph{Visa} Caclulations.\\newline \\indent \n", file = formulas_file, append = TRUE)
 
 #get VaR
 v_a_iii_table = getVaR_table(a_iii_spec, v_5$log_rtn)
@@ -479,7 +497,7 @@ cat(c(text_iii_v_1d,text_iii_v_5d), file = formulas_file, append = TRUE, sep = "
 
 ```{r iii msft}
 #write to file
-cat("\n\\paragraph{Microsoft}\n", file = formulas_file, append = TRUE)
+cat("\n\\paragraph{Microsoft} Caclulations.\\newline \\indent \n", file = formulas_file, append = TRUE)
 
 #get VaR
 msft_a_iii_table = getVaR_table(a_iii_spec, msft_5$log_rtn)
@@ -516,7 +534,7 @@ a_iv_spec <-  rugarch::ugarchspec(variance.model=list(model="sGARCH",
 
 ```{r iv v}
 #write to file
-cat("\n\\paragraph{Visa}\n", file = formulas_file, append = TRUE)
+cat("\n\\paragraph{Visa} Caclulations.\\newline \\indent \n", file = formulas_file, append = TRUE)
 
 #get VaR
 v_a_iv_table = getVaR_table(a_iv_spec, v_5$log_rtn)
@@ -533,7 +551,7 @@ cat(c(text_iv_v_1d,text_iv_v_5d), file = formulas_file, append = TRUE, sep = "\n
 
 ```{r iv msft}
 #write to file
-cat("\n\\paragraph{Microsoft}\n", file = formulas_file, append = TRUE)
+cat("\n\\paragraph{Microsoft} Caclulations.\\newline \\indent \n", file = formulas_file, append = TRUE)
 
 #get VaR
 msft_a_iv_table = getVaR_table(a_iv_spec, msft_5$log_rtn)
